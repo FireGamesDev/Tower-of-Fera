@@ -1,0 +1,54 @@
+extends Node
+
+var once = true
+
+var sfx_manager
+
+var highscore
+
+var path = "user://data.json"
+
+var data = { }
+
+# The default values
+var default_data = {
+	"score" : 0,
+	"options" : {
+		"volume" : -7,
+		"muted" : false
+	}
+}
+
+func load_game():
+	var file = File.new()
+	
+	if not file.file_exists(path):
+		reset_data()
+		return
+	
+	file.open(path, file.READ)
+	
+	var text = file.get_as_text()
+	
+	data = parse_json(text)
+	
+	highscore = data["score"]
+	
+	file.close()
+
+
+func save_game():
+	var file
+	
+	file = File.new()
+	
+	file.open(path, File.WRITE)
+	
+	file.store_line(to_json(data))
+	
+	file.close()
+
+
+func reset_data():
+	# Reset to defaults
+	data = default_data.duplicate(true)

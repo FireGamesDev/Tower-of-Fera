@@ -1,0 +1,38 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+[application]
+
+config/name="TowerOfFera"
+run/main_scene="res://Scenes/Menu.tscn"
+boot_splash/image="res://Logo/firegames.png"
+boot_splash/bg_color=Color( 0.0509804, 0.168627, 0.270588, 1 )
+config/icon="res://Logo/Tower.png"
+
+[autoload]
+
+Globals="*res://Scripts/Globals.gd"
+SceneChanger="*res://Scenes/SceneChanger.tscn"
+SoundManager="*res://Scenes/SoundManager.tscn"
+
+[display]
+
+mouse_cursor/custom_image="res://Sprites/Cursor.png"
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+quality/driver/driver_name="GLES2"
+vram_compression/import_etc=true
+vram_compression/import_etc2=false
+environment/default_environment="res://default_env.tres"
