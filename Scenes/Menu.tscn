@@ -7,16 +7,16 @@
 [ext_resource path="res://Sprites/Slider_highlighted.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/Slider_tick.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/unchecked.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/Tower.png" type="Texture" id=8]
+[ext_resource path="res://Scenes/Tower.tscn" type="PackedScene" id=8]
 
 [sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0, 0, 0, 1 )
+bg_color = Color( 0.815686, 0.505882, 0.34902, 1 )
 
 [sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 1, 0.627451, 0, 1 )
+bg_color = Color( 0.0509804, 0.168627, 0.270588, 1 )
 
 [sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 1, 1, 1, 1 )
+bg_color = Color( 1, 0.666667, 0.368627, 1 )
 
 [sub_resource type="DynamicFontData" id=4]
 font_path = "res://Font/PixelGameFont.ttf"
@@ -189,17 +189,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Tower" type="TextureRect" parent="CanvasLayer"]
+[node name="Control" type="Control" parent="CanvasLayer"]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -300.0
-margin_top = -300.0
-texture = ExtResource( 8 )
+margin_left = -40.0
+margin_top = -40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Tower" parent="CanvasLayer/Control" instance=ExtResource( 8 )]
+position = Vector2( -94.608, -127.098 )
+scale = Vector2( 1, 1 )
 
 [connection signal="tree_exited" from="." to="." method="_on_Menu_tree_exited"]
 [connection signal="pressed" from="CanvasLayer/PlayButton" to="." method="_on_PlayButton_pressed"]
