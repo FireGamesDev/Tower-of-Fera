@@ -17,10 +17,18 @@ func _input(event):
 	if event.is_action_released("shoot"):
 		aiming = false
 		on_drag_end()
+
+	if event is InputEventScreenTouch:
+		if event.is_pressed():
+			aiming = true
+			on_drag_start()
+		else:
+			aiming = false
+			on_drag_end()
 		
 	if aiming:
 		on_drag()
-			
+		
 func on_drag_start():
 	startpoint = get_global_mouse_position()
 	if Globals.trajectory:
@@ -36,5 +44,7 @@ func on_drag():
 	direction = (startpoint - endpoint).normalized()
 	force = direction * distance * shoot_force
 	
+	$Sprite.look_at(startpoint - endpoint)
+	
 	if Globals.trajectory:
-		Globals.trajectory.update_dots($Muzzle.position, force)
+		Globals.trajectory.update_dots($Sprite/Arrow/Muzzle.position, force)

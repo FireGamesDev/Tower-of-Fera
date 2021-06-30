@@ -32,11 +32,12 @@ hframes = 5
 playback_speed = 2.0
 anims/Bow = SubResource( 1 )
 
-[node name="Arrow" type="Sprite" parent="."]
-position = Vector2( 6.76344, 5.29163 )
+[node name="Arrow" type="Sprite" parent="Sprite"]
+position = Vector2( -3.0475, 3.80513 )
 texture = ExtResource( 2 )
 
-[node name="Muzzle" type="Position2D" parent="."]
-position = Vector2( 45, 5.5 )
+[node name="Muzzle" type="Position2D" parent="Sprite/Arrow"]
+position = Vector2( 21.9321, 0.978107 )
 
-[node name="Trajectory" parent="." instance=ExtResource( 4 )]
+[node name="Trajectory" parent="Sprite/Arrow/Muzzle" instance=ExtResource( 4 )]
+position = Vector2( -0.17569, -0.328751 )
