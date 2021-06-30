@@ -1,0 +1,13 @@
+[gd_scene format=2]
+
+[node name="Lightning" type="Node2D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="TextureProgress" type="TextureProgress" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+value = 50.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

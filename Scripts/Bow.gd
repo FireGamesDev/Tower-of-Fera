@@ -8,7 +8,7 @@ var direction
 var force
 var distance
 
-var shoot_force = 0.3
+var shoot_force = 0.5
 
 func _input(event):
 	if event.is_action_pressed("shoot"):

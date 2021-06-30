@@ -4,6 +4,7 @@ var once = true
 
 var sfx_manager
 var trajectory
+var trajectory_dot
 
 var highscore
 

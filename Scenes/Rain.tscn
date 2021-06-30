@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Sprites/raindrop.png" type="Texture" id=1]
+
+[node name="Rain" type="CPUParticles2D"]
+amount = 200
+lifetime = 7.0
+preprocess = 3.0
+speed_scale = 1.5
+texture = ExtResource( 1 )
+emission_shape = 2
+emission_rect_extents = Vector2( 700, 1 )
+gravity = Vector2( -40, 98 )
+scale_amount_random = 1.0
+color = Color( 0.0509804, 0.168627, 0.270588, 1 )
