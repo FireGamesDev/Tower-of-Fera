@@ -4,7 +4,7 @@
 [ext_resource path="res://Scripts/Lightning.gd" type="Script" id=2]
 [ext_resource path="res://SFX/Lightning_strike.wav" type="AudioStream" id=3]
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id=17]
 resource_name = "Lightning"
 tracks/0/type = "value"
 tracks/0/path = NodePath("TextureProgress:value")
@@ -19,15 +19,15 @@ tracks/0/keys = {
 "values": [ 0.0, 100.0 ]
 }
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 654.429, 32.5806 )
+[sub_resource type="RectangleShape2D" id=18]
+extents = Vector2( 109.783, 6.35927 )
 
 [node name="Lightning" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 3.0
-anims/Lightning = SubResource( 1 )
+anims/Lightning = SubResource( 17 )
 
 [node name="TextureProgress" type="TextureProgress" parent="."]
 margin_left = 22.653
@@ -50,7 +50,7 @@ autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnArea"]
 position = Vector2( 181.611, -77.4163 )
-shape = SubResource( 2 )
+shape = SubResource( 18 )
 disabled = true
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]

@@ -107,3 +107,5 @@ position = Vector2( 538.008, -111.377 )
 
 [node name="Spawner" parent="." instance=ExtResource( 14 )]
 position = Vector2( -2.37842, -91.5689 )
+
+[connection signal="body_entered" from="Map/Tower" to="." method="_on_Tower_body_entered"]

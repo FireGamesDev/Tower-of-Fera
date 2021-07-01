@@ -15,7 +15,7 @@ position = Vector2( 1022.65, 332.334 )
 position = Vector2( 1021.76, 220.081 )
 
 [node name="Air3" type="Position2D" parent="."]
-position = Vector2( 1021.76, 102.482 )
+position = Vector2( 1020.42, 161.215 )
 
 [node name="Air4" type="Position2D" parent="."]
 position = Vector2( 1024.13, 424.757 )

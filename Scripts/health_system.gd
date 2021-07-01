@@ -21,6 +21,8 @@ func reset_health():
 	manage_sprites(false)
 	
 func take_damage():
+	if health == 1:
+		die()
 	health -= 1
 	manage_sprites(false)
 	if health == 1:
@@ -34,9 +36,7 @@ func take_damage():
 		$Sprite2.visible = true
 		$Sprite3.visible = true
 		$Heartbeat.stop()
-		Globals.sfx_manager.play_sound(heartbeat_sfx)
-	if health == 0:
-		die()
+		Globals.sfx_manager.play_sound(damage_sfx)
 	$Timer.start()
 	
 func heal():
@@ -57,7 +57,7 @@ func heal():
 func die():
 	Globals.game_manager.die()
 	$Heartbeat.stop()
-	$Sprite.scale= Vector2(0.2,0.2)
+	$Sprite.scale = Vector2(0.2,0.2)
 	
 func manage_sprites(is_heal):
 	if health == 4:
@@ -73,6 +73,7 @@ func manage_sprites(is_heal):
 		$Sprite3.texture = empty_hearth
 		if !is_heal:
 			$Sprite3/Slash.visible = true
+			$Sprite3/Slash/SlashAnim.play("Slash")
 		pass
 	if health == 2:
 		$Sprite.texture = full_hearth
@@ -81,6 +82,7 @@ func manage_sprites(is_heal):
 		$Sprite3.texture = empty_hearth
 		if !is_heal:
 			$Sprite2/Slash.visible = true
+			$Sprite2/Slash/SlashAnim.play("Slash")
 		pass
 	if health == 1:
 		$Sprite.texture = full_hearth
@@ -89,6 +91,7 @@ func manage_sprites(is_heal):
 		$Sprite3.texture = empty_hearth
 		if !is_heal:
 			$Sprite1/Slash.visible = true
+			$Sprite1/Slash/SlashAnim.play("Slash")
 		pass
 	if health == 0:
 		$Sprite.texture = empty_hearth
@@ -97,6 +100,7 @@ func manage_sprites(is_heal):
 		$Sprite3.texture = empty_hearth
 		if !is_heal:
 			$Sprite/Slash.visible = true
+			$Sprite/Slash/SlashAnim.play("Slash")
 		pass
 
 func _on_Timer_timeout():

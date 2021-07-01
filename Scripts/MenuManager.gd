@@ -16,6 +16,7 @@ func _on_VolumeSlider_mouse_exited():
 
 
 func _on_PlayButton_pressed():
+	$CanvasLayer/Control2/Lightning.stop = true
 	Globals.sfx_manager.play_sound(click_sound)
 	SceneChanger.change_scene("res://Scenes/Game.tscn", 0.5)
 
@@ -101,3 +102,7 @@ func _on_VolumeSlider_value_changed(value):
 
 func _on_Menu_tree_exited():
 	save_game()
+
+
+func _on_Lightning_strike():
+	$CanvasLayer/PlayButton/AnimationPlayer.play("PlayButton")

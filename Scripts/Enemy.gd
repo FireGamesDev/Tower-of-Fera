@@ -11,10 +11,3 @@ func _process(_delta):
 	if !dummies:
 		velocity.x = -speed
 		var _move = move_and_slide(velocity, FLOOR)
-
-
-func _on_Area2D_area_entered(area):
-	if area.is_in_group("Tower"):
-		Globals.health_system.take_damage()
-		Globals.health_system.spawn_explosion_particle(area.global_position)
-		queue_free()

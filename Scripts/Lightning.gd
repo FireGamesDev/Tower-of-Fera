@@ -1,5 +1,11 @@
 extends Node2D
 
+signal strike
+
+var stop = false
+
+export var is_menu = false
+
 const lightning_strike = preload("res://SFX/Lightning_strike.wav")
 const heal = preload("res://Scenes/Heal.tscn")
 	
@@ -15,14 +21,20 @@ func get_spawn_pos():
 
 
 func _on_Timer_timeout():
+	if stop:
+		return
+	emit_signal("strike")
 	var pos = get_spawn_pos()
 	$TextureProgress.set_position(pos)
-	var hearth = heal.instance()
-	hearth.position = Vector2(pos.x, pos.y + 200) # 200 is the y size of the Lightning
-	call_deferred("add_child", hearth)
+	if !is_menu:
+		var hearth = heal.instance()
+		hearth.position = Vector2(pos.x, pos.y + 200) # 200 is the y size of the Lightning
+		call_deferred("add_child", hearth)
 	$AnimationPlayer.play("Lightning")
 	$TextureProgress.visible = true
-	$Timer.start(randi()%20+6)
+	if !is_menu:
+		$Timer.start(randi()%20+6)
+	else: $Timer.start(randi()%6+1)
 	yield(get_tree().create_timer(0.2), "timeout")
 	$SFX.play()
 
