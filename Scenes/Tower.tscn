@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Sprites/Tower.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/Tower_Light.png" type="Texture" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 110.131
+height = 406.495
 
 [node name="Tower" type="Node2D"]
 scale = Vector2( 0.6, 0.6 )
@@ -14,3 +18,11 @@ position = Vector2( 182.276, 0.910919 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 2 )
 offset = Vector2( 101.699, 120.711 )
+
+[node name="Area2D" type="Area2D" parent="." groups=[
+"Tower",
+]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 1.76575, -146.559 )
+shape = SubResource( 1 )

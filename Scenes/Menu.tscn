@@ -114,15 +114,17 @@ __meta__ = {
 [node name="Title" type="RichTextLabel" parent="CanvasLayer"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -227.0
-margin_top = 118.0
-margin_right = -2.0
-margin_bottom = 157.0
+margin_left = -224.619
+margin_top = 91.8079
+margin_right = 0.381104
+margin_bottom = 169.808
 rect_scale = Vector2( 2, 2 )
 custom_fonts/normal_font = SubResource( 9 )
 bbcode_enabled = true
-bbcode_text = "[wave]Tower of Fera"
-text = "Tower of Fera"
+bbcode_text = "
+[wave]Tower of Fera"
+text = "
+Tower of Fera"
 scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false

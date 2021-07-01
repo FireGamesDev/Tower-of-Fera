@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Sprites/Flying_enemy_sprite_sheet.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Enemy.gd" type="Script" id=2]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Bow"
@@ -19,8 +20,11 @@ tracks/0/keys = {
 "values": [ 0, 1, 2 ]
 }
 
-[node name="FlyingEnemy" type="Node2D"]
+[node name="FlyingEnemy" type="KinematicBody2D" groups=[
+"Enemy",
+]]
 scale = Vector2( 0.4, 0.4 )
+script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -30,3 +34,15 @@ hframes = 3
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
 autoplay = "Bow"
 anims/Bow = SubResource( 1 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+scale = Vector2( 1, 1 )
+polygon = PoolVector2Array( -29.8878, 61.6378, 15.0614, 64.9153, 45.964, 47.123, 58.6059, 10.6017, 40.3453, -36.2204, 5.69696, -62.909, -39.7205, -54.0128, -61.7268, -7.19067, -55.1718, 40.0996 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+scale = Vector2( 1, 1 )
+polygon = PoolVector2Array( -29.8878, 61.6378, 15.0614, 64.9153, 45.964, 47.123, 58.6059, 10.6017, 40.3453, -36.2204, 5.69696, -62.909, -39.7205, -54.0128, -61.7268, -7.19067, -55.1718, 40.0996 )
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

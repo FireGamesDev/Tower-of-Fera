@@ -5,14 +5,17 @@
 [ext_resource path="res://Sprites/Moon.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/Tower.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Bow.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/GroundEnemy1.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Scenes/GroundEnemy2.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Scenes/FlyingEnemy.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Health_system.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Sprites/Ground_light.png" type="Texture" id=9]
 [ext_resource path="res://Sprites/bg_light.png" type="Texture" id=10]
 [ext_resource path="res://Sprites/Vignette.png" type="Texture" id=11]
 [ext_resource path="res://Scenes/Rain.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Lightning.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/Spawner.tscn" type="PackedScene" id=14]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 53.3942
+height = 817.872
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 2 )
@@ -22,6 +25,8 @@ script = ExtResource( 2 )
 [node name="Camera2D" type="Camera2D" parent="CanvasLayer"]
 position = Vector2( 511.376, 297.56 )
 current = true
+
+[node name="HealthSystem" parent="CanvasLayer" instance=ExtResource( 6 )]
 
 [node name="Map" type="Node2D" parent="."]
 position = Vector2( -194.941, 489.472 )
@@ -62,6 +67,15 @@ __meta__ = {
 position = Vector2( 860.559, -42.0607 )
 texture = ExtResource( 9 )
 
+[node name="Ground" type="Area2D" parent="Map/Ground" groups=[
+"Ground",
+]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Ground/Ground"]
+position = Vector2( 1203.5, 77.4569 )
+rotation = -1.57169
+shape = SubResource( 1 )
+
 [node name="Moon" type="TextureRect" parent="Map"]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -87,14 +101,8 @@ offset = Vector2( -609.769, -927.214 )
 position = Vector2( 90.0919, 303.34 )
 rotation = -0.39695
 
-[node name="FlyingEnemy" parent="." instance=ExtResource( 8 )]
-position = Vector2( 799.411, 297.917 )
-
-[node name="GroundEnemy1" parent="." instance=ExtResource( 6 )]
-position = Vector2( 915.921, 489.968 )
-
-[node name="GroundEnemy2" parent="." instance=ExtResource( 7 )]
-position = Vector2( 608.218, 491.707 )
-
 [node name="Rain" parent="." instance=ExtResource( 12 )]
 position = Vector2( 538.008, -111.377 )
+
+[node name="Spawner" parent="." instance=ExtResource( 14 )]
+position = Vector2( -2.37842, -91.5689 )

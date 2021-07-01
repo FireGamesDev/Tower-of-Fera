@@ -1,7 +1,7 @@
 extends Node2D
 
-var dot_number = 20
-var spacing = 0.1
+var dot_number = 11
+var spacing = 0.2
 const dotScene = preload("res://Scenes/TrajectoryDot.tscn")
 
 var dots_list = []
@@ -36,6 +36,8 @@ func prepare_dots():
 	
 	for i in dot_number:
 		var dot = dotScene.instance()
+		if i == 7 or i == 10:
+			dot.get_child(0).modulate = Color.orange
 		dot.scale = Vector2.ONE * size
 		if size > min_scale:
 			size -= scale_factor

@@ -2,9 +2,15 @@ extends Node
 
 var once = true
 
+var game_manager
+var waves = 3
+
 var sfx_manager
 var trajectory
 var trajectory_dot
+
+var spawner
+var health_system
 
 var highscore
 

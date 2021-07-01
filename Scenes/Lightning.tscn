@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Sprites/lightning.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Lightning.gd" type="Script" id=2]
+[ext_resource path="res://SFX/Lightning_strike.wav" type="AudioStream" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Lightning"
@@ -51,6 +52,9 @@ autostart = true
 position = Vector2( 183.109, -36.962 )
 shape = SubResource( 2 )
 disabled = true
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

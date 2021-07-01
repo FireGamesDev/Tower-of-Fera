@@ -1,7 +1,7 @@
-extends Node2D
+[gd_scene load_steps=2 format=2]
 
-const lightning_strike = preload("res://SFX/Lightning_strike.wav")
-const heal = 
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
 	
 func get_spawn_pos():
 	var positionInArea = Vector2(0,0)
@@ -16,12 +16,12 @@ func get_spawn_pos():
 
 func _on_Timer_timeout():
 	$TextureProgress.set_position(get_spawn_pos())
-	
-	$AnimationPlayer.play("Lightning")
+	$AnimationPlayer.play(\"Lightning\")
 	$TextureProgress.visible = true
 	$Timer.start(randi()%30+6)
-	yield(get_tree().create_timer(0.2), "timeout")
+	yield(get_tree().create_timer(0.2), \"timeout\")
 	$SFX.play()
+"
 
-func _on_AnimationPlayer_animation_finished(_anim_name):
-	$TextureProgress.visible = false
+[node name="HealthSpawner" type="Node2D"]
+script = SubResource( 1 )
