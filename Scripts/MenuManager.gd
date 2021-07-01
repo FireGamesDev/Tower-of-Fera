@@ -8,17 +8,15 @@ var once = true
 func _ready():
 	$CanvasLayer/PlayButton.set_focus_mode(Control.FOCUS_NONE)
 	$CanvasLayer/Volume/Mute.set_focus_mode(Control.FOCUS_NONE)
+	$CanvasLayer/Modes/Hard.set_focus_mode(Control.FOCUS_NONE)
+	$CanvasLayer/Modes/Normal.set_focus_mode(Control.FOCUS_NONE)
+	$CanvasLayer/Modes/Easy.set_focus_mode(Control.FOCUS_NONE)
+	$CanvasLayer/Modes/Endless.set_focus_mode(Control.FOCUS_NONE)
 	set_saved_score()
 
 
 func _on_VolumeSlider_mouse_exited():
 	$CanvasLayer/Volume/VolumeSlider.release_focus()
-
-
-func _on_PlayButton_pressed():
-	$CanvasLayer/Control2/Lightning.stop = true
-	Globals.sfx_manager.play_sound(click_sound)
-	SceneChanger.change_scene("res://Scenes/Game.tscn", 0.5)
 
 
 func _on_Mute_pressed():
@@ -106,3 +104,36 @@ func _on_Menu_tree_exited():
 
 func _on_Lightning_strike():
 	$CanvasLayer/PlayButton/AnimationPlayer.play("PlayButton")
+
+func _on_PlayButton_pressed():
+	$CanvasLayer/Control2/Lightning._on_Timer_timeout()
+	$CanvasLayer/Control2/Lightning.stop = true
+	Globals.sfx_manager.play_sound(click_sound)
+	SceneChanger.change_scene("res://Scenes/Game.tscn", 0.5)
+
+func _on_Hard_pressed():
+	$CanvasLayer/Control2/Lightning._on_Timer_timeout()
+	$CanvasLayer/Control2/Lightning.stop = true
+	Globals.sfx_manager.play_sound(click_sound)
+	SceneChanger.change_scene("res://Scenes/Game.tscn", 0.5)
+
+
+func _on_Endless_pressed():
+	$CanvasLayer/Control2/Lightning._on_Timer_timeout()
+	$CanvasLayer/Control2/Lightning.stop = true
+	Globals.sfx_manager.play_sound(click_sound)
+	SceneChanger.change_scene("res://Scenes/Game.tscn", 0.5)
+
+
+func _on_Normal_pressed():
+	$CanvasLayer/Control2/Lightning._on_Timer_timeout()
+	$CanvasLayer/Control2/Lightning.stop = true
+	Globals.sfx_manager.play_sound(click_sound)
+	SceneChanger.change_scene("res://Scenes/Game.tscn", 0.5)
+
+
+func _on_Easy_pressed():
+	$CanvasLayer/Control2/Lightning._on_Timer_timeout()
+	$CanvasLayer/Control2/Lightning.stop = true
+	Globals.sfx_manager.play_sound(click_sound)
+	SceneChanger.change_scene("res://Scenes/Game.tscn", 0.5)

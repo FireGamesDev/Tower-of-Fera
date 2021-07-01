@@ -24,4 +24,4 @@ func manage_arrows():
 func _on_Timer_timeout():
 	Globals.arrows += Globals.ammo
 	manage_arrows()
-	$Timer.start()
+	$Timer.start(Globals.get_arrow_time)

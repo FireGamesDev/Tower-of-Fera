@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://Scripts/MenuManager.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Logo.tscn" type="PackedScene" id=2]
@@ -78,6 +78,7 @@ size = 30
 font_data = SubResource( 11 )
 
 [sub_resource type="StyleBoxLine" id=13]
+color = Color( 1, 0.666667, 0.368627, 1 )
 thickness = 10
 
 [sub_resource type="StyleBoxLine" id=14]
@@ -85,18 +86,86 @@ color = Color( 1, 1, 1, 1 )
 thickness = 10
 
 [sub_resource type="StyleBoxLine" id=15]
+color = Color( 0.054902, 0.168627, 0.270588, 1 )
 
 [sub_resource type="StyleBoxFlat" id=16]
 bg_color = Color( 0.941176, 0.568627, 0.133333, 1 )
 
 [sub_resource type="StyleBoxFlat" id=17]
-bg_color = Color( 0, 0, 0, 1 )
+bg_color = Color( 0.0509804, 0.168627, 0.270588, 1 )
 
 [sub_resource type="StyleBoxFlat" id=18]
 bg_color = Color( 0, 0, 0, 1 )
 
+[sub_resource type="StyleBoxFlat" id=24]
+bg_color = Color( 0.0509804, 0.168627, 0.270588, 1 )
+
 [sub_resource type="StyleBoxFlat" id=19]
-bg_color = Color( 0, 0, 0, 1 )
+bg_color = Color( 1, 0.666667, 0.368627, 1 )
+
+[sub_resource type="Animation" id=20]
+resource_name = "PlayButton"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=23]
+resource_name = "PlayButton"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "PlayButton"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=22]
+resource_name = "PlayButton"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
+}
 
 [node name="Menu" type="Node2D"]
 script = ExtResource( 1 )
@@ -176,20 +245,20 @@ __meta__ = {
 }
 
 [node name="PlayText" type="RichTextLabel" parent="CanvasLayer/PlayButton"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -50.0
-margin_top = -15.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 50.0
+margin_top = -12.0271
 margin_right = 50.0
-margin_bottom = 15.0
+margin_bottom = -10.0
 mouse_filter = 2
 custom_fonts/normal_font = SubResource( 9 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 bbcode_enabled = true
-bbcode_text = "[wave]PLAY"
-text = "PLAY"
+bbcode_text = "
+[wave]TRAIN"
+text = "
+TRAIN"
 scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -262,15 +331,18 @@ custom_icons/unchecked = ExtResource( 4 )
 custom_styles/hover = SubResource( 16 )
 custom_styles/pressed = SubResource( 17 )
 custom_styles/disabled = SubResource( 18 )
+custom_styles/hover_pressed = SubResource( 24 )
 custom_styles/normal = SubResource( 19 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Moon" type="TextureRect" parent="CanvasLayer"]
-margin_right = 521.0
-margin_bottom = 632.0
-rect_scale = Vector2( 0.6, 0.6 )
+margin_left = 58.2704
+margin_top = 7.41623
+margin_right = 579.27
+margin_bottom = 639.416
+rect_scale = Vector2( 0.4, 0.4 )
 texture = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -308,6 +380,272 @@ polygon = PoolVector2Array( 73.1808, 365.25, 67.2416, 252.403, 67.2416, 200.433,
 
 [node name="Logo" parent="CanvasLayer" instance=ExtResource( 2 )]
 
+[node name="Modes" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hard" type="Button" parent="CanvasLayer/Modes"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -516.621
+margin_top = 102.149
+margin_right = -316.621
+margin_bottom = 177.149
+rect_pivot_offset = Vector2( 100, 37 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="CanvasLayer/Modes/Hard"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 50.0
+margin_top = -10.0
+margin_right = 50.0
+margin_bottom = -10.0
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 9 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "
+[wave]HARD"
+text = "
+HARD"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cleared" type="RichTextLabel" parent="CanvasLayer/Modes/Hard"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -67.7711
+margin_top = -29.7451
+margin_right = 132.229
+margin_bottom = 45.2549
+rect_scale = Vector2( 0.4, 0.4 )
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 9 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "
+[wave]CLEARED"
+text = "
+CLEARED"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Modes/Hard"]
+anims/PlayButton = SubResource( 20 )
+
+[node name="Endless" type="Button" parent="CanvasLayer/Modes"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -515.499
+margin_top = 195.314
+margin_right = -315.499
+margin_bottom = 270.314
+rect_pivot_offset = Vector2( 100, 37 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="CanvasLayer/Modes/Endless"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 25.0
+margin_top = -10.0
+margin_right = 25.0
+margin_bottom = -10.0
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 9 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "
+[wave]ENDLESS"
+text = "
+ENDLESS"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Modes/Endless"]
+anims/PlayButton = SubResource( 23 )
+
+[node name="Score" type="RichTextLabel" parent="CanvasLayer/Modes/Endless"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -60.4541
+margin_top = -21.8682
+margin_right = 139.546
+margin_bottom = 46.1318
+grow_horizontal = 0
+rect_scale = Vector2( 0.3, 0.3 )
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 9 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "
+[wave]BEST: 100"
+text = "
+BEST: 100"
+fit_content_height = true
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Normal" type="Button" parent="CanvasLayer/Modes"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -516.621
+margin_top = 2.14929
+margin_right = -316.621
+margin_bottom = 77.1493
+rect_pivot_offset = Vector2( 100, 37 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="CanvasLayer/Modes/Normal"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 25.0
+margin_top = -10.0
+margin_right = 25.0
+margin_bottom = -10.0
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 9 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "
+[wave]NORMAL"
+text = "
+NORMAL"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Modes/Normal"]
+anims/PlayButton = SubResource( 21 )
+
+[node name="Cleared" type="RichTextLabel" parent="CanvasLayer/Modes/Normal"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -67.7711
+margin_top = -29.7451
+margin_right = 132.229
+margin_bottom = 45.2549
+rect_scale = Vector2( 0.4, 0.4 )
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 9 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "
+[wave]CLEARED"
+text = "
+CLEARED"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Easy" type="Button" parent="CanvasLayer/Modes"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -516.621
+margin_top = -97.8507
+margin_right = -316.621
+margin_bottom = -22.8507
+rect_pivot_offset = Vector2( 100, 37 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="CanvasLayer/Modes/Easy"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 50.0
+margin_top = -10.0
+margin_right = 50.0
+margin_bottom = -10.0
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 9 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "
+[wave]EASY"
+text = "
+EASY"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Modes/Easy"]
+anims/PlayButton = SubResource( 22 )
+
+[node name="Cleared" type="RichTextLabel" parent="CanvasLayer/Modes/Easy"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -67.7711
+margin_top = -29.7451
+margin_right = 132.229
+margin_bottom = 45.2549
+rect_scale = Vector2( 0.4, 0.4 )
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 9 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "
+[wave]CLEARED"
+text = "
+CLEARED"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="tree_exited" from="." to="." method="_on_Menu_tree_exited"]
 [connection signal="strike" from="CanvasLayer/Control2/Lightning" to="." method="_on_Lightning_strike"]
 [connection signal="animation_finished" from="CanvasLayer/Control2/Lightning/AnimationPlayer" to="CanvasLayer/Control2/Lightning" method="_on_AnimationPlayer_animation_finished"]
@@ -316,3 +654,7 @@ polygon = PoolVector2Array( 73.1808, 365.25, 67.2416, 252.403, 67.2416, 200.433,
 [connection signal="mouse_exited" from="CanvasLayer/Volume/VolumeSlider" to="." method="_on_VolumeSlider_mouse_exited"]
 [connection signal="value_changed" from="CanvasLayer/Volume/VolumeSlider" to="." method="_on_VolumeSlider_value_changed"]
 [connection signal="pressed" from="CanvasLayer/Volume/Mute" to="." method="_on_Mute_pressed"]
+[connection signal="pressed" from="CanvasLayer/Modes/Hard" to="." method="_on_Hard_pressed"]
+[connection signal="pressed" from="CanvasLayer/Modes/Endless" to="." method="_on_Endless_pressed"]
+[connection signal="pressed" from="CanvasLayer/Modes/Normal" to="." method="_on_Normal_pressed"]
+[connection signal="pressed" from="CanvasLayer/Modes/Easy" to="." method="_on_Easy_pressed"]

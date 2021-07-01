@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Sprites/Environment.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Game_manager.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Scenes/Bow.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Health.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/ArrowAmmo.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scripts/camera_shake.gd" type="Script" id=8]
 [ext_resource path="res://Sprites/Ground_light.png" type="Texture" id=9]
 [ext_resource path="res://Sprites/bg_light.png" type="Texture" id=10]
 [ext_resource path="res://Sprites/Vignette.png" type="Texture" id=11]
@@ -26,6 +27,7 @@ script = ExtResource( 2 )
 [node name="Camera2D" type="Camera2D" parent="CanvasLayer"]
 position = Vector2( 511.376, 297.56 )
 current = true
+script = ExtResource( 8 )
 
 [node name="Health" parent="CanvasLayer" instance=ExtResource( 6 )]
 margin_bottom = 63.0

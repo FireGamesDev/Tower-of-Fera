@@ -27,6 +27,7 @@ func _on_Timer_timeout():
 	var pos = get_spawn_pos()
 	$TextureProgress.set_position(pos)
 	if !is_menu:
+		Globals.player_cam.shake(0.5,30,8)
 		var hearth = heal.instance()
 		hearth.position = Vector2(pos.x, pos.y + 200) # 200 is the y size of the Lightning
 		call_deferred("add_child", hearth)

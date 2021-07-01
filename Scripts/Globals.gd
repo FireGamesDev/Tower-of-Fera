@@ -3,6 +3,7 @@ extends Node
 var once = true
 
 var game_manager
+var player_cam
 var waves = 3
 
 var sfx_manager
@@ -14,6 +15,7 @@ var health_system
 var arrow_ammo_system
 
 var arrows = 0
+var get_arrow_time = 5
 var ammo = 2 #diffuculty
 
 var highscore
