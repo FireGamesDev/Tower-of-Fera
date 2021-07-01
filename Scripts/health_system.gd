@@ -6,6 +6,7 @@ const explosion = preload("res://Scenes//Explosion.tscn")
 const heal_sfx = preload("res://SFX/Heal.wav")
 const heartbeat_sfx = preload("res://SFX/Heartbeat.wav")
 const bad_sfx = preload("res://SFX/Collect.wav")
+const damage_sfx = preload("res://SFX/Damaged.wav")
 
 export var empty_hearth : Texture
 export var full_hearth : Texture
@@ -13,7 +14,6 @@ export var full_hearth : Texture
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Globals.health_system = self
-	Globals.heartbeat = $Heartbeat
 	reset_health()
 	
 func reset_health():
@@ -28,25 +28,25 @@ func take_damage():
 		$Sprite2.visible = false
 		$Sprite3.visible = false
 		$Heartbeat.play("Heartbeat")
-		Globals.heartbeat_player.set_speed_scale(8)
 		Globals.sfx_manager.play_sound(heartbeat_sfx)
 	else:
 		$Sprite1.visible = true
 		$Sprite2.visible = true
 		$Sprite3.visible = true
 		$Heartbeat.stop()
+		Globals.sfx_manager.play_sound(heartbeat_sfx)
 	if health == 0:
 		die()
 	$Timer.start()
 	
 func heal():
 	_on_Timer_timeout()
-	Globals.sfx_manager.play_sound(heal_sfx)
+	Globals.sfx_manager.play_heal_sound(heal_sfx)
 	$Sprite1.visible = true
 	$Sprite2.visible = true
 	$Sprite3.visible = true
 	$Heartbeat.stop()
-	$Sprite.scale= Vector2(5,5)
+	$Sprite.scale= Vector2(0.2,0.2)
 	if health < 4:
 		health += 1
 		manage_sprites(true)
@@ -57,7 +57,7 @@ func heal():
 func die():
 	Globals.game_manager.die()
 	$Heartbeat.stop()
-	$Sprite.scale= Vector2(5,5)
+	$Sprite.scale= Vector2(0.2,0.2)
 	
 func manage_sprites(is_heal):
 	if health == 4:

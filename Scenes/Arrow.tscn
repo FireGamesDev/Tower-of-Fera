@@ -19,7 +19,9 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[node name="Arrow" type="Area2D"]
+[node name="Arrow" type="Area2D" groups=[
+"Arrow",
+]]
 gravity = 9.8
 script = ExtResource( 2 )
 

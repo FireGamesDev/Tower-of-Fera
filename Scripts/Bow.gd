@@ -47,7 +47,7 @@ func on_drag_end():
 	if Globals.trajectory:
 		Globals.trajectory.hide()
 	$Sprite/AnimationPlayer.play("Bow")
-	Globals.sfx_manager.play_sound(shoot_sfx)
+	Globals.sfx_manager.play_shoot_sound(shoot_sfx)
 	
 	$Line2D.remove_point(1)
 	$Line2D.remove_point(0) 

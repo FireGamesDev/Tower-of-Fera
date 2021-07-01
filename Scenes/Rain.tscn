@@ -3,7 +3,7 @@
 [ext_resource path="res://Sprites/raindrop.png" type="Texture" id=1]
 
 [node name="Rain" type="CPUParticles2D"]
-amount = 200
+amount = 100
 lifetime = 7.0
 preprocess = 3.0
 speed_scale = 1.5

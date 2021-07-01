@@ -12,3 +12,7 @@ script = ExtResource( 1 )
 [node name="Theme" type="AudioStreamPlayer" parent="."]
 volume_db = -20.0
 autoplay = true
+
+[node name="HealPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="KillPlayer" type="AudioStreamPlayer" parent="."]

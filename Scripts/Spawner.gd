@@ -14,17 +14,24 @@ func _ready():
 
 func spawn():
 	var rand = randi()%3+1
-	print(rand)
 	var enemy
 	if rand == 1:
 		enemy = ground_enemy1.instance()
-		$Position2D.call_deferred("add_child", enemy)
+		$Ground.call_deferred("add_child", enemy)
 	if rand == 2:
 		enemy = ground_enemy2.instance()
-		$Position2D.call_deferred("add_child", enemy)
+		$Ground.call_deferred("add_child", enemy)
 	if rand == 3:
 		enemy = flying_enemy.instance()
-		$Position2D2.call_deferred("add_child", enemy)
+		rand = randi()%4+1
+		if rand == 1:
+			$Air1.call_deferred("add_child", enemy)
+		if rand == 2:
+			$Air2.call_deferred("add_child", enemy)
+		if rand == 3:
+			$Air3.call_deferred("add_child", enemy)
+		if rand == 4:
+			$Air4.call_deferred("add_child", enemy)
 		
 	enemy.speed = enemy_speed
 

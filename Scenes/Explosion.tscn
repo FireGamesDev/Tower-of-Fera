@@ -12,7 +12,7 @@ max_value = 20.0
 _data = [ Vector2( 0, 0.518182 ), 0.0, 0.0, 0, 0, Vector2( 0.0706522, 9.45455 ), 0.0, 0.0, 0, 0, Vector2( 0.233696, 20 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.545454 ), 0.0, 0.0, 0, 0 ]
 
 [node name="Explosion" type="CPUParticles2D"]
-scale = Vector2( 10, 10 )
+scale = Vector2( 3, 3 )
 emitting = false
 one_shot = true
 speed_scale = 2.0
@@ -26,4 +26,5 @@ initial_velocity = 20.0
 angular_velocity_curve = SubResource( 1 )
 scale_amount = 0.1
 scale_amount_curve = SubResource( 2 )
+color = Color( 1, 0.666667, 0.368627, 1 )
 script = ExtResource( 1 )

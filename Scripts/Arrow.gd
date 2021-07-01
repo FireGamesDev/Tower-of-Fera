@@ -1,5 +1,7 @@
 extends Area2D
 
+const kill_sfx = preload("res://SFX/Collect.wav")
+
 var mass = 0.10
 var launched = false
 var velocity = Vector2(0, 0)
@@ -29,6 +31,6 @@ func _on_Anim_animation_finished(_anim_name):
 
 func _on_Arrow_body_entered(body):
 	if body.is_in_group("Enemy"):
-		Globals.health_system.spawn_explosion_particle(body.position)
+		Globals.health_system.spawn_explosion_particle(body.global_position)
+		Globals.sfx_manager.play_kill_sound(kill_sfx)
 		body.queue_free()
-		queue_free()
