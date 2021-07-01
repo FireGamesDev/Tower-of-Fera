@@ -25,9 +25,10 @@ func _input(event):
 
 	if event is InputEventScreenTouch:
 		if event.is_pressed():
-			aiming = true
-			on_drag_start()
-		else:
+			if Globals.arrows > 0:
+				aiming = true
+				on_drag_start()
+		elif $Sprite.get_child_count() > 2:
 			aiming = false
 			on_drag_end()
 		
@@ -39,6 +40,9 @@ func on_drag_start():
 	arrow = arrowAsset.instance()
 	arrow.set_position($Sprite/Muzzle.position)
 	$Sprite.call_deferred("add_child", arrow)
+	
+	Globals.arrows -= 1
+	Globals.arrow_ammo_system.manage_arrows()
 	
 	if Globals.trajectory:
 		Globals.trajectory.show()

@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Sprites/Tank_enemy.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Enemy.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Bow"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 1 ]
+}
+
+[node name="GroundEnemy2" type="KinematicBody2D" groups=[
+"Tank",
+]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 1 )
+flip_h = true
+hframes = 5
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+autoplay = "Bow"
+playback_speed = 2.0
+anims/Bow = SubResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -6.67094, 23.8749, 6.66129, 26.2346, 15.7461, 19.3915, 16.6899, 1.4579, 16.8079, -17.8915, 5.36346, -25.6785, -11.2723, -22.139, -14.6939, -7.62689, -16.5816, 6.88518, -15.8737, 18.9196 )

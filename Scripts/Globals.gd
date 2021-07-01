@@ -11,6 +11,10 @@ var trajectory_dot
 
 var spawner
 var health_system
+var arrow_ammo_system
+
+var arrows = 0
+var ammo = 2 #diffuculty
 
 var highscore
 

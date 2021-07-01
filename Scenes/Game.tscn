@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Sprites/Environment.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Game_manager.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Scenes/Tower.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Bow.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Health.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/ArrowAmmo.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Sprites/Ground_light.png" type="Texture" id=9]
 [ext_resource path="res://Sprites/bg_light.png" type="Texture" id=10]
 [ext_resource path="res://Sprites/Vignette.png" type="Texture" id=11]
@@ -101,6 +102,10 @@ offset = Vector2( -609.769, -927.214 )
 [node name="Bow" parent="." instance=ExtResource( 5 )]
 position = Vector2( 90.0919, 303.34 )
 rotation = -0.39695
+
+[node name="Ammo" parent="Bow" instance=ExtResource( 7 )]
+position = Vector2( 4.31189, -234.608 )
+rotation = 0.39695
 
 [node name="Rain" parent="." instance=ExtResource( 12 )]
 position = Vector2( 538.008, -111.377 )

@@ -23,6 +23,7 @@ tracks/0/keys = {
 "Arrow",
 ]]
 gravity = 9.8
+collision_mask = 3
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
