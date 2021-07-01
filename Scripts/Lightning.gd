@@ -35,7 +35,7 @@ func _on_Timer_timeout():
 	$TextureProgress.visible = true
 	if !is_menu:
 		$Timer.start(randi()%20+6)
-	else: $Timer.start(randi()%6+1) #diffuculty
+	else: $Timer.start(randi()%50+30) #diffuculty
 	yield(get_tree().create_timer(0.2), "timeout")
 	$SFX.play()
 

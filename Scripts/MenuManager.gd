@@ -101,39 +101,52 @@ func _on_VolumeSlider_value_changed(value):
 func _on_Menu_tree_exited():
 	save_game()
 
-
-func _on_Lightning_strike():
-	$CanvasLayer/PlayButton/AnimationPlayer.play("PlayButton")
-
 func _on_PlayButton_pressed():
 	$CanvasLayer/Control2/Lightning._on_Timer_timeout()
 	$CanvasLayer/Control2/Lightning.stop = true
 	Globals.sfx_manager.play_sound(click_sound)
 	SceneChanger.change_scene("res://Scenes/Game.tscn", 0.5)
 
+
 func _on_Hard_pressed():
-	$CanvasLayer/Control2/Lightning._on_Timer_timeout()
-	$CanvasLayer/Control2/Lightning.stop = true
+	$CanvasLayer/Modes/Hard/Hard_light._on_Timer_timeout()
+	$CanvasLayer/Modes/Hard/Hard_light.stop = true
 	Globals.sfx_manager.play_sound(click_sound)
 	SceneChanger.change_scene("res://Scenes/Game.tscn", 0.5)
 
 
 func _on_Endless_pressed():
-	$CanvasLayer/Control2/Lightning._on_Timer_timeout()
-	$CanvasLayer/Control2/Lightning.stop = true
+	$CanvasLayer/Modes/Endless/Endless_strike._on_Timer_timeout()
+	$CanvasLayer/Modes/Endless/Endless_strike.stop = true
 	Globals.sfx_manager.play_sound(click_sound)
 	SceneChanger.change_scene("res://Scenes/Game.tscn", 0.5)
 
 
 func _on_Normal_pressed():
-	$CanvasLayer/Control2/Lightning._on_Timer_timeout()
-	$CanvasLayer/Control2/Lightning.stop = true
+	$CanvasLayer/Modes/Normal/Normal_strike._on_Timer_timeout()
+	$CanvasLayer/Modes/Normal/Normal_strike.stop = true
 	Globals.sfx_manager.play_sound(click_sound)
 	SceneChanger.change_scene("res://Scenes/Game.tscn", 0.5)
 
 
 func _on_Easy_pressed():
-	$CanvasLayer/Control2/Lightning._on_Timer_timeout()
-	$CanvasLayer/Control2/Lightning.stop = true
+	$CanvasLayer/Modes/Easy/Easy_strike._on_Timer_timeout()
+	$CanvasLayer/Modes/Easy/Easy_strike.stop = true
 	Globals.sfx_manager.play_sound(click_sound)
 	SceneChanger.change_scene("res://Scenes/Game.tscn", 0.5)
+
+
+func _on_Lightning_strike():
+	$CanvasLayer/PlayButton/AnimationPlayer.play("PlayButton")
+
+func _on_Hard_light_strike():
+	$CanvasLayer/Modes/Hard/AnimationPlayer.play("PlayButton")
+
+func _on_Endless_strike_strike():
+	$CanvasLayer/Modes/Endless/AnimationPlayer.play("PlayButton")
+
+func _on_Normal_strike_strike():
+	$CanvasLayer/Modes/Normal/AnimationPlayer.play("PlayButton")
+
+func _on_Easy_strike_strike():
+	$CanvasLayer/Modes/Easy/AnimationPlayer.play("PlayButton")
