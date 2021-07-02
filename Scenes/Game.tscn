@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Sprites/Environment.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Game_manager.gd" type="Script" id=2]
@@ -16,6 +16,8 @@
 [ext_resource path="res://Scenes/Spawner.tscn" type="PackedScene" id=14]
 [ext_resource path="res://SFX/Lightning_strike.wav" type="AudioStream" id=15]
 [ext_resource path="res://Sprites/lightning.png" type="Texture" id=16]
+[ext_resource path="res://Scenes/MouseTrail.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/Fireflies.tscn" type="PackedScene" id=18]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.815686, 0.505882, 0.34902, 1 )
@@ -238,6 +240,9 @@ void fragment() {
 shader = SubResource( 20 )
 shader_param/color = Vector3( 0.35, 0.48, 0.95 )
 shader_param/OCTAVES = 2
+
+[sub_resource type="Curve" id=22]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.990909, 0.990909 ), 0.0, 0.0, 0, 0 ]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 2 )
@@ -769,6 +774,10 @@ disabled = true
 [node name="SFX" type="AudioStreamPlayer" parent="CanvasLayer/Win/Win/Win_light"]
 stream = ExtResource( 15 )
 
+[node name="Fireflies" parent="CanvasLayer" instance=ExtResource( 18 )]
+position = Vector2( 517.342, 207.896 )
+emission_rect_extents = Vector2( 600, 600 )
+
 [node name="Map" type="Node2D" parent="."]
 position = Vector2( -194.941, 489.472 )
 
@@ -890,6 +899,11 @@ position = Vector2( 425.423, 279.383 )
 rotation = 0.530663
 scale = Vector2( 1.26996, 1.42614 )
 texture = ExtResource( 10 )
+
+[node name="MouseTrail" parent="." instance=ExtResource( 17 )]
+width = 5.0
+width_curve = SubResource( 22 )
+default_color = Color( 1, 1, 1, 0.588235 )
 
 [connection signal="pressed" from="CanvasLayer/Menu" to="." method="_on_Menu_pressed"]
 [connection signal="strike" from="CanvasLayer/Menu/Hard_light" to="." method="_on_Hard_light_strike"]

@@ -14,7 +14,7 @@ func _ready():
 	$CanvasLayer/Modes/Endless.set_focus_mode(Control.FOCUS_NONE)
 	$CanvasLayer/Modes/Boss.set_focus_mode(Control.FOCUS_NONE)
 	$CanvasLayer/Story/ContinueButton.set_focus_mode(Control.FOCUS_NONE)
-	$CanvasLayer/Story/ContinueButton/Who_is_Fera.set_focus_mode(Control.FOCUS_NONE)
+	$CanvasLayer/Story/Who_is_Fera.set_focus_mode(Control.FOCUS_NONE)
 	set_saved_score()
 	
 	Globals.menu_cam = $CanvasLayer
@@ -78,7 +78,6 @@ func load_game():
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), -80)
 		data["options"]["volume"] = -80
 	else: AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), data["options"]["volume"])
-
 	
 	file.close()
 
@@ -195,6 +194,12 @@ func on_hard_cleared():
 
 
 func _on_ContinueButton_pressed():
+	$CanvasLayer/Story/ContinueButton/Continue._on_Timer_timeout()
+	$CanvasLayer/Story/ContinueButton/Continue.stop = true
+	Globals.sfx_manager.play_sound(click_sound)
+	yield(get_tree().create_timer(1), "timeout")
+	$CanvasLayer/Story/ContinueButton/Continue/AnimationPlayer.play_backwards("Appear")
+	yield(get_tree().create_timer($CanvasLayer/Story/ContinueButton/Continue/AnimationPlayer.current_animation_length), "timeout")
 	#start all timers
 	$CanvasLayer/Control2/Lightning/Timer.start()
 	$CanvasLayer/Modes/Boss/Boss/Timer.start()
@@ -202,10 +207,6 @@ func _on_ContinueButton_pressed():
 	$CanvasLayer/Modes/Endless/Endless_strike/Timer.start()
 	$CanvasLayer/Modes/Hard/Hard_light/Timer.start()
 	$CanvasLayer/Modes/Normal/Normal_strike/Timer.start()
-	
-	$CanvasLayer/Story/ContinueButton/Continue._on_Timer_timeout()
-	$CanvasLayer/Story/ContinueButton/Continue.stop = true
-	Globals.sfx_manager.play_sound(click_sound)
 	$CanvasLayer/Story.visible = false
 
 
@@ -216,5 +217,9 @@ func _on_Continue_strike():
 
 func _on_Who_is_Fera_pressed():
 	$CanvasLayer/Story/Text.visible = false
-	$CanvasLayer/Story/ContinueButton/Who_is_Fera.visible = false
-	$CanvasLayer/Story/ContinueButton/Who_is_fera.visible = true
+	$CanvasLayer/Story/Who_is_Fera.visible = false
+	$CanvasLayer/Story/Who_is_fera.visible = true
+
+
+func _on_Logo_logo_finished():
+	$CanvasLayer/Story/ContinueButton/Continue/AnimationPlayer.play("Appear")

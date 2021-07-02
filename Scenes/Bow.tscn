@@ -32,7 +32,7 @@ playback_speed = 2.0
 anims/Bow = SubResource( 1 )
 
 [node name="Muzzle" type="Position2D" parent="Sprite"]
-position = Vector2( 18.8846, 4.78324 )
+position = Vector2( 30.4965, 4.40867 )
 
 [node name="Trajectory" parent="Sprite/Muzzle" instance=ExtResource( 4 )]
 position = Vector2( -0.17569, -0.328751 )

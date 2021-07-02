@@ -60,11 +60,13 @@ func _on_Arrow_body_entered(body):
 			if current_body == body:
 				return
 		current_body = body
-		launched = false
-		$Anim.set_speed_scale(0.5)
-		$Anim.play("Arrow_fade")
-		call_deferred("reparent", self, body)
-		position = Vector2(0,0)
+		if body.health > 1:
+			$trail_target.queue_free()
+			launched = false
+			call_deferred("reparent", self, body)
+			position = Vector2(0,0)
+			$Anim.set_speed_scale(0.5)
+			$Anim.play("Arrow_fade")
 		Globals.health_system.spawn_explosion_particle(body.global_position)
 		if randi()%2+1 == 1:
 			Globals.sfx_manager.play_kill_sound(kill_sfx1)

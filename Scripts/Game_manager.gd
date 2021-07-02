@@ -25,13 +25,13 @@ func die():
 	if Globals.waves_count -1 == 0:
 		$CanvasLayer/Win/Text.bbcode_text = "\n[wave]THE TOWN FALLED!"
 	else: $CanvasLayer/Win/Text.bbcode_text = "\n[wave]THE TOWN FALLED! \nCLEARED WAVES: " + str(Globals.waves_count -1)
-	if Globals.score < Globals.waves_count -1:
+	if Globals.highscore < Globals.waves_count -1:
 		Globals.save_score(Globals.waves_count -1)
 	$CanvasLayer/Lose.visible = true
 	
 func win():
 	#Globals.save_progress()
-	if Globals.score < Globals.waves_count:
+	if Globals.highscore < Globals.waves_count:
 		Globals.save_score(Globals.waves_count)
 	Globals.sfx_manager.play_sound(win_sfx)
 	$CanvasLayer/Win.visible = true

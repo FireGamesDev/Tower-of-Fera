@@ -40,7 +40,7 @@ func on_drag_start():
 	arrow = arrowAsset.instance()
 	arrow.set_position($Sprite/Muzzle.position)
 	$Sprite.call_deferred("add_child", arrow)
-	
+
 	Globals.arrows -= 1
 	Globals.arrow_ammo_system.manage_arrows()
 	
@@ -76,7 +76,6 @@ func on_drag():
 		$Sprite.frame = 1
 	if force.x > 200:
 		$Sprite.frame = 2
-	
 	$Sprite.look_at(startpoint - endpoint)
 	arrow.rotation = $Sprite.rotation
 	

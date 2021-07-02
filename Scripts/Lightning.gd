@@ -44,8 +44,9 @@ func _on_Timer_timeout():
 	else: $SFX_lightning.start(0.2)
 	
 
-func _on_AnimationPlayer_animation_finished(_anim_name):
-	$TextureProgress.visible = false
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "Lightning":
+		$TextureProgress.visible = false
 
 
 func _on_SFX_lightning_timeout():
