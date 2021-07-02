@@ -19,6 +19,7 @@ var current_enemy_count = 0
 func _ready():
 	Globals.spawner = self
 	yield(get_tree().create_timer(1.0), "timeout") #wait to get the game_manager initialize
+	Globals.wave = 1
 	next_wave()
 	
 func spawn_wave():

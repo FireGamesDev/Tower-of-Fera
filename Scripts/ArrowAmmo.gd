@@ -5,6 +5,7 @@ const arrowSprite = preload("res://Scenes/ArrowAmmoSprite.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Globals.arrow_ammo_system = self
+	Globals.arrows = 0
 	_on_Timer_timeout()
 
 func manage_arrows():

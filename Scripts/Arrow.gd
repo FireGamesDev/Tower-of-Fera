@@ -7,6 +7,10 @@ const grave1 = preload("res://Scenes/Grave1.tscn")
 const grave2 = preload("res://Scenes/Grave2.tscn")
 const grave3 = preload("res://Scenes/Grave3.tscn")
 
+const grave1_rigid = preload("res://Scenes/Grave1Rigid.tscn")
+const grave2_rigid = preload("res://Scenes/Grave2Rigid.tscn")
+const grave3_rigid = preload("res://Scenes/Grave3Rigid.tscn")
+
 var mass = 0.10
 var launched = false
 var velocity = Vector2(0, 0)
@@ -46,6 +50,7 @@ func _on_Arrow_body_entered(body):
 		body.queue_free()
 		if !body.is_in_group("FlyingEnemy"):
 			spawn_grave(randi()%3 + 1, body.global_position)
+		else: spawn_rigid_grave(randi()%3 + 1, body.global_position)
 		Globals.remaining_enemies -= 1
 		Globals.spawner.set_remaining_text()
 		
@@ -88,3 +93,16 @@ func spawn_grave(rand, pos):
 	grave.position = pos
 	grave.position.y += 100
 	grave.get_child(0).play("grave_appear")
+	
+func spawn_rigid_grave(rand, pos):
+	var grave
+	if rand == 1:
+		grave = grave1_rigid.instance()
+	if rand == 2:
+		grave = grave2_rigid.instance()
+	if rand == 3:
+		grave = grave3_rigid.instance()
+	Globals.spawner.call_deferred("add_child", grave)
+	grave.position = pos
+	grave.position.y += 100
+	grave.launch()

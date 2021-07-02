@@ -104,117 +104,55 @@ bg_color = Color( 0.0509804, 0.168627, 0.270588, 1 )
 [sub_resource type="StyleBoxFlat" id=20]
 bg_color = Color( 1, 0.666667, 0.368627, 1 )
 
-[sub_resource type="StyleBoxFlat" id=31]
+[sub_resource type="StyleBoxFlat" id=21]
 bg_color = Color( 0.815686, 0.505882, 0.34902, 1 )
 
-[sub_resource type="Animation" id=29]
-length = 0.6
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:rect_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=30]
-resource_name = "Lightning"
-tracks/0/type = "value"
-tracks/0/path = NodePath("TextureProgress:value")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.0, 100.0 ]
-}
-
-[sub_resource type="Animation" id=21]
-length = 0.6
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:rect_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
-}
-
 [sub_resource type="Animation" id=22]
-resource_name = "Lightning"
+length = 0.6
 tracks/0/type = "value"
-tracks/0/path = NodePath("TextureProgress:value")
+tracks/0/path = NodePath(".:rect_scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ 0.0, 100.0 ]
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=23]
-resource_name = "PlayButton"
-length = 0.6
+resource_name = "Lightning"
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:rect_scale")
+tracks/0/path = NodePath("TextureProgress:value")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
+"values": [ 0.0, 100.0 ]
 }
 
 [sub_resource type="Animation" id=24]
-resource_name = "Lightning"
+length = 0.6
 tracks/0/type = "value"
-tracks/0/path = NodePath("TextureProgress:value")
+tracks/0/path = NodePath(".:rect_scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ 0.0, 100.0 ]
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=25]
-length = 0.6
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:rect_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=26]
-resource_name = "Lightning"
 tracks/0/type = "value"
 tracks/0/path = NodePath("TextureProgress:value")
 tracks/0/interp = 1
@@ -228,7 +166,7 @@ tracks/0/keys = {
 "values": [ 0.0, 100.0 ]
 }
 
-[sub_resource type="Animation" id=27]
+[sub_resource type="Animation" id=26]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rect_scale")
@@ -243,8 +181,65 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
 }
 
+[sub_resource type="Animation" id=27]
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureProgress:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 100.0 ]
+}
+
 [sub_resource type="Animation" id=28]
-resource_name = "Lightning"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=29]
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureProgress:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 100.0 ]
+}
+
+[sub_resource type="Animation" id=30]
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=31]
 tracks/0/type = "value"
 tracks/0/path = NodePath("TextureProgress:value")
 tracks/0/interp = 1
@@ -522,7 +517,7 @@ margin_bottom = 145.04
 rect_pivot_offset = Vector2( 100, 37 )
 custom_styles/hover = SubResource( 3 )
 custom_styles/pressed = SubResource( 4 )
-custom_styles/disabled = SubResource( 31 )
+custom_styles/disabled = SubResource( 21 )
 custom_styles/normal = SubResource( 5 )
 custom_fonts/font = SubResource( 7 )
 __meta__ = {
@@ -573,7 +568,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Modes/Boss"]
-anims/PlayButton = SubResource( 29 )
+anims/PlayButton = SubResource( 22 )
 
 [node name="Boss" type="Node2D" parent="CanvasLayer/Modes/Boss"]
 position = Vector2( 189.827, 28.4361 )
@@ -584,7 +579,7 @@ is_menu = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Modes/Boss/Boss"]
 playback_speed = 3.0
-anims/Lightning = SubResource( 30 )
+anims/Lightning = SubResource( 23 )
 
 [node name="TextureProgress" type="TextureProgress" parent="CanvasLayer/Modes/Boss/Boss"]
 margin_left = 22.653
@@ -677,7 +672,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Modes/Hard"]
-anims/PlayButton = SubResource( 21 )
+anims/PlayButton = SubResource( 24 )
 
 [node name="Hard_light" type="Node2D" parent="CanvasLayer/Modes/Hard"]
 position = Vector2( 189.827, 28.4361 )
@@ -687,7 +682,7 @@ is_menu = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Modes/Hard/Hard_light"]
 playback_speed = 3.0
-anims/Lightning = SubResource( 22 )
+anims/Lightning = SubResource( 25 )
 
 [node name="TextureProgress" type="TextureProgress" parent="CanvasLayer/Modes/Hard/Hard_light"]
 margin_left = 22.653
@@ -756,7 +751,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Modes/Endless"]
-anims/PlayButton = SubResource( 23 )
+anims/PlayButton = SubResource( 26 )
 
 [node name="Score" type="RichTextLabel" parent="CanvasLayer/Modes/Endless"]
 anchor_left = 1.0
@@ -791,7 +786,7 @@ is_menu = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Modes/Endless/Endless_strike"]
 playback_speed = 3.0
-anims/Lightning = SubResource( 24 )
+anims/Lightning = SubResource( 27 )
 
 [node name="TextureProgress" type="TextureProgress" parent="CanvasLayer/Modes/Endless/Endless_strike"]
 margin_left = 22.653
@@ -860,7 +855,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Modes/Normal"]
-anims/PlayButton = SubResource( 25 )
+anims/PlayButton = SubResource( 28 )
 
 [node name="Cleared" type="RichTextLabel" parent="CanvasLayer/Modes/Normal"]
 visible = false
@@ -894,7 +889,7 @@ is_menu = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Modes/Normal/Normal_strike"]
 playback_speed = 3.0
-anims/Lightning = SubResource( 26 )
+anims/Lightning = SubResource( 29 )
 
 [node name="TextureProgress" type="TextureProgress" parent="CanvasLayer/Modes/Normal/Normal_strike"]
 margin_left = 22.653
@@ -963,7 +958,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Modes/Easy"]
-anims/PlayButton = SubResource( 27 )
+anims/PlayButton = SubResource( 30 )
 
 [node name="Cleared" type="RichTextLabel" parent="CanvasLayer/Modes/Easy"]
 visible = false
@@ -997,7 +992,7 @@ is_menu = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Modes/Easy/Easy_strike"]
 playback_speed = 3.0
-anims/Lightning = SubResource( 28 )
+anims/Lightning = SubResource( 31 )
 
 [node name="TextureProgress" type="TextureProgress" parent="CanvasLayer/Modes/Easy/Easy_strike"]
 margin_left = 22.653
@@ -1047,7 +1042,7 @@ margin_left = -263.0
 margin_top = -48.0
 margin_right = 261.0
 margin_bottom = 52.0
-color = Color( 0.0627451, 0.172549, 0.270588, 0.54902 )
+color = Color( 0.0627451, 0.172549, 0.270588, 0.862745 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1238,8 +1233,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Logo" parent="." instance=ExtResource( 2 )]
-margin_top = -1.52588e-05
+[node name="Logo" parent="CanvasLayer" instance=ExtResource( 2 )]
 
 [connection signal="tree_exited" from="." to="." method="_on_Menu_tree_exited"]
 [connection signal="strike" from="CanvasLayer/Control2/Lightning" to="." method="_on_Lightning_strike"]

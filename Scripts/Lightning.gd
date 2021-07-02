@@ -6,6 +6,8 @@ export var stop = false
 
 export var is_menu = false
 
+export var is_restart_button = false
+
 const lightning_strike = preload("res://SFX/Lightning_strike.wav")
 const heal = preload("res://Scenes/Heal.tscn")
 	
@@ -36,8 +38,15 @@ func _on_Timer_timeout():
 	if !is_menu:
 		$Timer.start(randi()%20+6) #diffuculty
 	else: $Timer.start(randi()%50+30) 
-	yield(get_tree().create_timer(0.2), "timeout")
-	$SFX.play()
+	if !is_restart_button:
+		yield(get_tree().create_timer(0.2), "timeout")
+		$SFX.play()
+	else: $SFX_lightning.start(0.2)
+	
 
 func _on_AnimationPlayer_animation_finished(_anim_name):
 	$TextureProgress.visible = false
+
+
+func _on_SFX_lightning_timeout():
+	$SFX.play()
