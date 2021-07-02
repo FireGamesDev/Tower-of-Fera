@@ -1,4 +1,4 @@
-extends Camera2D
+extends CanvasLayer
 
 var _duration = 0.0
 var _period_in_ms = 0.0
@@ -53,3 +53,4 @@ func shake(duration, frequency, amplitude):
 	# Reset previous offset, if any.
 	set_offset(get_offset() - _last_offset)
 	_last_offset = Vector2(0, 0)
+

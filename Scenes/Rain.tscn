@@ -3,10 +3,12 @@
 [ext_resource path="res://Sprites/raindrop.png" type="Texture" id=1]
 
 [node name="Rain" type="CPUParticles2D"]
+rotation = 0.187985
+scale = Vector2( 1, 2 )
 amount = 100
 lifetime = 7.0
 preprocess = 3.0
-speed_scale = 1.5
+speed_scale = 0.8
 texture = ExtResource( 1 )
 emission_shape = 2
 emission_rect_extents = Vector2( 700, 1 )

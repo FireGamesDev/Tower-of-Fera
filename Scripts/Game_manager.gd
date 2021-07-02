@@ -3,6 +3,7 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Globals.game_manager = self
+	Globals.player_cam = $CanvasLayer/Camera2D
 	
 func die():
 	pass

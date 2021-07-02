@@ -4,6 +4,7 @@ var once = true
 
 var game_manager
 var player_cam
+var menu_cam
 var waves = 3
 
 var sfx_manager

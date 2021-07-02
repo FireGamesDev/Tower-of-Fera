@@ -34,8 +34,8 @@ func _on_Timer_timeout():
 	$AnimationPlayer.play("Lightning")
 	$TextureProgress.visible = true
 	if !is_menu:
-		$Timer.start(randi()%20+6)
-	else: $Timer.start(randi()%50+30) #diffuculty
+		$Timer.start(randi()%20+6) #diffuculty
+	else: $Timer.start(randi()%50+30) 
 	yield(get_tree().create_timer(0.2), "timeout")
 	$SFX.play()
 

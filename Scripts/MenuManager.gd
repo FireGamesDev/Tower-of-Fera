@@ -13,6 +13,8 @@ func _ready():
 	$CanvasLayer/Modes/Easy.set_focus_mode(Control.FOCUS_NONE)
 	$CanvasLayer/Modes/Endless.set_focus_mode(Control.FOCUS_NONE)
 	set_saved_score()
+	
+	Globals.menu_cam = $CanvasLayer
 
 
 func _on_VolumeSlider_mouse_exited():
@@ -137,16 +139,21 @@ func _on_Easy_pressed():
 
 
 func _on_Lightning_strike():
+	Globals.menu_cam.shake(0.5,15,8)
 	$CanvasLayer/PlayButton/AnimationPlayer.play("PlayButton")
 
 func _on_Hard_light_strike():
+	Globals.menu_cam.shake(0.5,15,8)
 	$CanvasLayer/Modes/Hard/AnimationPlayer.play("PlayButton")
 
 func _on_Endless_strike_strike():
+	Globals.menu_cam.shake(0.5,15,8)
 	$CanvasLayer/Modes/Endless/AnimationPlayer.play("PlayButton")
 
 func _on_Normal_strike_strike():
+	Globals.menu_cam.shake(0.5,15,8)
 	$CanvasLayer/Modes/Normal/AnimationPlayer.play("PlayButton")
 
 func _on_Easy_strike_strike():
+	Globals.menu_cam.shake(0.5,15,8)
 	$CanvasLayer/Modes/Easy/AnimationPlayer.play("PlayButton")
