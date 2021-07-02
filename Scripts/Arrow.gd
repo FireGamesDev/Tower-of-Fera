@@ -3,6 +3,10 @@ extends Area2D
 const kill_sfx1 = preload("res://SFX/Die1.wav")
 const kill_sfx2 = preload("res://SFX/Die2.wav")
 
+const grave1 = preload("res://Scenes/Grave1.tscn")
+const grave2 = preload("res://Scenes/Grave2.tscn")
+const grave3 = preload("res://Scenes/Grave3.tscn")
+
 var mass = 0.10
 var launched = false
 var velocity = Vector2(0, 0)
@@ -40,6 +44,11 @@ func _on_Arrow_body_entered(body):
 			Globals.sfx_manager.play_kill_sound(kill_sfx1)
 		else: Globals.sfx_manager.play_kill_sound(kill_sfx2)
 		body.queue_free()
+		if !body.is_in_group("FlyingEnemy"):
+			spawn_grave(randi()%3 + 1, body.global_position)
+		Globals.remaining_enemies -= 1
+		Globals.spawner.set_remaining_text()
+		
 	if body.is_in_group("Tank"):
 		Globals.player_cam.shake(0.5,8,4)
 		if current_body != null:
@@ -57,9 +66,25 @@ func _on_Arrow_body_entered(body):
 		else: Globals.sfx_manager.play_kill_sound(kill_sfx2)
 		body.health -= 1
 		if body.health == 0:
+			Globals.remaining_enemies -= 1
+			Globals.spawner.set_remaining_text()
 			body.queue_free()
+			spawn_grave(randi()%3 + 1, body.global_position)
 
 
 func reparent(node, body):
 	node.get_parent().remove_child(node)
 	body.add_child(node)
+	
+func spawn_grave(rand, pos):
+	var grave
+	if rand == 1:
+		grave = grave1.instance()
+	if rand == 2:
+		grave = grave2.instance()
+	if rand == 3:
+		grave = grave3.instance()
+	Globals.spawner.call_deferred("add_child", grave)
+	grave.position = pos
+	grave.position.y += 100
+	grave.get_child(0).play("grave_appear")

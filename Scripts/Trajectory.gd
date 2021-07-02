@@ -27,6 +27,7 @@ func hide():
 	$Dots.visible = false
 	
 func prepare_dots():
+	Globals.trajectory_dot = null
 	dots_list = [dot_number]
 	if Globals.trajectory_dot:
 		Globals.trajectory_dot.scale = Vector2.ONE * max_scale

@@ -45,7 +45,12 @@ var data = { }
 
 # The default values
 var default_data = {
-	"score" : 0,
+	"player" : {
+		"score" : 0,
+		"hard" : false,
+		"easy" : false,
+		"normal" : false
+		},
 	"options" : {
 		"volume" : -7,
 		"muted" : false
@@ -108,6 +113,8 @@ func _on_PlayButton_pressed():
 	$CanvasLayer/Control2/Lightning.stop = true
 	Globals.sfx_manager.play_sound(click_sound)
 	SceneChanger.change_scene("res://Scenes/Game.tscn", 0.5)
+	
+	Globals.game_mode = "Easy"
 
 
 func _on_Hard_pressed():
@@ -115,6 +122,8 @@ func _on_Hard_pressed():
 	$CanvasLayer/Modes/Hard/Hard_light.stop = true
 	Globals.sfx_manager.play_sound(click_sound)
 	SceneChanger.change_scene("res://Scenes/Game.tscn", 0.5)
+	
+	Globals.game_mode = "Hard"
 
 
 func _on_Endless_pressed():
@@ -122,6 +131,8 @@ func _on_Endless_pressed():
 	$CanvasLayer/Modes/Endless/Endless_strike.stop = true
 	Globals.sfx_manager.play_sound(click_sound)
 	SceneChanger.change_scene("res://Scenes/Game.tscn", 0.5)
+	
+	Globals.game_mode = "Endless"
 
 
 func _on_Normal_pressed():
@@ -129,6 +140,8 @@ func _on_Normal_pressed():
 	$CanvasLayer/Modes/Normal/Normal_strike.stop = true
 	Globals.sfx_manager.play_sound(click_sound)
 	SceneChanger.change_scene("res://Scenes/Game.tscn", 0.5)
+	
+	Globals.game_mode = "Normal"
 
 
 func _on_Easy_pressed():
@@ -136,6 +149,8 @@ func _on_Easy_pressed():
 	$CanvasLayer/Modes/Easy/Easy_strike.stop = true
 	Globals.sfx_manager.play_sound(click_sound)
 	SceneChanger.change_scene("res://Scenes/Game.tscn", 0.5)
+	
+	Globals.game_mode = "Easy"
 
 
 func _on_Lightning_strike():

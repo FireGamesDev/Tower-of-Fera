@@ -10,23 +10,25 @@ scale = Vector2( 0.6, 0.6 )
 collision_mask = 3
 
 [node name="Sprite3" type="Sprite" parent="."]
-position = Vector2( -223.601, -340.744 )
+position = Vector2( -181.222, -347.807 )
 scale = Vector2( 2, 4 )
 texture = ExtResource( 1 )
 
 [node name="Sprite4" type="Sprite" parent="."]
-position = Vector2( 102.016, -325.032 )
+position = Vector2( 144.395, -332.095 )
 scale = Vector2( 2, 4 )
 texture = ExtResource( 2 )
 offset = Vector2( 101.699, 120.711 )
 
 [node name="Sprite5" type="Sprite" parent="."]
+visible = false
 position = Vector2( -274.388, 104.621 )
 rotation = -1.6595
 scale = Vector2( 1.41095, 2.01411 )
 texture = ExtResource( 1 )
 
 [node name="Sprite6" type="Sprite" parent="."]
+visible = false
 position = Vector2( -306.589, -224.682 )
 rotation = -1.6595
 scale = Vector2( 2, 2 )
@@ -42,6 +44,5 @@ scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 2 )
 offset = Vector2( 101.699, 120.711 )
 
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
-position = Vector2( 4.12272, -245.554 )
-polygon = PoolVector2Array( 73.1808, 365.25, 67.2416, 252.403, 67.2416, 200.433, 92.4837, 198.949, 88.0292, 155.889, 67.2416, 121.737, -79.7567, 115.798, -85.696, -264.319, -44.1208, -268.773, -35.2118, -311.833, -60.4539, -584.708, -234.179, -589.162, -225.27, -45.7141, -237.149, 370.228, -23.3331, 411.803, -21.8483, 368.743 )
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 78.0943, 119.381, 71.1572, -44.1351, 96.9234, -49.0901, 81.0673, -119.452, -35.8714, -124.407, -35.8714, -515.383, 1.78685, -520.155, 12.6879, -679.707, -23.9793, -846.196, -115.152, -842.232, -123.08, -392.316, -120.107, 38.264, -122.089, 117.544, -122.089, 149.777, -30.9163, 149.777, -25.9613, 125.993 )

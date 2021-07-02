@@ -22,6 +22,7 @@ tracks/0/keys = {
 
 [node name="FlyingEnemy" type="KinematicBody2D" groups=[
 "Enemy",
+"FlyingEnemy",
 ]]
 scale = Vector2( 0.4, 0.4 )
 script = ExtResource( 2 )
@@ -36,5 +37,4 @@ autoplay = "Bow"
 anims/Bow = SubResource( 1 )
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
-scale = Vector2( 1, 1 )
 polygon = PoolVector2Array( -29.8878, 61.6378, 15.0614, 64.9153, 45.964, 47.123, 58.6059, 10.6017, 40.3453, -36.2204, 5.69696, -62.909, -39.7205, -54.0128, -61.7268, -7.19067, -55.1718, 40.0996 )

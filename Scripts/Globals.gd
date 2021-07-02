@@ -5,7 +5,6 @@ var once = true
 var game_manager
 var player_cam
 var menu_cam
-var waves = 3
 
 var sfx_manager
 var trajectory
@@ -19,6 +18,16 @@ var arrows = 0
 var get_arrow_time = 5
 var ammo = 2 #diffuculty
 
+var game_mode
+var waves_count = 3 #difficulty
+var wave = 1
+var remaining_enemies = 0
+var max_enemy_count = 10 #difficulty
+var min_enemy_count = 3 #difficulty
+var max_enemy_plus = 3 #difficulty
+var min_enemy_plus = 2 #difficulty
+var spawn_time_minus = 0.2 # difficulty
+
 var highscore
 
 var path = "user://data.json"
@@ -27,7 +36,12 @@ var data = { }
 
 # The default values
 var default_data = {
-	"score" : 0,
+	"player" : {
+		"score" : 0,
+		"hard" : false,
+		"easy" : false,
+		"normal" : false
+		},
 	"options" : {
 		"volume" : -7,
 		"muted" : false
@@ -47,7 +61,7 @@ func load_game():
 	
 	data = parse_json(text)
 	
-	highscore = data["score"]
+	highscore = data["player"]["score"]
 	
 	file.close()
 
