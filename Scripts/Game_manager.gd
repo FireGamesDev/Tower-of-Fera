@@ -1,6 +1,8 @@
 extends Node2D
 
 const click_sound = preload("res://SFX/Collect.wav")
+const win_sfx = preload("res://SFX/Win.wav")
+const lose_sfx = preload("res://SFX/Lose.wav")
 
 var remaining_text
 var wave_text
@@ -12,13 +14,28 @@ func _ready():
 	wave_text = $CanvasLayer/Waves
 	remaining_text = $CanvasLayer/Remaining
 	$CanvasLayer/Menu.set_focus_mode(Control.FOCUS_NONE)
+	$CanvasLayer/Win/Win.set_focus_mode(Control.FOCUS_NONE)
+	$CanvasLayer/Menu.set_focus_mode(Control.FOCUS_NONE)
+	$CanvasLayer/Lose/Restart.set_focus_mode(Control.FOCUS_NONE)
+	$CanvasLayer/Lose/Menu_lose.set_focus_mode(Control.FOCUS_NONE)
 	set_rain()
 	
 func die():
-	pass
+	Globals.sfx_manager.play_sound(lose_sfx)
+	$CanvasLayer/Win/Text.bbcode_text = "\n[wave]THE TOWN FALLED! \nCLEARED WAVES: " + str(Globals.wave_count -1)
+	if Globals.score < Globals.wave_count -1:
+		Globals.save_score(Globals.wave_count -1)
+	$CanvasLayer/Lose.visible = true
 	
 func win():
-	pass
+	Globals.save_progress()
+	if Globals.score < Globals.wave_count:
+		Globals.save_score(Globals.wave_count)
+	Globals.is_ended = true
+	Globals.sfx_manager.play_sound(win_sfx)
+	$CanvasLayer/Win.visible = true
+	var cleared_mode = Globals.game_mode
+	$CanvasLayer/Win/Text.bbcode_text = "\n[wave]YOU CLEARED " + str(cleared_mode.to_upper())
 
 
 func _on_Tower_body_entered(body):
@@ -50,3 +67,43 @@ func _on_Menu_pressed():
 	$Map/Lightning.stop = true
 	Globals.sfx_manager.play_sound(click_sound)
 	SceneChanger.change_scene("res://Scenes/Menu.tscn", 0.5)
+
+
+func _on_Win_light_strike():
+	Globals.player_cam.shake(0.5,15,8)
+	$CanvasLayer/Win/Win/AnimationPlayer.play("PlayButton")
+
+
+func _on_Win_pressed():
+	$CanvasLayer/Win/Win/Win_light._on_Timer_timeout()
+	$CanvasLayer/Win/Win/Win_light.stop = true
+	$Map/Lightning.stop = true
+	Globals.sfx_manager.play_sound(click_sound)
+	SceneChanger.change_scene("res://Scenes/Menu.tscn", 0.5)
+
+
+func _on_Menu_lose_pressed():
+	$CanvasLayer/Lose/Menu_lose/Menu_lose._on_Timer_timeout()
+	$CanvasLayer/Lose/Menu_lose/Menu_lose.stop = true
+	$Map/Lightning.stop = true
+	Globals.sfx_manager.play_sound(click_sound)
+	SceneChanger.change_scene("res://Scenes/Menu.tscn", 0.5)
+
+
+func _on_Menu_lose_strike():
+	Globals.player_cam.shake(0.5,15,8)
+	$CanvasLayer/Lose/Menu_lose/AnimationPlayer.play("PlayButton")
+
+
+func _on_Restart_pressed():
+	$CanvasLayer/Lose/Restart/Restart_strike._on_Timer_timeout()
+	$CanvasLayer/Lose/Restart/Restart_strike.stop = true
+	$Map/Lightning.stop = true
+	Globals.sfx_manager.play_sound(click_sound)
+	$CanvasLayer/Lose.visible = false
+	get_tree().call_deferred("reload_current_scene")
+
+
+func _on_Restart_strike_strike():
+	Globals.player_cam.shake(0.5,15,8)
+	$CanvasLayer/Lose/Restart/AnimationPlayer.play("PlayButton")
