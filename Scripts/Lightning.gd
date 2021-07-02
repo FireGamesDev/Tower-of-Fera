@@ -2,7 +2,7 @@ extends Node2D
 
 signal strike
 
-var stop = false
+export var stop = false
 
 export var is_menu = false
 

@@ -12,6 +12,9 @@ func _ready():
 	$CanvasLayer/Modes/Normal.set_focus_mode(Control.FOCUS_NONE)
 	$CanvasLayer/Modes/Easy.set_focus_mode(Control.FOCUS_NONE)
 	$CanvasLayer/Modes/Endless.set_focus_mode(Control.FOCUS_NONE)
+	$CanvasLayer/Modes/Boss.set_focus_mode(Control.FOCUS_NONE)
+	$CanvasLayer/Story/ContinueButton.set_focus_mode(Control.FOCUS_NONE)
+	$CanvasLayer/Story/ContinueButton/Who_is_Fera.set_focus_mode(Control.FOCUS_NONE)
 	set_saved_score()
 	
 	Globals.menu_cam = $CanvasLayer
@@ -114,8 +117,16 @@ func _on_PlayButton_pressed():
 	Globals.sfx_manager.play_sound(click_sound)
 	SceneChanger.change_scene("res://Scenes/Game.tscn", 0.5)
 	
-	Globals.game_mode = "Easy"
+	Globals.game_mode = "Train"
 
+
+func _on_Boss_pressed():
+	$CanvasLayer/Modes/Boss/Boss._on_Timer_timeout()
+	$CanvasLayer/Modes/Boss/Boss.stop = true
+	Globals.sfx_manager.play_sound(click_sound)
+	SceneChanger.change_scene("res://Scenes/Game.tscn", 0.5)
+	
+	Globals.game_mode = "Boss"
 
 func _on_Hard_pressed():
 	$CanvasLayer/Modes/Hard/Hard_light._on_Timer_timeout()
@@ -172,3 +183,38 @@ func _on_Normal_strike_strike():
 func _on_Easy_strike_strike():
 	Globals.menu_cam.shake(0.5,15,8)
 	$CanvasLayer/Modes/Easy/AnimationPlayer.play("PlayButton")
+
+
+func _on_Boss_strike():
+	Globals.menu_cam.shake(0.5,20,14)
+	$CanvasLayer/Modes/Boss/AnimationPlayer.play("PlayButton")
+	
+func on_hard_cleared():
+	$CanvasLayer/Modes/Boss/Boss.stop = false
+	$CanvasLayer/Modes/Boss.disabled = false
+
+
+func _on_ContinueButton_pressed():
+	#start all timers
+	$CanvasLayer/Control2/Lightning/Timer.start()
+	$CanvasLayer/Modes/Boss/Boss/Timer.start()
+	$CanvasLayer/Modes/Easy/Easy_strike/Timer.start()
+	$CanvasLayer/Modes/Endless/Endless_strike/Timer.start()
+	$CanvasLayer/Modes/Hard/Hard_light/Timer.start()
+	$CanvasLayer/Modes/Normal/Normal_strike/Timer.start()
+	
+	$CanvasLayer/Story/ContinueButton/Continue._on_Timer_timeout()
+	$CanvasLayer/Story/ContinueButton/Continue.stop = true
+	Globals.sfx_manager.play_sound(click_sound)
+	$CanvasLayer/Story.visible = false
+
+
+func _on_Continue_strike():
+	Globals.menu_cam.shake(0.5,15,8)
+	$CanvasLayer/Story/ContinueButton/AnimationPlayer.play("PlayButton")
+
+
+func _on_Who_is_Fera_pressed():
+	$CanvasLayer/Story/Text.visible = false
+	$CanvasLayer/Story/ContinueButton/Who_is_Fera.visible = false
+	$CanvasLayer/Story/ContinueButton/Who_is_fera.visible = true

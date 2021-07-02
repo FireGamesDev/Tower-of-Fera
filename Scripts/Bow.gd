@@ -74,7 +74,7 @@ func on_drag():
 	
 	if force.x > 100:
 		$Sprite.frame = 1
-	if force.x > 300:
+	if force.x > 200:
 		$Sprite.frame = 2
 	
 	$Sprite.look_at(startpoint - endpoint)
