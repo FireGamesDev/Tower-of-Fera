@@ -47,10 +47,15 @@ func _on_Arrow_body_entered(body):
 		if randi()%2+1 == 1:
 			Globals.sfx_manager.play_kill_sound(kill_sfx1)
 		else: Globals.sfx_manager.play_kill_sound(kill_sfx2)
-		body.queue_free()
 		if !body.is_in_group("FlyingEnemy"):
 			spawn_grave(randi()%3 + 1, body.global_position)
 		else: spawn_rigid_grave(randi()%3 + 1, body.global_position)
+		if Globals.game_mode == "Train":
+			body.get_parent().queue_free()
+			Globals.train_point += 1
+			Globals.game_manager.set_train_score_text()
+			return
+		body.queue_free()
 		Globals.remaining_enemies -= 1
 		Globals.spawner.set_remaining_text()
 		
@@ -60,7 +65,7 @@ func _on_Arrow_body_entered(body):
 			if current_body == body:
 				return
 		current_body = body
-		if body.health > 1:
+		if body.health > 1 and Globals.game_mode != "Train":
 			$trail_target.queue_free()
 			launched = false
 			call_deferred("reparent", self, body)
@@ -73,10 +78,15 @@ func _on_Arrow_body_entered(body):
 		else: Globals.sfx_manager.play_kill_sound(kill_sfx2)
 		body.health -= 1
 		if body.health == 0:
+			spawn_grave(randi()%3 + 1, body.global_position)
+			if Globals.game_mode == "Train":
+				body.get_parent().queue_free()
+				Globals.train_point += 1
+				Globals.game_manager.set_train_score_text()
+				return
+			body.queue_free()
 			Globals.remaining_enemies -= 1
 			Globals.spawner.set_remaining_text()
-			body.queue_free()
-			spawn_grave(randi()%3 + 1, body.global_position)
 
 
 func reparent(node, body):

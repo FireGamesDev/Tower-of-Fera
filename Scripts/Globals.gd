@@ -13,6 +13,7 @@ var trajectory_dot
 var spawner
 var health_system
 var arrow_ammo_system
+var can_shoot = false
 
 var arrows = 0
 var get_arrow_time = 5
@@ -27,6 +28,9 @@ var min_enemy_count = 3 #difficulty
 var max_enemy_plus = 3 #difficulty
 var min_enemy_plus = 2 #difficulty
 var spawn_time_minus = 0.2 # difficulty
+
+var train_timer
+var train_point
 
 var path = "user://data.save"
 

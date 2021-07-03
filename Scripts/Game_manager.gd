@@ -11,6 +11,7 @@ var wave_text
 func _ready():
 	Globals.game_manager = self
 	Globals.player_cam = $CanvasLayer/Camera2D
+	Globals.train_timer = $CanvasLayer/TimerText
 	wave_text = $CanvasLayer/Waves
 	remaining_text = $CanvasLayer/Remaining
 	$CanvasLayer/Menu.set_focus_mode(Control.FOCUS_NONE)
@@ -19,6 +20,9 @@ func _ready():
 	$CanvasLayer/Lose/Restart.set_focus_mode(Control.FOCUS_NONE)
 	$CanvasLayer/Lose/Menu_lose.set_focus_mode(Control.FOCUS_NONE)
 	set_rain()
+	
+	if Globals.game_mode == "Train":
+		$CanvasLayer/Tutorial/Close_tutorial/AnimationPlayer.play("Appear")
 	
 func die():
 	Engine.time_scale = 0
@@ -33,8 +37,13 @@ func die():
 		Globals.save_score(Globals.waves_count -1)
 	$CanvasLayer/Lose.visible = true
 	
-func win():
+func win(is_train):
 	Engine.time_scale = 0
+	if is_train:
+		Globals.sfx_manager.play_sound(win_sfx)
+		$CanvasLayer/Win.visible = true
+		$CanvasLayer/Win/Text.bbcode_text = "\n[wave]YOU KILLED " + str(Globals.train_point) + " [/wave] [shake]GIMPS "
+		return
 	Globals.save_progress()
 	if Globals.wave_save < Globals.waves_count:
 		Globals.save_score(Globals.waves_count)
@@ -116,3 +125,26 @@ func _on_Restart_pressed():
 func _on_Restart_strike_strike():
 	Globals.player_cam.shake(0.5,15,8)
 	$CanvasLayer/Lose/Restart/AnimationPlayer.play("PlayButton")
+
+
+func _on_Tutorial_light_strike():
+	Globals.player_cam.shake(0.5,15,8)
+	$CanvasLayer/Tutorial/Close_tutorial/AnimationPlayer.play("PlayButton")
+
+
+func _on_Close_tutorial_pressed():
+	Globals.can_shoot = true
+	$CanvasLayer/Tutorial/Close_tutorial/Tutorial_light._on_Timer_timeout()
+	$CanvasLayer/Tutorial/Close_tutorial/Tutorial_light.stop = true
+	Globals.sfx_manager.play_sound(click_sound)
+	$CanvasLayer/Tutorial/Close_tutorial/AnimationPlayer.play_backwards("Appear")
+	yield(get_tree().create_timer($CanvasLayer/Tutorial/Close_tutorial/AnimationPlayer.current_animation_length), "timeout")
+	$CanvasLayer/Tutorial.visible = false
+	
+	#start train
+	Globals.train_point = 0
+	if Globals.spawner:
+		Globals.spawner.train()
+	
+func set_train_score_text():
+	$CanvasLayer/TrainScoreText.bbcode_text = "\n[wave]SCORE: " + str(Globals.train_point)

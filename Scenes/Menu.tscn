@@ -271,7 +271,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=34]
+[sub_resource type="Animation" id=33]
 resource_name = "Appear"
 tracks/0/type = "value"
 tracks/0/path = NodePath("../..:rect_scale")
@@ -286,8 +286,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=33]
-resource_name = "Lightning"
+[sub_resource type="Animation" id=34]
 tracks/0/type = "value"
 tracks/0/path = NodePath("TextureProgress:value")
 tracks/0/interp = 1
@@ -301,7 +300,7 @@ tracks/0/keys = {
 "values": [ 0.0, 100.0 ]
 }
 
-[sub_resource type="Animation" id=36]
+[sub_resource type="Animation" id=35]
 resource_name = "PlayButton"
 length = 0.6
 tracks/0/type = "value"
@@ -317,7 +316,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=37]
+[sub_resource type="Animation" id=36]
 resource_name = "Appear"
 tracks/0/type = "value"
 tracks/0/path = NodePath("../..:rect_scale")
@@ -332,7 +331,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=38]
+[sub_resource type="Animation" id=37]
 resource_name = "Lightning"
 tracks/0/type = "value"
 tracks/0/path = NodePath("TextureProgress:value")
@@ -347,7 +346,7 @@ tracks/0/keys = {
 "values": [ 0.0, 100.0 ]
 }
 
-[sub_resource type="Curve" id=35]
+[sub_resource type="Curve" id=38]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.981818, 1 ), 0.0, 0.0, 0, 0 ]
 
 [node name="Menu" type="Node2D"]
@@ -1242,8 +1241,8 @@ is_menu = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Story/ContinueButton/Continue"]
 playback_speed = 3.0
-anims/Appear = SubResource( 34 )
-anims/Lightning = SubResource( 33 )
+anims/Appear = SubResource( 33 )
+anims/Lightning = SubResource( 34 )
 
 [node name="TextureProgress" type="TextureProgress" parent="CanvasLayer/Story/ContinueButton/Continue"]
 margin_left = 22.653
@@ -1384,7 +1383,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/ThanksForPlaying/CloseButton"]
-anims/PlayButton = SubResource( 36 )
+anims/PlayButton = SubResource( 35 )
 
 [node name="Close" type="Node2D" parent="CanvasLayer/ThanksForPlaying/CloseButton"]
 position = Vector2( 189.827, 28.4361 )
@@ -1394,8 +1393,8 @@ is_menu = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/ThanksForPlaying/CloseButton/Close"]
 playback_speed = 3.0
-anims/Appear = SubResource( 37 )
-anims/Lightning = SubResource( 38 )
+anims/Appear = SubResource( 36 )
+anims/Lightning = SubResource( 37 )
 
 [node name="TextureProgress" type="TextureProgress" parent="CanvasLayer/ThanksForPlaying/CloseButton/Close"]
 margin_left = 22.653
@@ -1472,7 +1471,7 @@ __meta__ = {
 [node name="MouseTrail" parent="CanvasLayer" instance=ExtResource( 14 )]
 z_index = 1
 width = 5.0
-width_curve = SubResource( 35 )
+width_curve = SubResource( 38 )
 default_color = Color( 1, 1, 1, 0.588235 )
 
 [node name="Fireflies" parent="CanvasLayer" instance=ExtResource( 15 )]

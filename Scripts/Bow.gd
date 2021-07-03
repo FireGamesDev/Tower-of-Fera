@@ -23,6 +23,12 @@ func _input(event):
 #		aiming = false
 #		on_drag_end()
 
+	if Globals.game_mode != "Train":
+		Globals.can_shoot = true
+		
+	if !Globals.can_shoot:
+		return
+
 	if event is InputEventScreenTouch:
 		if event.is_pressed():
 			if Globals.arrows > 0:

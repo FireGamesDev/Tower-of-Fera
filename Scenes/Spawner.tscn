@@ -22,4 +22,67 @@ position = Vector2( 1024.13, 424.757 )
 
 [node name="Timer" type="Timer" parent="."]
 
+[node name="TrainTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="TrainWaveTimer" type="Timer" parent="."]
+
+[node name="NearSpawnPointsGround" type="Node2D" parent="."]
+
+[node name="Point1" type="Position2D" parent="NearSpawnPointsGround"]
+position = Vector2( 352.313, 586.892 )
+
+[node name="Point2" type="Position2D" parent="NearSpawnPointsGround"]
+position = Vector2( 277.359, 588.307 )
+
+[node name="Point3" type="Position2D" parent="NearSpawnPointsGround"]
+position = Vector2( 421.609, 585.478 )
+
+[node name="Point4" type="Position2D" parent="NearSpawnPointsGround"]
+position = Vector2( 464.036, 588.307 )
+
+[node name="NearSpawnPointsAir" type="Node2D" parent="."]
+
+[node name="Point1" type="Position2D" parent="NearSpawnPointsAir"]
+position = Vector2( 266.541, 193.353 )
+
+[node name="Point2" type="Position2D" parent="NearSpawnPointsAir"]
+position = Vector2( 248.769, 77.0416 )
+
+[node name="Point3" type="Position2D" parent="NearSpawnPointsAir"]
+position = Vector2( 433.382, 180.166 )
+
+[node name="Point4" type="Position2D" parent="NearSpawnPointsAir"]
+position = Vector2( 396.764, 304.084 )
+
+[node name="FarSpawnPointsGround" type="Node2D" parent="."]
+
+[node name="Point1" type="Position2D" parent="FarSpawnPointsGround"]
+position = Vector2( 792.942, 595.301 )
+
+[node name="Point2" type="Position2D" parent="FarSpawnPointsGround"]
+position = Vector2( 958.485, 595.034 )
+
+[node name="Point3" type="Position2D" parent="FarSpawnPointsGround"]
+position = Vector2( 870.648, 592.205 )
+
+[node name="Point4" type="Position2D" parent="FarSpawnPointsGround"]
+position = Vector2( 734.804, 591.67 )
+
+[node name="FarSpawnPointsAir" type="Node2D" parent="."]
+
+[node name="Point1" type="Position2D" parent="FarSpawnPointsAir"]
+position = Vector2( 675.217, 129.445 )
+
+[node name="Point2" type="Position2D" parent="FarSpawnPointsAir"]
+position = Vector2( 820.578, 325.947 )
+
+[node name="Point3" type="Position2D" parent="FarSpawnPointsAir"]
+position = Vector2( 911.011, 77.5768 )
+
+[node name="Point4" type="Position2D" parent="FarSpawnPointsAir"]
+position = Vector2( 906.347, 243.539 )
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="TrainTimer" to="." method="_on_TrainTimer_timeout"]
+[connection signal="timeout" from="TrainWaveTimer" to="." method="_on_TrainWaveTimer_timeout"]
