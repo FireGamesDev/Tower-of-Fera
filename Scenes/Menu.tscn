@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://Scripts/MenuManager.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Logo.tscn" type="PackedScene" id=2]
@@ -287,6 +287,52 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=33]
+resource_name = "Lightning"
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureProgress:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 100.0 ]
+}
+
+[sub_resource type="Animation" id=36]
+resource_name = "PlayButton"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=37]
+resource_name = "Appear"
+tracks/0/type = "value"
+tracks/0/path = NodePath("../..:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=38]
 resource_name = "Lightning"
 tracks/0/type = "value"
 tracks/0/path = NodePath("TextureProgress:value")
@@ -1051,7 +1097,6 @@ margin_left = -250.0
 margin_top = -250.0
 margin_right = 250.0
 margin_bottom = 250.0
-rect_scale = Vector2( 1e-05, 1e-05 )
 rect_pivot_offset = Vector2( 250, 250 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1132,11 +1177,17 @@ bbcode_enabled = true
 bbcode_text = "
 [shake]Hogy kicsoda Fera??[/shake]
 
-Ja, hat neki csak egy hosszu esteje volt a kocsmaban, aztan nem igazan talalt haza."
+Ja, hat neki csak egy hosszu esteje volt a kocsmaban, aztan nem igazan talalt haza.
+
+Valahol pedig megiscsak
+ le kellett pihennie"
 text = "
 Hogy kicsoda Fera??
 
-Ja, hat neki csak egy hosszu esteje volt a kocsmaban, aztan nem igazan talalt haza."
+Ja, hat neki csak egy hosszu esteje volt a kocsmaban, aztan nem igazan talalt haza.
+
+Valahol pedig megiscsak
+ le kellett pihennie"
 scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1259,6 +1310,163 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ThanksForPlaying" type="Control" parent="CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -250.0
+margin_top = -250.0
+margin_right = 250.0
+margin_bottom = 250.0
+rect_scale = Vector2( 1e-05, 1e-05 )
+rect_pivot_offset = Vector2( 250, 250 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Grey" type="ColorRect" parent="CanvasLayer/ThanksForPlaying"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -263.0
+margin_top = -48.0
+margin_right = 261.0
+margin_bottom = 52.0
+color = Color( 0.0627451, 0.172549, 0.270588, 0.862745 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Blue" type="ColorRect" parent="CanvasLayer/ThanksForPlaying"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0627451, 0.172549, 0.270588, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CloseButton" type="Button" parent="CanvasLayer/ThanksForPlaying"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -215.434
+margin_top = -110.013
+margin_right = -15.4338
+margin_bottom = -35.0128
+rect_pivot_offset = Vector2( 100, 37 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="RichTextLabel" parent="CanvasLayer/ThanksForPlaying/CloseButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 40.5221
+margin_top = -7.72346
+margin_right = 40.5221
+margin_bottom = -5.69637
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 9 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "
+[wave]CLOSE"
+text = "
+CLOSE"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/ThanksForPlaying/CloseButton"]
+anims/PlayButton = SubResource( 36 )
+
+[node name="Close" type="Node2D" parent="CanvasLayer/ThanksForPlaying/CloseButton"]
+position = Vector2( 189.827, 28.4361 )
+rotation = 1.52392
+script = ExtResource( 10 )
+is_menu = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/ThanksForPlaying/CloseButton/Close"]
+playback_speed = 3.0
+anims/Appear = SubResource( 37 )
+anims/Lightning = SubResource( 38 )
+
+[node name="TextureProgress" type="TextureProgress" parent="CanvasLayer/ThanksForPlaying/CloseButton/Close"]
+margin_left = 22.653
+margin_top = -366.223
+margin_right = 222.653
+margin_bottom = -166.223
+rect_scale = Vector2( 0.2, 1 )
+mouse_filter = 2
+input_pass_on_modal_close_click = false
+texture_progress = ExtResource( 12 )
+fill_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="CanvasLayer/ThanksForPlaying/CloseButton/Close"]
+wait_time = 20.0
+one_shot = true
+
+[node name="SpawnArea" type="Area2D" parent="CanvasLayer/ThanksForPlaying/CloseButton/Close"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/ThanksForPlaying/CloseButton/Close/SpawnArea"]
+position = Vector2( -16.4744, -188.834 )
+shape = SubResource( 2 )
+disabled = true
+
+[node name="SFX" type="AudioStreamPlayer" parent="CanvasLayer/ThanksForPlaying/CloseButton/Close"]
+stream = ExtResource( 11 )
+
+[node name="Text" type="RichTextLabel" parent="CanvasLayer/ThanksForPlaying"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -250.0
+margin_top = -251.014
+margin_right = 250.0
+margin_bottom = 251.014
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 9 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "
+[wave]You saved the town![/wave]
+
+[wave]Congrats![/wave]
+
+[wave]Thanks you very much for playing!![/wave]
+
+The game was made in a week for a game jam.
+
+By Levente
+
+Main music: Yrana"
+text = "
+You saved the town!
+
+Congrats!
+
+Thanks you very much for playing!!
+
+The game was made in a week for a game jam.
+
+By Levente
+
+Main music: Yrana"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Logo" parent="CanvasLayer" instance=ExtResource( 2 )]
 
 [node name="MouseTrail" parent="CanvasLayer" instance=ExtResource( 14 )]
@@ -1304,4 +1512,8 @@ emission_rect_extents = Vector2( 600, 600 )
 [connection signal="strike" from="CanvasLayer/Story/ContinueButton/Continue" to="." method="_on_Continue_strike"]
 [connection signal="animation_finished" from="CanvasLayer/Story/ContinueButton/Continue/AnimationPlayer" to="CanvasLayer/Story/ContinueButton/Continue" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="CanvasLayer/Story/ContinueButton/Continue/Timer" to="CanvasLayer/Story/ContinueButton/Continue" method="_on_Timer_timeout"]
+[connection signal="pressed" from="CanvasLayer/ThanksForPlaying/CloseButton" to="." method="_on_CloseButton_pressed"]
+[connection signal="strike" from="CanvasLayer/ThanksForPlaying/CloseButton/Close" to="." method="_on_Close_strike"]
+[connection signal="animation_finished" from="CanvasLayer/ThanksForPlaying/CloseButton/Close/AnimationPlayer" to="CanvasLayer/ThanksForPlaying/CloseButton/Close" method="_on_AnimationPlayer_animation_finished"]
+[connection signal="timeout" from="CanvasLayer/ThanksForPlaying/CloseButton/Close/Timer" to="CanvasLayer/ThanksForPlaying/CloseButton/Close" method="_on_Timer_timeout"]
 [connection signal="logo_finished" from="CanvasLayer/Logo" to="." method="_on_Logo_logo_finished"]

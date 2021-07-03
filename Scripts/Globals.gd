@@ -28,56 +28,76 @@ var max_enemy_plus = 3 #difficulty
 var min_enemy_plus = 2 #difficulty
 var spawn_time_minus = 0.2 # difficulty
 
-var highscore
+var path = "user://data.save"
 
-var path = "user://data.json"
-
-var data = { }
-
-# The default values
-var default_data = {
-	"player" : {
-		"score" : 0,
-		"hard" : false,
-		"easy" : false,
-		"normal" : false
-		},
-	"options" : {
-		"volume" : -7,
-		"muted" : false
-	}
-}
-
-func load_game():
-	var file = File.new()
-	
-	if not file.file_exists(path):
-		reset_data()
-		return
-	
-	file.open(path, file.READ)
-	
-	var text = file.get_as_text()
-	
-	data = parse_json(text)
-	
-	highscore = data["player"]["score"]
-	
-	file.close()
-
+#things to save:
+var wave_save
+var easy_save
+var normal_save
+var hard_save
+var endless_wave_save
+var boss_save
+var volume
+var muted
+var story
 
 func save_game():
-	var file
-	
-	file = File.new()
-	
-	file.open(path, File.WRITE)
-	
-	file.store_line(to_json(data))
-	
-	file.close()
+	var f = File.new()
+	f.open(path, File.WRITE)
+	f.store_var(wave_save)
+	f.store_var(easy_save)
+	f.store_var(normal_save)
+	f.store_var(hard_save)
+	f.store_var(endless_wave_save)
+	f.store_var(boss_save)
+	f.store_var(volume)
+	f.store_var(muted)
+	f.store_var(story)
+	f.close()
 
-
+func load_game():
+	var f = File.new()
+	if f.file_exists(path):
+		f.open(path, File.READ)
+		wave_save = f.get_var()
+		easy_save = f.get_var()
+		normal_save = f.get_var()
+		hard_save = f.get_var()
+		endless_wave_save = f.get_var()
+		boss_save = f.get_var()
+		volume = f.get_var()
+		muted = f.get_var()
+		story = f.get_var()
+		f.close()
+	else: reset_data()
+		
 func reset_data():
-	# Reset to defaults
-	data = default_data.duplicate(true)
+	wave_save = 0
+	easy_save = false
+	normal_save = false
+	hard_save = false
+	endless_wave_save = 0
+	boss_save = false
+	volume = -7
+	muted = false
+	story = true
+	save_game()
+		
+func save_score(score):
+	wave_save = score
+	save_game()
+	
+func save_progress():
+	if game_mode == "Easy":
+		easy_save = true
+	if game_mode == "Normal":
+		normal_save = true
+	if game_mode == "Hard":
+		hard_save = true
+	if game_mode == "Boss":
+		boss_save = true
+	save_game()
+
+func save_endless_score(score):
+	endless_wave_save = score
+	save_game()

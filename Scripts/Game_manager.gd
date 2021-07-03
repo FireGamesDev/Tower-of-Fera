@@ -21,17 +21,22 @@ func _ready():
 	set_rain()
 	
 func die():
+	Engine.time_scale = 0
+	if Globals.game_mode == "Endless":
+		if Globals.endless_wave_save < Globals.wave -1:
+			Globals.save_endless_score(Globals.wave -1)
 	Globals.sfx_manager.play_sound(lose_sfx)
 	if Globals.waves_count -1 == 0:
 		$CanvasLayer/Win/Text.bbcode_text = "\n[wave]THE TOWN FALLED!"
 	else: $CanvasLayer/Win/Text.bbcode_text = "\n[wave]THE TOWN FALLED! \nCLEARED WAVES: " + str(Globals.waves_count -1)
-	if Globals.highscore < Globals.waves_count -1:
+	if Globals.wave_save < Globals.waves_count -1:
 		Globals.save_score(Globals.waves_count -1)
 	$CanvasLayer/Lose.visible = true
 	
 func win():
-	#Globals.save_progress()
-	if Globals.highscore < Globals.waves_count:
+	Engine.time_scale = 0
+	Globals.save_progress()
+	if Globals.wave_save < Globals.waves_count:
 		Globals.save_score(Globals.waves_count)
 	Globals.sfx_manager.play_sound(win_sfx)
 	$CanvasLayer/Win.visible = true
@@ -63,6 +68,7 @@ func _on_Hard_light_strike():
 
 
 func _on_Menu_pressed():
+	Engine.time_scale = 1
 	$CanvasLayer/Menu/Hard_light._on_Timer_timeout()
 	$CanvasLayer/Menu/Hard_light.stop = true
 	$Map/Lightning.stop = true
@@ -76,6 +82,7 @@ func _on_Win_light_strike():
 
 
 func _on_Win_pressed():
+	Engine.time_scale = 1
 	$CanvasLayer/Win/Win/Win_light._on_Timer_timeout()
 	$CanvasLayer/Win/Win/Win_light.stop = true
 	$Map/Lightning.stop = true
@@ -97,6 +104,7 @@ func _on_Menu_lose_strike():
 
 
 func _on_Restart_pressed():
+	Engine.time_scale = 1
 	$CanvasLayer/Lose/Restart/Restart_strike._on_Timer_timeout()
 	$CanvasLayer/Lose/Restart/Restart_strike.stop = true
 	$Map/Lightning.stop = true

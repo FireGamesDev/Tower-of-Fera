@@ -24,7 +24,6 @@ __meta__ = {
 anims/Logo = ExtResource( 3 )
 
 [node name="ColorRect" type="ColorRect" parent="AnimationPlayer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.0509804, 0.168627, 0.270588, 1 )
@@ -68,14 +67,16 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -307.49
-margin_top = -57.6941
-margin_right = -4.48987
-margin_bottom = -24.6941
+margin_left = -307.757
+margin_top = -87.8381
+margin_right = -4.75684
+margin_bottom = -17.8381
 custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
-bbcode_text = "[wave]CLICK TO SKIP"
-text = "CLICK TO SKIP"
+bbcode_text = "
+[wave]CLICK TO SKIP"
+text = "
+CLICK TO SKIP"
 scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false

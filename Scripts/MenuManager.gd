@@ -15,7 +15,10 @@ func _ready():
 	$CanvasLayer/Modes/Boss.set_focus_mode(Control.FOCUS_NONE)
 	$CanvasLayer/Story/ContinueButton.set_focus_mode(Control.FOCUS_NONE)
 	$CanvasLayer/Story/Who_is_Fera.set_focus_mode(Control.FOCUS_NONE)
-	set_saved_score()
+	$CanvasLayer/ThanksForPlaying/CloseButton.set_focus_mode(Control.FOCUS_NONE)
+	
+	#load the save
+	load_game()
 	
 	Globals.menu_cam = $CanvasLayer
 
@@ -29,86 +32,56 @@ func _on_Mute_pressed():
 	mute()
 	
 func mute():
-	data["options"]["muted"] = $CanvasLayer/Volume/Mute.pressed
-	Globals.save_game()
+	Globals.muted = $CanvasLayer/Volume/Mute.pressed
 	if $CanvasLayer/Volume/Mute.pressed:
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), -80)
 	else: 
-		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), data["options"]["volume"])
-		$CanvasLayer/Volume/VolumeSlider.value = data["options"]["volume"]
-	$CanvasLayer/Volume/Mute.pressed = data["options"]["muted"]
-	save_game()
-	
-func set_saved_score():
-	load_game()
-
-var path = "user://data.json"
-
-var data = { }
-
-# The default values
-var default_data = {
-	"player" : {
-		"score" : 0,
-		"hard" : false,
-		"easy" : false,
-		"normal" : false
-		},
-	"options" : {
-		"volume" : -7,
-		"muted" : false
-	}
-}
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), Globals.volume)
+		$CanvasLayer/Volume/VolumeSlider.value = Globals.volume
+	$CanvasLayer/Volume/Mute.pressed = Globals.muted
+	Globals.save_game()
 
 func load_game():
-	var file = File.new()
+	Globals.load_game()
 	
-	if not file.file_exists(path):
-		reset_data()
-		return
-	file.open(path, file.READ)
-	var text = file.get_as_text()
+	#volume
+	$CanvasLayer/Volume/VolumeSlider.value = Globals.volume
+	$CanvasLayer/Volume/Mute.pressed = Globals.muted
 	
-	data = parse_json(text)
-	
-	$CanvasLayer/Volume/VolumeSlider.value = data["options"]["volume"]
-	$CanvasLayer/Volume/Mute.pressed = data["options"]["muted"]
-	
-	if data["options"]["muted"]:
+	if Globals.muted:
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), -80)
-		data["options"]["volume"] = -80
-	else: AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), data["options"]["volume"])
+		Globals.volume = -80
+	else: AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), Globals.volume)
 	
-	file.close()
-
-
-func reset_data():
-	# Reset to defaults
-	data = default_data.duplicate(true)
+	#score
+	$CanvasLayer/Modes/Endless/Score.bbcode_text = "\n[wave]BEST: " + str(Globals.wave_save)
 	
-func save_game():
-	var file
+	#the story show once
+	$CanvasLayer/Story.visible = Globals.story
 	
-	file = File.new()
-	
-	file.open(path, File.WRITE)
-	
-	file.store_line(to_json(data))
-	
-	file.close()
+	#mode is cleared
+	$CanvasLayer/Modes/Easy/Cleared.visible = Globals.easy_save
+	$CanvasLayer/Modes/Normal/Cleared.visible = Globals.normal_save
+	$CanvasLayer/Modes/Hard/Cleared.visible = Globals.hard_save
+	if Globals.hard_save:
+		$CanvasLayer/Modes/Boss/Cleared.bbcode_text = "\n[wave]UNLOCKED"
+	if Globals.boss_save:
+		$CanvasLayer/Modes/Boss/Cleared.bbcode_text = "\n[wave]CLEARED"
+		$CanvasLayer/ThanksForPlaying.visible = true
+		$CanvasLayer/ThanksForPlaying/CloseButton/Close/AnimationPlayer.play("Appear")
 
 
 func _on_VolumeSlider_value_changed(value):
 	if !once:
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), value)
-		data["options"]["volume"] = value
-		data["options"]["muted"] = false
+		Globals.volume = value
+		Globals.muted = false
 		$CanvasLayer/Volume/Mute.pressed = false
 	else: once = false
 
 
 func _on_Menu_tree_exited():
-	save_game()
+	Globals.save_game()
 
 func _on_PlayButton_pressed():
 	$CanvasLayer/Control2/Lightning._on_Timer_timeout()
@@ -194,6 +167,9 @@ func on_hard_cleared():
 
 
 func _on_ContinueButton_pressed():
+	#story shows once
+	Globals.story = false
+	Globals.save_game()
 	$CanvasLayer/Story/ContinueButton/Continue._on_Timer_timeout()
 	$CanvasLayer/Story/ContinueButton/Continue.stop = true
 	Globals.sfx_manager.play_sound(click_sound)
@@ -223,3 +199,25 @@ func _on_Who_is_Fera_pressed():
 
 func _on_Logo_logo_finished():
 	$CanvasLayer/Story/ContinueButton/Continue/AnimationPlayer.play("Appear")
+
+
+func _on_Close_strike():
+	Globals.menu_cam.shake(0.5,15,8)
+	$CanvasLayer/ThanksForPlaying/CloseButton/AnimationPlayer.play("PlayButton")
+
+
+func _on_CloseButton_pressed():
+	$CanvasLayer/ThanksForPlaying/CloseButton/Close._on_Timer_timeout()
+	$CanvasLayer/ThanksForPlaying/CloseButton/Close.stop = true
+	Globals.sfx_manager.play_sound(click_sound)
+	yield(get_tree().create_timer(1), "timeout")
+	$CanvasLayer/ThanksForPlaying/CloseButton/Close/AnimationPlayer.play_backwards("Appear")
+	yield(get_tree().create_timer($CanvasLayer/ThanksForPlaying/CloseButton/Close/AnimationPlayer.current_animation_length), "timeout")
+	#start all timers
+	$CanvasLayer/Control2/Lightning/Timer.start()
+	$CanvasLayer/Modes/Boss/Boss/Timer.start()
+	$CanvasLayer/Modes/Easy/Easy_strike/Timer.start()
+	$CanvasLayer/Modes/Endless/Endless_strike/Timer.start()
+	$CanvasLayer/Modes/Hard/Hard_light/Timer.start()
+	$CanvasLayer/Modes/Normal/Normal_strike/Timer.start()
+	$CanvasLayer/ThanksForPlaying.visible = false
