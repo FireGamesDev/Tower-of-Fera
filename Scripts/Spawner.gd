@@ -95,7 +95,8 @@ func spawn_ground_enemy(is_dummies):
 		enemy = mini_ground_enemy.instance()
 		enemy.speed = enemy_speed + 50
 	if rand2 == 4:
-		return spawn_tank_enemy(is_dummies)
+		var tank_enemy = spawn_tank_enemy(is_dummies)
+		return tank_enemy
 	enemy.dummies = is_dummies
 	return enemy
 	
@@ -104,6 +105,7 @@ func spawn_tank_enemy(is_dummies):
 	enemy.health = tank_health
 	enemy.speed = enemy_speed - 30
 	enemy.dummies = is_dummies
+	print("tank")
 	return enemy
 
 func _on_Timer_timeout():

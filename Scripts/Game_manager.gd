@@ -69,6 +69,7 @@ func _on_Tower_body_entered(body):
 		Globals.health_system.take_damage()
 		Globals.health_system.spawn_explosion_particle(body.global_position)
 		Globals.remaining_enemies -= 1
+		Globals.spawner.set_remaining_text()
 		body.queue_free()
 		
 func set_rain():

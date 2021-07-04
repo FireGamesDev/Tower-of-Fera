@@ -7,7 +7,7 @@
 "Tower",
 ]]
 scale = Vector2( 0.6, 0.6 )
-collision_mask = 3
+collision_mask = 7
 
 [node name="Sprite3" type="Sprite" parent="."]
 position = Vector2( -181.222, -347.807 )
