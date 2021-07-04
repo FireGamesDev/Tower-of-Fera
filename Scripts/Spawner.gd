@@ -72,19 +72,19 @@ func spawn_flying_enemy(is_dummies):
 	var rand2 = randi()%3+1
 	if rand2 == 2:
 		enemy = fast_flying_enemy.instance()
-		enemy.speed = enemy_speed + 75
+		enemy.speed = enemy_speed + 60
 	if rand2 == 1: 
 		enemy = flying_enemy.instance()
 		enemy.speed = enemy_speed
 	if rand2 == 3:
 		enemy = ghost_flying_enemy.instance()
-		enemy.speed = enemy_speed + 40
+		enemy.speed = enemy_speed + 35
 	enemy.dummies = is_dummies
 	return enemy
 		
 func spawn_ground_enemy(is_dummies):
 	var enemy
-	var rand2 = randi()%3+1
+	var rand2 = randi()%4+1
 	if rand2 == 1:
 		enemy = ground_enemy1.instance()
 		enemy.speed = enemy_speed
@@ -93,19 +93,19 @@ func spawn_ground_enemy(is_dummies):
 		enemy.speed = enemy_speed
 	if rand2 == 3:
 		enemy = mini_ground_enemy.instance()
-		enemy.speed = enemy_speed + 50
+		enemy.speed = enemy_speed + 40
 	if rand2 == 4:
-		var tank_enemy = spawn_tank_enemy(is_dummies)
-		return tank_enemy
+		return spawn_tank_enemy(is_dummies)
 	enemy.dummies = is_dummies
 	return enemy
 	
 func spawn_tank_enemy(is_dummies):
 	var enemy = ground_enemy3.instance()
 	enemy.health = tank_health
-	enemy.speed = enemy_speed - 30
+	if Globals.game_mode == "Easy":
+		enemy.speed = enemy_speed - 10
+	else: enemy.speed = enemy_speed - 30
 	enemy.dummies = is_dummies
-	print("tank")
 	return enemy
 
 func _on_Timer_timeout():

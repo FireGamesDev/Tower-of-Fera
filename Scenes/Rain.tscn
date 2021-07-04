@@ -4,14 +4,14 @@
 
 [node name="Rain" type="CPUParticles2D"]
 rotation = 0.187985
-scale = Vector2( 1, 2 )
+scale = Vector2( 0.25, 2 )
 amount = 100
 lifetime = 7.0
 preprocess = 3.0
 speed_scale = 0.8
 texture = ExtResource( 1 )
 emission_shape = 2
-emission_rect_extents = Vector2( 700, 1 )
+emission_rect_extents = Vector2( 2800, 1 )
 gravity = Vector2( -40, 98 )
 scale_amount_random = 1.0
 color = Color( 0.0509804, 0.168627, 0.270588, 1 )

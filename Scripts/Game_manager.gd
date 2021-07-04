@@ -28,6 +28,7 @@ func _ready():
 		Globals.can_shoot = false
 	
 func die():
+	$Map/Lightning.stop = true
 	Globals.is_ended = true
 	Globals.sfx_manager.play_sound(lose_sfx)
 	$CanvasLayer/Lose.visible = true
@@ -43,6 +44,7 @@ func die():
 		Globals.save_score(Globals.wave -1)
 	
 func win(is_train):
+	$Map/Lightning.stop = true
 	Globals.is_ended = true
 	if is_train:
 		$CanvasLayer/TrainScoreText.bbcode_text = ""

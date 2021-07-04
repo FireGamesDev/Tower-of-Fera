@@ -89,6 +89,9 @@ func on_drag():
 		Globals.trajectory.update_dots($Sprite/Muzzle.position, force)
 		
 func shoot():
+	if Globals.health_system.health == 1:
+		arrow.scale = Vector2(10,10)
+	else: arrow.scale = Vector2(1,1)
 	$Sprite.remove_child(arrow)
 	self.add_child(arrow)
 	arrow.launch(force)

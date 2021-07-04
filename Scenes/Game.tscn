@@ -1114,7 +1114,6 @@ position = Vector2( 538.008, -111.377 )
 position = Vector2( -2.37842, -91.5689 )
 
 [node name="Fog" type="Sprite" parent="."]
-visible = false
 material = SubResource( 24 )
 position = Vector2( 417.486, 279.383 )
 rotation = 0.530663
