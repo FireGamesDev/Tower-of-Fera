@@ -61,13 +61,13 @@ func _on_Arrow_body_entered(body):
 		Globals.spawner.set_remaining_text()
 		
 	if body.is_in_group("Tank"):
-		Globals.arrows += 1
-		Globals.arrow_ammo_system.manage_arrows()
 		Globals.player_cam.shake(0.5,8,4)
 		if current_body != null:
 			if current_body == body:
 				return
 		current_body = body
+		Globals.arrows += 1
+		Globals.arrow_ammo_system.manage_arrows()
 		if body.health > 1 and Globals.game_mode != "Train":
 			$trail_target.queue_free()
 			launched = false

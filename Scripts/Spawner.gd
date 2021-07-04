@@ -1,6 +1,7 @@
 extends Node2D
 
 const flying_enemy = preload("res://Scenes/FlyingEnemy.tscn")
+const fast_flying_enemy = preload("res://Scenes/FastFlyingEnemy.tscn")
 const ground_enemy1 = preload("res://Scenes/GroundEnemy1.tscn")
 const ground_enemy2 = preload("res://Scenes/GroundEnemy2.tscn")
 const ground_enemy3 = preload("res://Scenes/GroundEnemy3.tscn")
@@ -13,6 +14,7 @@ var enemy_speed
 var tank_health
 
 var wait_time = 5
+var current_wait_time
 
 var total_enemies_count
 var current_enemy_count = 0
@@ -46,33 +48,50 @@ func spawn_wave():
 	$Timer.start(spawn_time)
 
 func spawn():
-	var rand = randi()%4+1
-	var enemy
+	var rand = randi()%2+1
 	if rand == 1:
-		enemy = ground_enemy1.instance()
-		$Ground.call_deferred("add_child", enemy)
+		spawn_ground_enemy()
 	if rand == 2:
-		enemy = ground_enemy2.instance()
-		$Ground.call_deferred("add_child", enemy)
-	if rand == 4:
-		enemy = ground_enemy3.instance()
-		$Ground.call_deferred("add_child", enemy)
-		enemy.health = tank_health
-	if rand == 3:
+		spawn_flying_enemy()
+
+
+
+func spawn_flying_enemy():
+	var enemy
+	var rand2 = randi()%3+1
+	if rand2 == 2:
+		enemy = fast_flying_enemy.instance()
+		enemy.speed = enemy_speed + 75
+	if rand2 == 1: 
 		enemy = flying_enemy.instance()
-		var rand1 = randi()%4+1
-		if rand1 == 1:
-			$Air1.call_deferred("add_child", enemy)
-		if rand1 == 2:
-			$Air2.call_deferred("add_child", enemy)
-		if rand1 == 3:
-			$Air3.call_deferred("add_child", enemy)
-		if rand1 == 4:
-			$Air4.call_deferred("add_child", enemy)
+		enemy.speed = enemy_speed
+	if rand2 == 3:
+		spawn_tank_enemy()
+		return
+	var rand1 = randi()%4+1
+	if rand1 == 1:
+		$Air1.call_deferred("add_child", enemy)
+	if rand1 == 2:
+		$Air2.call_deferred("add_child", enemy)
+	if rand1 == 3:
+		$Air3.call_deferred("add_child", enemy)
+	if rand1 == 4:
+		$Air4.call_deferred("add_child", enemy)
+		
+func spawn_ground_enemy():
+	var enemy
+	var rand2 = randi()%2+1
+	if rand2 == 1:
+		enemy = ground_enemy1.instance()
+	else: enemy = ground_enemy2.instance()
+	$Ground.call_deferred("add_child", enemy)
+	enemy.speed = enemy_speed
 	
-	if rand == 4:
-		enemy.speed = enemy_speed - 30
-	else: enemy.speed = enemy_speed
+func spawn_tank_enemy():
+	var enemy = ground_enemy3.instance()
+	$Ground.call_deferred("add_child", enemy)
+	enemy.health = tank_health
+	enemy.speed = enemy_speed - 30
 
 func _on_Timer_timeout():
 	current_enemy_count += 1
@@ -84,30 +103,9 @@ func next_wave():
 	if Globals.wave == Globals.waves_count + 1 and Globals.game_mode != "Endless":
 		Globals.game_manager.win(false)
 		return
-		
-	var text = "NEXT"
-	if Globals.wave == 1:
-		text = "FIRST"
-	if Globals.wave == Globals.waves_count:
-		text = "LAST"
 	if Globals.game_manager:
-		Globals.game_manager.wave_text.bbcode_text = "\n[wave]" + text + " WAVE IN 5"
-		yield(get_tree().create_timer(1.0), "timeout")
-		Globals.game_manager.wave_text.bbcode_text = "\n[wave]" + text + " WAVE IN 4"
-		yield(get_tree().create_timer(1.0), "timeout")
-		Globals.game_manager.wave_text.bbcode_text = "\n[wave]" + text + " WAVE IN 3"
-		yield(get_tree().create_timer(1.0), "timeout")
-		Globals.game_manager.wave_text.bbcode_text = "\n[wave]" + text + " WAVE IN 2"
-		yield(get_tree().create_timer(1.0), "timeout")
-		Globals.game_manager.wave_text.bbcode_text = "\n[wave]" + text + " WAVE IN 1"
-		yield(get_tree().create_timer(1.0), "timeout")
-	
-	set_wave_text()
-	
-	Globals.wave += 1
-	Globals.remaining_enemies = 0
-	current_enemy_count = 0
-	spawn_wave()
+		current_wait_time = wait_time
+		$SpawnTimer.start(1)
 	
 func set_wave_text():
 	if Globals.game_mode == "Endless" and Globals.game_manager:
@@ -204,3 +202,22 @@ func get_air_spawn(enemy):
 		random = randi()%spawn_points_count + 1
 		if $NearSpawnPointsAir.get_child(random -1).get_child_count() == 0:
 			$NearSpawnPointsAir.get_child(random -1).call_deferred("add_child", portal_particle)
+
+
+func _on_SpawnTimer_timeout():
+	var text = "NEXT"
+	if Globals.wave == 1:
+		text = "FIRST"
+	if Globals.wave == Globals.waves_count:
+		text = "LAST"
+		
+	if current_wait_time != 0:
+		Globals.game_manager.wave_text.bbcode_text = "\n[wave]" + text + " WAVE IN " + str(current_wait_time)
+		current_wait_time -= 1
+		$SpawnTimer.start(1)
+	else: 
+		set_wave_text()
+		Globals.wave += 1
+		Globals.remaining_enemies = 0
+		current_enemy_count = 0
+		spawn_wave()

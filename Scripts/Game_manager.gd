@@ -45,7 +45,6 @@ func die():
 	
 func win(is_train):
 	Globals.is_ended = true
-	Engine.time_scale = 0
 	if is_train:
 		$CanvasLayer/TrainScoreText.bbcode_text = ""
 		$CanvasLayer/TimerText.bbcode_text = ""
@@ -64,6 +63,9 @@ func win(is_train):
 
 func _on_Tower_body_entered(body):
 	if body.is_in_group("Enemy") or body.is_in_group("Tank"):
+		Globals.arrows += 1
+		Globals.arrow_ammo_system.manage_arrows()
+		
 		Globals.player_cam.shake(0.5,15,8)
 		Globals.health_system.take_damage()
 		Globals.health_system.spawn_explosion_particle(body.global_position)

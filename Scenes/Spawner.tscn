@@ -89,3 +89,4 @@ position = Vector2( 906.347, 243.539 )
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="TrainTimer" to="." method="_on_TrainTimer_timeout"]
 [connection signal="timeout" from="TrainWaveTimer" to="." method="_on_TrainWaveTimer_timeout"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
