@@ -7,10 +7,10 @@ const ground_enemy3 = preload("res://Scenes/GroundEnemy3.tscn")
 
 const portal = preload("res://Scenes/SpawningParticles.tscn")
 
-#diffuculty
-var spawn_time = 4
-var enemy_speed = 50
-var tank_health = 2
+#difficulty
+var spawn_time : float
+var enemy_speed
+var tank_health
 
 var wait_time = 5
 
@@ -26,6 +26,9 @@ var train_enemies_count = 3
 var spawn_points_count = 4
 
 func _ready():
+	spawn_time = Globals.spawner_spawn_time
+	enemy_speed = Globals.spawner_enemy_speed
+	tank_health = Globals.spawner_tank_health
 	Globals.spawner = self
 	yield(get_tree().create_timer(1.0), "timeout") #wait to get the game_manager initialize
 	if 	Globals.game_mode == "Train":
@@ -72,13 +75,13 @@ func spawn():
 	else: enemy.speed = enemy_speed
 
 func _on_Timer_timeout():
-	if current_enemy_count < total_enemies_count:
+	current_enemy_count += 1
+	if current_enemy_count <= total_enemies_count:
 		spawn()
-		current_enemy_count += 1
 		$Timer.start(spawn_time)
 		
 func next_wave():
-	if Globals.wave == Globals.waves_count + 1:
+	if Globals.wave == Globals.waves_count + 1 and Globals.game_mode != "Endless":
 		Globals.game_manager.win(false)
 		return
 		
@@ -107,6 +110,9 @@ func next_wave():
 	spawn_wave()
 	
 func set_wave_text():
+	if Globals.game_mode == "Endless" and Globals.game_manager:
+		Globals.game_manager.wave_text.bbcode_text = "\n[wave]WAVE: " + str(Globals.wave)
+		return
 	if Globals.game_manager:
 		Globals.game_manager.wave_text.bbcode_text = "\n[wave]WAVE: " + str(Globals.wave) + "/" + str(Globals.waves_count)
 
@@ -126,11 +132,12 @@ func train():
 
 
 func _on_TrainTimer_timeout():
-	if Globals.train_timer:
-		Globals.train_timer.bbcode_text = "\n[wave]" + str($TrainTimer.time_left)
 	current_train_time += 1
+	if Globals.train_timer:
+		Globals.train_timer.bbcode_text = "\n[wave]" + str(train_length - current_train_time)
 	if current_train_time >= train_length:
 		Globals.game_manager.win(true)
+	else: $TrainTimer.start()
 		
 func spawn_train_wave():
 	spawn_train_enemies(train_enemies_count)
@@ -138,11 +145,15 @@ func spawn_train_wave():
 
 
 func _on_TrainWaveTimer_timeout():
+	if Globals.is_ended:
+		return
 	spawn_train_enemies(train_enemies_count)
 	train_speed -= train_speed_minus
 	$TrainWaveTimer.start(train_speed)
 	
 func spawn_train_enemies(count):
+	if Engine.time_scale == 0:
+		return
 	for i in count:
 		var rand = randi()%2+1
 		var enemy
@@ -161,47 +172,35 @@ func spawn_train_enemies(count):
 			get_air_spawn(enemy)
 
 func get_ground_spawn(enemy):
-	enemy.speed = 0
+	if Globals.is_ended:
+		return
+	enemy.dummies = true
 	var portal_particle = portal.instance()
 	portal_particle.spawn_this = enemy
 	var rand = randi()%2 + 1
 	var random
 	if rand == 1:
 		random = randi()%spawn_points_count + 1
-		while $FarSpawnPointsGround.get_child(random -1).get_child_count() == 0:
-			if $FarSpawnPointsGround.get_child(random -1).get_child_count() == 0:
-				$FarSpawnPointsGround.get_child(random -1).call_deferred("add_child", portal_particle)
-			else: 
-				random = randi()%spawn_points_count + 1
-				yield(get_tree().create_timer(1.0), "timeout")
+		if $FarSpawnPointsGround.get_child(random -1).get_child_count() == 0:
+			$FarSpawnPointsGround.get_child(random -1).call_deferred("add_child", portal_particle)
 	else:
 		random = randi()%spawn_points_count + 1
-		while $NearSpawnPointsGround.get_child(random -1).get_child_count() == 0:
-			if $NearSpawnPointsGround.get_child(random -1).get_child_count() == 0:
-				$NearSpawnPointsGround.get_child(random -1).call_deferred("add_child", portal_particle)
-			else: 
-				random = randi()%spawn_points_count + 1
-				yield(get_tree().create_timer(1.0), "timeout")
+		if $NearSpawnPointsGround.get_child(random -1).get_child_count() == 0:
+			$NearSpawnPointsGround.get_child(random -1).call_deferred("add_child", portal_particle)
 	
 func get_air_spawn(enemy):
-	enemy.speed = 0
+	if Globals.is_ended:
+		return
+	enemy.dummies = true
 	var portal_particle = portal.instance()
 	portal_particle.spawn_this = enemy
 	var rand = randi()%2 + 1
 	var random
 	if rand == 1:
 		random = randi()%spawn_points_count + 1
-		while $FarSpawnPointsAir.get_child(random -1).get_child_count() == 0:
-			if $FarSpawnPointsAir.get_child(random -1).get_child_count() == 0:
-				$FarSpawnPointsAir.get_child(random -1).call_deferred("add_child", portal_particle)
-			else:
-				random = randi()%spawn_points_count+ 1
-				yield(get_tree().create_timer(1.0), "timeout")
+		if $FarSpawnPointsAir.get_child(random -1).get_child_count() == 0:
+			$FarSpawnPointsAir.get_child(random -1).call_deferred("add_child", portal_particle)
 	else:
 		random = randi()%spawn_points_count + 1
-		while $NearSpawnPointsAir.get_child(random -1).get_child_count() == 0:
-			if $NearSpawnPointsAir.get_child(random -1).get_child_count() == 0:
-				$NearSpawnPointsAir.get_child(random -1).call_deferred("add_child", portal_particle)
-			else:
-				random = randi()%spawn_points_count + 1
-				yield(get_tree().create_timer(1.0), "timeout")
+		if $NearSpawnPointsAir.get_child(random -1).get_child_count() == 0:
+			$NearSpawnPointsAir.get_child(random -1).call_deferred("add_child", portal_particle)

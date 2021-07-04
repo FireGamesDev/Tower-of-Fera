@@ -22,5 +22,6 @@ color = Color( 0.815686, 0.505882, 0.34902, 1 )
 script = ExtResource( 1 )
 
 [node name="Timer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

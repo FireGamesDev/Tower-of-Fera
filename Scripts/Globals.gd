@@ -6,6 +6,8 @@ var game_manager
 var player_cam
 var menu_cam
 
+var is_ended = false
+
 var sfx_manager
 var trajectory
 var trajectory_dot
@@ -16,8 +18,8 @@ var arrow_ammo_system
 var can_shoot = false
 
 var arrows = 0
-var get_arrow_time = 5
-var ammo = 2 #diffuculty
+var get_arrow_time = 5 #difficulty
+var ammo = 2 #difficulty
 
 var game_mode
 var waves_count = 3 #difficulty
@@ -27,7 +29,11 @@ var max_enemy_count = 10 #difficulty
 var min_enemy_count = 3 #difficulty
 var max_enemy_plus = 3 #difficulty
 var min_enemy_plus = 2 #difficulty
-var spawn_time_minus = 0.2 # difficulty
+var spawn_time_minus = 0.2 #difficulty
+var health_spawn_max = 20 #diffuculty
+var spawner_spawn_time #diffuculty
+var spawner_tank_health #diffuculty
+var spawner_enemy_speed #diffuculty
 
 var train_timer
 var train_point
@@ -89,6 +95,8 @@ func reset_data():
 		
 func save_score(score):
 	wave_save = score
+	if wave_save > endless_wave_save:
+		endless_wave_save = wave_save
 	save_game()
 	
 func save_progress():

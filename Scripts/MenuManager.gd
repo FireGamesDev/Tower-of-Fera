@@ -54,7 +54,7 @@ func load_game():
 	else: AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), Globals.volume)
 	
 	#score
-	$CanvasLayer/Modes/Endless/Score.bbcode_text = "\n[wave]BEST: " + str(Globals.wave_save)
+	$CanvasLayer/Modes/Endless/Score.bbcode_text = "\n[wave]BEST: " + str(Globals.endless_wave_save)
 	
 	#the story show once
 	$CanvasLayer/Story.visible = Globals.story
@@ -90,6 +90,16 @@ func _on_PlayButton_pressed():
 	SceneChanger.change_scene("res://Scenes/Game.tscn", 0.5)
 	
 	Globals.game_mode = "Train"
+	
+	Globals.ammo = 2
+	Globals.max_enemy_count = 10
+	Globals.min_enemy_count = 3
+	Globals.max_enemy_plus = 3
+	Globals.min_enemy_plus = 2
+	Globals.spawn_time_minus = 0.2
+	Globals.spawner_spawn_time = 4
+	Globals.spawner_enemy_speed = 50
+	Globals.spawner_tank_health = 2
 
 
 func _on_Boss_pressed():
@@ -99,6 +109,11 @@ func _on_Boss_pressed():
 	SceneChanger.change_scene("res://Scenes/Game.tscn", 0.5)
 	
 	Globals.game_mode = "Boss"
+	
+	Globals.spawner_spawn_time = 2
+	Globals.spawner_enemy_speed = 100
+	Globals.spawner_tank_health = 2
+	Globals.health_spawn_max = 10
 
 func _on_Hard_pressed():
 	$CanvasLayer/Modes/Hard/Hard_light._on_Timer_timeout()
@@ -107,6 +122,19 @@ func _on_Hard_pressed():
 	SceneChanger.change_scene("res://Scenes/Game.tscn", 0.5)
 	
 	Globals.game_mode = "Hard"
+	
+	Globals.ammo = 1
+	Globals.get_arrow_time = 60
+	Globals.waves_count = 5
+	Globals.max_enemy_count = 20
+	Globals.min_enemy_count = 10
+	Globals.max_enemy_plus = 5
+	Globals.min_enemy_plus = 4
+	Globals.spawn_time_minus = 0.2
+	Globals.spawner_spawn_time = 2
+	Globals.spawner_enemy_speed = 75
+	Globals.spawner_tank_health = 2
+	Globals.health_spawn_max = 10
 
 
 func _on_Endless_pressed():
@@ -116,6 +144,18 @@ func _on_Endless_pressed():
 	SceneChanger.change_scene("res://Scenes/Game.tscn", 0.5)
 	
 	Globals.game_mode = "Endless"
+	
+	Globals.ammo = 1
+	Globals.get_arrow_time = 60
+	Globals.spawner_spawn_time = 2
+	Globals.spawner_enemy_speed = 50
+	Globals.spawner_tank_health = 2
+	Globals.health_spawn_max = 10
+	Globals.max_enemy_count = 20
+	Globals.min_enemy_count = 10
+	Globals.max_enemy_plus = 5
+	Globals.min_enemy_plus = 4
+	Globals.spawn_time_minus = 0.2
 
 
 func _on_Normal_pressed():
@@ -123,8 +163,20 @@ func _on_Normal_pressed():
 	$CanvasLayer/Modes/Normal/Normal_strike.stop = true
 	Globals.sfx_manager.play_sound(click_sound)
 	SceneChanger.change_scene("res://Scenes/Game.tscn", 0.5)
-	
 	Globals.game_mode = "Normal"
+	
+	Globals.ammo = 1
+	Globals.get_arrow_time = 60
+	Globals.waves_count = 4
+	Globals.max_enemy_count = 24
+	Globals.min_enemy_count = 12
+	Globals.max_enemy_plus = 6
+	Globals.min_enemy_plus = 5
+	Globals.spawn_time_minus = 0.2
+	Globals.spawner_spawn_time = 2
+	Globals.spawner_enemy_speed = 60
+	Globals.spawner_tank_health = 2
+	Globals.health_spawn_max = 10
 
 
 func _on_Easy_pressed():
@@ -134,7 +186,19 @@ func _on_Easy_pressed():
 	SceneChanger.change_scene("res://Scenes/Game.tscn", 0.5)
 	
 	Globals.game_mode = "Easy"
-
+	
+	Globals.ammo = 1
+	Globals.get_arrow_time = 60
+	Globals.waves_count = 3
+	Globals.max_enemy_count = 10
+	Globals.min_enemy_count = 3
+	Globals.max_enemy_plus = 3
+	Globals.min_enemy_plus = 2
+	Globals.spawn_time_minus = 0.2
+	Globals.spawner_spawn_time = 4
+	Globals.spawner_enemy_speed = 50
+	Globals.spawner_tank_health = 2
+	Globals.health_spawn_max = 10
 
 func _on_Lightning_strike():
 	Globals.menu_cam.shake(0.5,15,8)

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Sprites/Grave2.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/GraveRigid.gd" type="Script" id=2]
-[ext_resource path="res://.import/Grave_fade.tres" type="Animation" id=3]
+[ext_resource path="res://Animations/grave_fading.tres" type="Animation" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "grave_appear"

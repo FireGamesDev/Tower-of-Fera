@@ -15,6 +15,7 @@ run/main_scene="res://Scenes/Menu.tscn"
 boot_splash/image="res://Logo/firegames.png"
 boot_splash/bg_color=Color( 0.0509804, 0.168627, 0.270588, 1 )
 config/icon="res://Logo/Tower.png"
+config/windows_native_icon="res://Logo/Tower.ico"
 
 [autoload]
 

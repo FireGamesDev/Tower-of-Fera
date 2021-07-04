@@ -27,6 +27,9 @@ one_shot = true
 
 [node name="TrainWaveTimer" type="Timer" parent="."]
 
+[node name="SpawnTimer" type="Timer" parent="."]
+one_shot = true
+
 [node name="NearSpawnPointsGround" type="Node2D" parent="."]
 
 [node name="Point1" type="Position2D" parent="NearSpawnPointsGround"]
@@ -47,7 +50,7 @@ position = Vector2( 464.036, 588.307 )
 position = Vector2( 266.541, 193.353 )
 
 [node name="Point2" type="Position2D" parent="NearSpawnPointsAir"]
-position = Vector2( 248.769, 77.0416 )
+position = Vector2( 524.583, 260.357 )
 
 [node name="Point3" type="Position2D" parent="NearSpawnPointsAir"]
 position = Vector2( 433.382, 180.166 )
@@ -78,7 +81,7 @@ position = Vector2( 675.217, 129.445 )
 position = Vector2( 820.578, 325.947 )
 
 [node name="Point3" type="Position2D" parent="FarSpawnPointsAir"]
-position = Vector2( 911.011, 77.5768 )
+position = Vector2( 741.15, 254.165 )
 
 [node name="Point4" type="Position2D" parent="FarSpawnPointsAir"]
 position = Vector2( 906.347, 243.539 )

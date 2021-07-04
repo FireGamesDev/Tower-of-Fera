@@ -36,12 +36,12 @@ font_path = "res://Font/PixelGameFont.ttf"
 size = 30
 font_data = SubResource( 4 )
 
-[sub_resource type="DynamicFontData" id=26]
+[sub_resource type="DynamicFontData" id=6]
 font_path = "res://Font/PixelGameFont.ttf"
 
 [sub_resource type="DynamicFont" id=7]
 size = 30
-font_data = SubResource( 26 )
+font_data = SubResource( 6 )
 
 [sub_resource type="Animation" id=8]
 length = 0.6
@@ -166,7 +166,7 @@ tracks/0/keys = {
 "values": [ 0.0, 100.0 ]
 }
 
-[sub_resource type="Animation" id=25]
+[sub_resource type="Animation" id=17]
 resource_name = "Appear"
 tracks/0/type = "value"
 tracks/0/path = NodePath("..:rect_scale")
@@ -181,7 +181,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=23]
+[sub_resource type="Animation" id=18]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rect_scale")
@@ -196,7 +196,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=24]
+[sub_resource type="Animation" id=19]
 resource_name = "Lightning"
 tracks/0/type = "value"
 tracks/0/path = NodePath("TextureProgress:value")
@@ -211,7 +211,7 @@ tracks/0/keys = {
 "values": [ 0.0, 100.0 ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=20]
 tracks/0/type = "value"
 tracks/0/path = NodePath("TextureProgress:value")
 tracks/0/interp = 1
@@ -225,14 +225,14 @@ tracks/0/keys = {
 "values": [ 0.0, 100.0 ]
 }
 
-[sub_resource type="RectangleShape2D" id=18]
+[sub_resource type="RectangleShape2D" id=21]
 extents = Vector2( 414.174, 39.5447 )
 
-[sub_resource type="CapsuleShape2D" id=19]
+[sub_resource type="CapsuleShape2D" id=22]
 radius = 53.3942
 height = 817.872
 
-[sub_resource type="Shader" id=20]
+[sub_resource type="Shader" id=23]
 code = "shader_type canvas_item;
 
 // Gonkee's fog shader for Godot 3 - full tutorial https://youtu.be/QEaTsz_0o44
@@ -282,12 +282,12 @@ void fragment() {
 	COLOR = vec4(color, final * 0.5);
 }"
 
-[sub_resource type="ShaderMaterial" id=21]
-shader = SubResource( 20 )
+[sub_resource type="ShaderMaterial" id=24]
+shader = SubResource( 23 )
 shader_param/color = Vector3( 0.35, 0.48, 0.95 )
 shader_param/OCTAVES = 2
 
-[sub_resource type="Curve" id=22]
+[sub_resource type="Curve" id=25]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.990909, 0.990909 ), 0.0, 0.0, 0, 0 ]
 
 [node name="Game" type="Node2D"]
@@ -912,8 +912,8 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Tutorial/Close_tutorial"]
-anims/Appear = SubResource( 25 )
-anims/PlayButton = SubResource( 23 )
+anims/Appear = SubResource( 17 )
+anims/PlayButton = SubResource( 18 )
 
 [node name="Tutorial_light" type="Node2D" parent="CanvasLayer/Tutorial/Close_tutorial"]
 position = Vector2( 189.827, 28.4361 )
@@ -923,7 +923,7 @@ is_menu = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Tutorial/Close_tutorial/Tutorial_light"]
 playback_speed = 3.0
-anims/Lightning = SubResource( 24 )
+anims/Lightning = SubResource( 19 )
 
 [node name="TextureProgress" type="TextureProgress" parent="CanvasLayer/Tutorial/Close_tutorial/Tutorial_light"]
 margin_left = 22.653
@@ -990,9 +990,9 @@ custom_fonts/normal_font = SubResource( 7 )
 custom_colors/default_color = Color( 1, 0.666667, 0.368627, 1 )
 bbcode_enabled = true
 bbcode_text = "
-[wave]SCORE: 0"
+[wave]"
 text = "
-SCORE: 0"
+"
 scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1022,7 +1022,7 @@ script = ExtResource( 13 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Map/Lightning"]
 playback_speed = 3.0
-anims/Lightning = SubResource( 17 )
+anims/Lightning = SubResource( 20 )
 
 [node name="TextureProgress" type="TextureProgress" parent="Map/Lightning"]
 margin_left = 22.653
@@ -1045,7 +1045,7 @@ autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Lightning/SpawnArea"]
 position = Vector2( 243.45, -107.146 )
-shape = SubResource( 18 )
+shape = SubResource( 21 )
 disabled = true
 
 [node name="SFX" type="AudioStreamPlayer" parent="Map/Lightning"]
@@ -1076,7 +1076,7 @@ texture = ExtResource( 9 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Ground/Ground"]
 position = Vector2( 1203.5, 77.4569 )
 rotation = -1.57169
-shape = SubResource( 19 )
+shape = SubResource( 22 )
 
 [node name="Moon" type="TextureRect" parent="Map"]
 anchor_left = 0.5
@@ -1114,7 +1114,8 @@ position = Vector2( 538.008, -111.377 )
 position = Vector2( -2.37842, -91.5689 )
 
 [node name="Fog" type="Sprite" parent="."]
-material = SubResource( 21 )
+visible = false
+material = SubResource( 24 )
 position = Vector2( 417.486, 279.383 )
 rotation = 0.530663
 scale = Vector2( 1.26996, 1.42614 )
@@ -1122,7 +1123,7 @@ texture = ExtResource( 10 )
 
 [node name="MouseTrail" parent="." instance=ExtResource( 17 )]
 width = 5.0
-width_curve = SubResource( 22 )
+width_curve = SubResource( 25 )
 default_color = Color( 1, 1, 1, 0.588235 )
 
 [connection signal="pressed" from="CanvasLayer/Menu" to="." method="_on_Menu_pressed"]

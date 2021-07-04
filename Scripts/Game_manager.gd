@@ -9,6 +9,7 @@ var wave_text
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Globals.is_ended = false
 	Globals.game_manager = self
 	Globals.player_cam = $CanvasLayer/Camera2D
 	Globals.train_timer = $CanvasLayer/TimerText
@@ -19,30 +20,38 @@ func _ready():
 	$CanvasLayer/Menu.set_focus_mode(Control.FOCUS_NONE)
 	$CanvasLayer/Lose/Restart.set_focus_mode(Control.FOCUS_NONE)
 	$CanvasLayer/Lose/Menu_lose.set_focus_mode(Control.FOCUS_NONE)
+	$CanvasLayer/Tutorial/Close_tutorial.set_focus_mode(Control.FOCUS_NONE)
 	set_rain()
 	
 	if Globals.game_mode == "Train":
 		$CanvasLayer/Tutorial/Close_tutorial/AnimationPlayer.play("Appear")
+		Globals.can_shoot = false
 	
 func die():
+	Globals.is_ended = true
 	Engine.time_scale = 0
+	Globals.sfx_manager.play_sound(lose_sfx)
+	$CanvasLayer/Lose.visible = true
 	if Globals.game_mode == "Endless":
 		if Globals.endless_wave_save < Globals.wave -1:
 			Globals.save_endless_score(Globals.wave -1)
-	Globals.sfx_manager.play_sound(lose_sfx)
-	if Globals.waves_count -1 == 0:
-		$CanvasLayer/Win/Text.bbcode_text = "\n[wave]THE TOWN FALLED!"
-	else: $CanvasLayer/Win/Text.bbcode_text = "\n[wave]THE TOWN FALLED! \nCLEARED WAVES: " + str(Globals.waves_count -1)
-	if Globals.wave_save < Globals.waves_count -1:
-		Globals.save_score(Globals.waves_count -1)
-	$CanvasLayer/Lose.visible = true
+		$CanvasLayer/Lose/Text.bbcode_text = "\n[wave]CLEARED WAVES: " + str(Globals.wave -1)
+		return
+	if Globals.wave -1 == 0:
+		$CanvasLayer/Lose/Text.bbcode_text = "\n[wave]THE TOWN FALLED!"
+	else: $CanvasLayer/Lose/Text.bbcode_text = "\n[wave]THE TOWN FALLED! \nCLEARED WAVES: " + str(Globals.wave -1)
+	if Globals.wave_save < Globals.wave -1:
+		Globals.save_score(Globals.wave -1)
 	
 func win(is_train):
+	Globals.is_ended = true
 	Engine.time_scale = 0
 	if is_train:
+		$CanvasLayer/TrainScoreText.bbcode_text = ""
+		$CanvasLayer/TimerText.bbcode_text = ""
 		Globals.sfx_manager.play_sound(win_sfx)
 		$CanvasLayer/Win.visible = true
-		$CanvasLayer/Win/Text.bbcode_text = "\n[wave]YOU KILLED " + str(Globals.train_point) + " [/wave] [shake]GIMPS "
+		$CanvasLayer/Win/Text.bbcode_text = "\n[wave]YOU KILLED " + str(Globals.train_point) + " [/wave] [shake]GIMPS!"
 		return
 	Globals.save_progress()
 	if Globals.wave_save < Globals.waves_count:
@@ -54,10 +63,11 @@ func win(is_train):
 
 
 func _on_Tower_body_entered(body):
-	if body.is_in_group("Enemy"):
+	if body.is_in_group("Enemy") or body.is_in_group("Tank"):
 		Globals.player_cam.shake(0.5,15,8)
 		Globals.health_system.take_damage()
 		Globals.health_system.spawn_explosion_particle(body.global_position)
+		Globals.remaining_enemies -= 1
 		body.queue_free()
 		
 func set_rain():
@@ -100,6 +110,7 @@ func _on_Win_pressed():
 
 
 func _on_Menu_lose_pressed():
+	Engine.time_scale = 1
 	$CanvasLayer/Lose/Menu_lose/Menu_lose._on_Timer_timeout()
 	$CanvasLayer/Lose/Menu_lose/Menu_lose.stop = true
 	$Map/Lightning.stop = true

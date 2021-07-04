@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Yrana - ArcherTower.wav-aefa7a75188990436de9459cb36495ab.sample"
+
+[deps]
+
+source_file="res://SFX/Yrana - ArcherTower.wav"
+dest_files=[ "res://.import/Yrana - ArcherTower.wav-aefa7a75188990436de9459cb36495ab.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

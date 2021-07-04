@@ -32,7 +32,6 @@ func launch(initial_velocity : Vector2):
 
 func _on_Arrow_area_shape_entered(_area_id, area, _area_shape, _local_shape):
 	if area.is_in_group("Ground"):
-		launched = false
 		$Anim.play("Arrow_fade")
 
 
@@ -42,6 +41,8 @@ func _on_Anim_animation_finished(_anim_name):
 
 func _on_Arrow_body_entered(body):
 	if body.is_in_group("Enemy"):
+		Globals.arrows += 1
+		Globals.arrow_ammo_system.manage_arrows()
 		Globals.player_cam.shake(0.5,8,4)
 		Globals.health_system.spawn_explosion_particle(body.global_position)
 		if randi()%2+1 == 1:
@@ -60,6 +61,8 @@ func _on_Arrow_body_entered(body):
 		Globals.spawner.set_remaining_text()
 		
 	if body.is_in_group("Tank"):
+		Globals.arrows += 1
+		Globals.arrow_ammo_system.manage_arrows()
 		Globals.player_cam.shake(0.5,8,4)
 		if current_body != null:
 			if current_body == body:
