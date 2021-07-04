@@ -112,7 +112,7 @@ func _on_Boss_pressed():
 	
 	Globals.ammo = 1
 	Globals.get_arrow_time = 60
-	Globals.spawner_spawn_time = 4
+	Globals.spawner_spawn_time = 3
 	Globals.spawner_enemy_speed = 80
 	Globals.spawner_tank_health = 2
 	Globals.health_spawn_max = 10
@@ -138,7 +138,7 @@ func _on_Hard_pressed():
 	Globals.max_enemy_plus = 7
 	Globals.min_enemy_plus = 7
 	Globals.spawn_time_minus = 0.25
-	Globals.spawner_spawn_time = 4
+	Globals.spawner_spawn_time = 2.5
 	Globals.spawner_enemy_speed = 75
 	Globals.spawner_tank_health = 2
 	Globals.health_spawn_max = 10
@@ -154,7 +154,7 @@ func _on_Endless_pressed():
 	
 	Globals.ammo = 1
 	Globals.get_arrow_time = 60
-	Globals.spawner_spawn_time = 4
+	Globals.spawner_spawn_time = 3
 	Globals.spawner_enemy_speed = 50
 	Globals.spawner_tank_health = 2
 	Globals.health_spawn_max = 10
@@ -173,14 +173,14 @@ func _on_Normal_pressed():
 	Globals.game_mode = "Normal"
 	
 	Globals.ammo = 1
-	Globals.get_arrow_time = 60
+	Globals.get_arrow_time = 15
 	Globals.waves_count = 4
 	Globals.max_enemy_count = 10
 	Globals.min_enemy_count = 6
 	Globals.max_enemy_plus = 6
 	Globals.min_enemy_plus = 5
 	Globals.spawn_time_minus = 0.25
-	Globals.spawner_spawn_time = 4
+	Globals.spawner_spawn_time = 2.5
 	Globals.spawner_enemy_speed = 60
 	Globals.spawner_tank_health = 2
 	Globals.health_spawn_max = 10
@@ -202,7 +202,7 @@ func _on_Easy_pressed():
 	Globals.max_enemy_plus = 3
 	Globals.min_enemy_plus = 2
 	Globals.spawn_time_minus = 0.2
-	Globals.spawner_spawn_time = 4
+	Globals.spawner_spawn_time = 3
 	Globals.spawner_enemy_speed = 50
 	Globals.spawner_tank_health = 2
 	Globals.health_spawn_max = 15

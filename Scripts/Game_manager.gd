@@ -29,7 +29,6 @@ func _ready():
 	
 func die():
 	Globals.is_ended = true
-	Engine.time_scale = 0
 	Globals.sfx_manager.play_sound(lose_sfx)
 	$CanvasLayer/Lose.visible = true
 	if Globals.game_mode == "Endless":

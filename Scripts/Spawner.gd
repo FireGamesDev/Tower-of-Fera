@@ -2,9 +2,12 @@ extends Node2D
 
 const flying_enemy = preload("res://Scenes/FlyingEnemy.tscn")
 const fast_flying_enemy = preload("res://Scenes/FastFlyingEnemy.tscn")
+const ghost_flying_enemy = preload("res://Scenes/GhostFlyingEnemy.tscn")
+
 const ground_enemy1 = preload("res://Scenes/GroundEnemy1.tscn")
 const ground_enemy2 = preload("res://Scenes/GroundEnemy2.tscn")
 const ground_enemy3 = preload("res://Scenes/GroundEnemy3.tscn")
+const mini_ground_enemy = preload("res://Scenes/MiniGroundEnemy.tscn")
 
 const portal = preload("res://Scenes/SpawningParticles.tscn")
 
@@ -50,13 +53,21 @@ func spawn_wave():
 func spawn():
 	var rand = randi()%2+1
 	if rand == 1:
-		spawn_ground_enemy()
+		$Ground.call_deferred("add_child", spawn_ground_enemy(false))
 	if rand == 2:
-		spawn_flying_enemy()
+		var rand1 = randi()%4+1
+		if rand1 == 1:
+			$Air1.call_deferred("add_child", spawn_flying_enemy(false))
+		if rand1 == 2:
+			$Air2.call_deferred("add_child", spawn_flying_enemy(false))
+		if rand1 == 3:
+			$Air3.call_deferred("add_child", spawn_flying_enemy(false))
+		if rand1 == 4:
+			$Air4.call_deferred("add_child", spawn_flying_enemy(false))
 
 
 
-func spawn_flying_enemy():
+func spawn_flying_enemy(is_dummies):
 	var enemy
 	var rand2 = randi()%3+1
 	if rand2 == 2:
@@ -66,32 +77,34 @@ func spawn_flying_enemy():
 		enemy = flying_enemy.instance()
 		enemy.speed = enemy_speed
 	if rand2 == 3:
-		spawn_tank_enemy()
-		return
-	var rand1 = randi()%4+1
-	if rand1 == 1:
-		$Air1.call_deferred("add_child", enemy)
-	if rand1 == 2:
-		$Air2.call_deferred("add_child", enemy)
-	if rand1 == 3:
-		$Air3.call_deferred("add_child", enemy)
-	if rand1 == 4:
-		$Air4.call_deferred("add_child", enemy)
+		enemy = ghost_flying_enemy.instance()
+		enemy.speed = enemy_speed + 40
+	enemy.dummies = is_dummies
+	return enemy
 		
-func spawn_ground_enemy():
+func spawn_ground_enemy(is_dummies):
 	var enemy
-	var rand2 = randi()%2+1
+	var rand2 = randi()%3+1
 	if rand2 == 1:
 		enemy = ground_enemy1.instance()
-	else: enemy = ground_enemy2.instance()
-	$Ground.call_deferred("add_child", enemy)
-	enemy.speed = enemy_speed
+		enemy.speed = enemy_speed
+	if rand2 == 2:
+		enemy = ground_enemy2.instance()
+		enemy.speed = enemy_speed
+	if rand2 == 3:
+		enemy = mini_ground_enemy.instance()
+		enemy.speed = enemy_speed + 50
+	if rand2 == 4:
+		return spawn_tank_enemy(is_dummies)
+	enemy.dummies = is_dummies
+	return enemy
 	
-func spawn_tank_enemy():
+func spawn_tank_enemy(is_dummies):
 	var enemy = ground_enemy3.instance()
-	$Ground.call_deferred("add_child", enemy)
 	enemy.health = tank_health
 	enemy.speed = enemy_speed - 30
+	enemy.dummies = is_dummies
+	return enemy
 
 func _on_Timer_timeout():
 	current_enemy_count += 1
@@ -150,24 +163,14 @@ func _on_TrainWaveTimer_timeout():
 	$TrainWaveTimer.start(train_speed)
 	
 func spawn_train_enemies(count):
-	if Engine.time_scale == 0:
+	if Globals.is_ended:
 		return
 	for i in count:
 		var rand = randi()%2+1
-		var enemy
 		if rand == 1:
-			var random_type = randi()%3 + 1
-			if random_type == 1:
-				enemy = ground_enemy1.instance()
-			if random_type == 2:
-				enemy = ground_enemy2.instance()
-			if random_type == 3:
-				enemy = ground_enemy3.instance()
-				enemy.health = tank_health
-			get_ground_spawn(enemy)
+			get_ground_spawn(spawn_ground_enemy(true))
 		if rand == 2:
-			enemy = flying_enemy.instance()
-			get_air_spawn(enemy)
+			get_air_spawn(spawn_flying_enemy(true))
 
 func get_ground_spawn(enemy):
 	if Globals.is_ended:

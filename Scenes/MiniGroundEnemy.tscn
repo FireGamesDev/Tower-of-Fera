@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Sprites/Tank_enemy.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/MiniGroundEnemy.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Enemy.gd" type="Script" id=2]
 
 [sub_resource type="Animation" id=1]
@@ -13,25 +13,26 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6, 0.8 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 1, 2, 3, 1 ]
+"values": [ 1, 2, 3 ]
 }
 
-[node name="GroundEnemy3" type="KinematicBody2D" groups=[
-"Tank",
+[node name="MiniGroundEnemy" type="KinematicBody2D" groups=[
+"Enemy",
 ]]
-collision_layer = 2
-collision_mask = 2
+collision_layer = 4
+collision_mask = 4
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0.841858, 12.8446 )
 scale = Vector2( 0.4, 0.4 )
 texture = ExtResource( 1 )
 flip_h = true
-hframes = 5
-frame = 1
+hframes = 4
+frame = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
 autoplay = "Bow"
@@ -39,4 +40,5 @@ playback_speed = 2.0
 anims/Bow = SubResource( 1 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( -6.67094, 23.8749, 6.66129, 26.2346, 17.5, 19.75, 21.5, 1, 19.75, -21.25, 5.36346, -25.6785, -16.25, -26.75, -22.5, -22.5, -22.75, -7.25, -21.75, 9.5, -15.8737, 18.9196 )
+position = Vector2( 0.841858, 12.8446 )
+polygon = PoolVector2Array( -4.35389, 18.1714, 1.47324, 14.5491, 11.3951, 19.2738, 18.6397, 3.83979, 13.915, -13.4841, 2.73316, -18.3663, -11.5984, -16.9489, -18.0555, -7.18452, -15.0632, 7.61955, -8.13366, 13.7617 )
