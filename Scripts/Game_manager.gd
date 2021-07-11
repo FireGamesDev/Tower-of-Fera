@@ -26,8 +26,14 @@ func _ready():
 	if Globals.game_mode == "Train":
 		$CanvasLayer/Tutorial/Close_tutorial/AnimationPlayer.play("Appear")
 		Globals.can_shoot = false
+		
+	if Globals.game_mode == "Boss":
+		$CanvasLayer/BossBar.visible = true
+		$CanvasLayer/Waves.visible = false
 	
 func die():
+	for bullet in get_tree().get_nodes_in_group("boss_bullet"):
+		bullet.queue_free()
 	$Map/Lightning.stop = true
 	Globals.is_ended = true
 	Globals.sfx_manager.play_sound(lose_sfx)
@@ -59,7 +65,9 @@ func win(is_train):
 	Globals.sfx_manager.play_sound(win_sfx)
 	$CanvasLayer/Win.visible = true
 	var cleared_mode = Globals.game_mode
-	$CanvasLayer/Win/Text.bbcode_text = "\n[wave]YOU CLEARED " + str(cleared_mode.to_upper())
+	$CanvasLayer/Win/Text.bbcode_text = "\n[wave]YOU CLEARED " + str(cleared_mode.to_upper()) + "\n\nCONGRATS!"
+	if cleared_mode == "Boss":
+		$CanvasLayer/Win/Text.bbcode_text = "\n[wave]YOU DEFEATED THE KING!\n\nCONGRATS!"
 
 
 func _on_Tower_body_entered(body):
@@ -163,3 +171,15 @@ func _on_Close_tutorial_pressed():
 	
 func set_train_score_text():
 	$CanvasLayer/TrainScoreText.bbcode_text = "\n[wave]SCORE: " + str(Globals.train_point)
+	
+func take_damage():
+	$CanvasLayer/BossBar.value -= 5
+	$CanvasLayer/BossBar/BossText.bbcode_text = "\n[wave]HEALTH: " + str($CanvasLayer/BossBar.value)
+	
+	if $CanvasLayer/BossBar.value <= 0:
+		Globals.boss.die()
+		$CanvasLayer/BossBar.visible = false
+		$CanvasLayer/Camera2D/AnimationPlayer.play("end_anim")
+		yield(get_tree().create_timer(5.0), "timeout")
+		win(false)
+

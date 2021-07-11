@@ -59,14 +59,21 @@ func load_game():
 	#the story show once
 	$CanvasLayer/Story.visible = Globals.story
 	
+	if !Globals.story:
+		start_all_timers()
+	
 	#mode is cleared
 	$CanvasLayer/Modes/Easy/Cleared.visible = Globals.easy_save
 	$CanvasLayer/Modes/Normal/Cleared.visible = Globals.normal_save
 	$CanvasLayer/Modes/Hard/Cleared.visible = Globals.hard_save
+	
 	if Globals.hard_save:
 		$CanvasLayer/Modes/Boss/Cleared.bbcode_text = "\n[wave]UNLOCKED"
+		$CanvasLayer/Modes/Boss/Cleared.rect_position.x = 140
+		$CanvasLayer/Modes/Boss.disabled = false
 	if Globals.boss_save:
 		$CanvasLayer/Modes/Boss/Cleared.bbcode_text = "\n[wave]CLEARED"
+		$CanvasLayer/Modes/Boss/Cleared.rect_position.x = 140
 		$CanvasLayer/ThanksForPlaying.visible = true
 		$CanvasLayer/ThanksForPlaying/CloseButton/Close/AnimationPlayer.play("Appear")
 
@@ -112,15 +119,7 @@ func _on_Boss_pressed():
 	
 	Globals.ammo = 1
 	Globals.get_arrow_time = 60
-	Globals.spawner_spawn_time = 3
-	Globals.spawner_enemy_speed = 50
-	Globals.spawner_tank_health = 2
 	Globals.health_spawn_max = 10
-	Globals.max_enemy_count = 12
-	Globals.min_enemy_count = 8
-	Globals.max_enemy_plus = 7
-	Globals.min_enemy_plus = 7
-	Globals.spawn_time_minus = 0.20
 
 func _on_Hard_pressed():
 	$CanvasLayer/Modes/Hard/Hard_light._on_Timer_timeout()
@@ -247,15 +246,16 @@ func _on_ContinueButton_pressed():
 	yield(get_tree().create_timer(1), "timeout")
 	$CanvasLayer/Story/ContinueButton/Continue/AnimationPlayer.play_backwards("Appear")
 	yield(get_tree().create_timer($CanvasLayer/Story/ContinueButton/Continue/AnimationPlayer.current_animation_length), "timeout")
-	#start all timers
+	start_all_timers()
+	$CanvasLayer/Story.visible = false
+
+func start_all_timers():
 	$CanvasLayer/Control2/Lightning/Timer.start()
 	$CanvasLayer/Modes/Boss/Boss/Timer.start()
 	$CanvasLayer/Modes/Easy/Easy_strike/Timer.start()
 	$CanvasLayer/Modes/Endless/Endless_strike/Timer.start()
 	$CanvasLayer/Modes/Hard/Hard_light/Timer.start()
 	$CanvasLayer/Modes/Normal/Normal_strike/Timer.start()
-	$CanvasLayer/Story.visible = false
-
 
 func _on_Continue_strike():
 	Globals.menu_cam.shake(0.5,15,8)

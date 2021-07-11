@@ -571,7 +571,6 @@ __meta__ = {
 }
 
 [node name="Boss" type="Button" parent="CanvasLayer/Modes"]
-visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -586,6 +585,7 @@ custom_styles/pressed = SubResource( 4 )
 custom_styles/disabled = SubResource( 21 )
 custom_styles/normal = SubResource( 5 )
 custom_fonts/font = SubResource( 7 )
+disabled = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -602,9 +602,9 @@ custom_fonts/normal_font = SubResource( 9 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "
-[wave]BOSS"
+[wave]KING"
 text = "
-BOSS"
+KING"
 scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -615,10 +615,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -105.203
-margin_top = -22.595
-margin_right = 244.797
-margin_bottom = 52.405
+margin_left = -110.0
+margin_top = -20.5926
+margin_right = 240.0
+margin_bottom = 54.4074
 rect_scale = Vector2( 0.3, 0.3 )
 mouse_filter = 2
 custom_fonts/normal_font = SubResource( 9 )
@@ -1097,6 +1097,7 @@ margin_left = -250.0
 margin_top = -250.0
 margin_right = 250.0
 margin_bottom = 250.0
+rect_scale = Vector2( 1e-05, 1e-05 )
 rect_pivot_offset = Vector2( 250, 250 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1286,25 +1287,25 @@ custom_fonts/normal_font = SubResource( 9 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "
-[wave]Ijasz! [/wave]
+[wave]Archer! [/wave]
 
-Szuksegunk van a segitsegedre! 
+We need your help! 
 
-Varosunk a [shake]Gimp[/shake] - ek tamadasa alatt all.
+Our town is under the [shake]Gimps[/shake] attack.
 
-Vedelmunk szive egy torony amit csak [shake]Fera[/shake] tornyakent emlegetnek. Azt mondjak [wave]bevehetetlen[/wave]. 
+The heart of our defense is a tower, that just called the [shake]Tower of Fera[/shake]. Peoples said it is [wave]impregnable[/wave]. 
 
-Hat, nem ugy tunik.... "
+But it doesn't seem to.... "
 text = "
-Ijasz! 
+Archer! 
 
-Szuksegunk van a segitsegedre! 
+We need your help! 
 
-Varosunk a Gimp - ek tamadasa alatt all.
+Our town is under the Gimps attack.
 
-Vedelmunk szive egy torony amit csak Fera tornyakent emlegetnek. Azt mondjak bevehetetlen. 
+The heart of our defense is a tower, that just called the Tower of Fera. Peoples said it is impregnable. 
 
-Hat, nem ugy tunik.... "
+But it doesn't seem to.... "
 scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false

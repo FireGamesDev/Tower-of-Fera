@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Sprites/Environment.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Game_manager.gd" type="Script" id=2]
@@ -19,64 +19,60 @@
 [ext_resource path="res://Scenes/MouseTrail.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scenes/Fireflies.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Sprites/Swipe.png" type="Texture" id=19]
+[ext_resource path="res://Sprites/BossBar.png" type="Texture" id=20]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.815686, 0.505882, 0.34902, 1 )
+[sub_resource type="Animation" id=1]
+resource_name = "end_anim"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.3, 0.3 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 512, 300 ), Vector2( 955.369, 452.285 ) ]
+}
 
 [sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.0509804, 0.168627, 0.270588, 1 )
+bg_color = Color( 0.815686, 0.505882, 0.34902, 1 )
 
 [sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.0509804, 0.168627, 0.270588, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.192157, 0.290196, 0.454902, 0.596078 )
 
-[sub_resource type="DynamicFontData" id=4]
+[sub_resource type="DynamicFontData" id=5]
 font_path = "res://Font/PixelGameFont.ttf"
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=6]
 size = 30
-font_data = SubResource( 4 )
+font_data = SubResource( 5 )
 
-[sub_resource type="DynamicFontData" id=6]
+[sub_resource type="DynamicFontData" id=7]
 font_path = "res://Font/PixelGameFont.ttf"
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=8]
 size = 30
-font_data = SubResource( 6 )
-
-[sub_resource type="Animation" id=8]
-length = 0.6
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:rect_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
-}
+font_data = SubResource( 7 )
 
 [sub_resource type="Animation" id=9]
-resource_name = "Lightning"
-tracks/0/type = "value"
-tracks/0/path = NodePath("TextureProgress:value")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.0, 100.0 ]
-}
-
-[sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 10, 6.359 )
-
-[sub_resource type="Animation" id=11]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rect_scale")
@@ -91,8 +87,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=12]
-resource_name = "Lightning"
+[sub_resource type="Animation" id=10]
 tracks/0/type = "value"
 tracks/0/path = NodePath("TextureProgress:value")
 tracks/0/interp = 1
@@ -104,39 +99,41 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0.0, 100.0 ]
+}
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 10, 6.359 )
+
+[sub_resource type="Animation" id=12]
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=13]
-length = 0.6
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:rect_scale")
+tracks/0/path = NodePath("TextureProgress:value")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
+"values": [ 0.0, 100.0 ]
 }
 
 [sub_resource type="Animation" id=14]
-resource_name = "Lightning"
-tracks/0/type = "value"
-tracks/0/path = NodePath("TextureProgress:value")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.0, 100.0 ]
-}
-
-[sub_resource type="Animation" id=15]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rect_scale")
@@ -151,8 +148,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=16]
-resource_name = "Lightning"
+[sub_resource type="Animation" id=15]
 tracks/0/type = "value"
 tracks/0/path = NodePath("TextureProgress:value")
 tracks/0/interp = 1
@@ -166,8 +162,36 @@ tracks/0/keys = {
 "values": [ 0.0, 100.0 ]
 }
 
+[sub_resource type="Animation" id=16]
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
+}
+
 [sub_resource type="Animation" id=17]
-resource_name = "Appear"
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureProgress:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 100.0 ]
+}
+
+[sub_resource type="Animation" id=18]
 tracks/0/type = "value"
 tracks/0/path = NodePath("..:rect_scale")
 tracks/0/interp = 1
@@ -181,7 +205,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=19]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rect_scale")
@@ -194,21 +218,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
-}
-
-[sub_resource type="Animation" id=19]
-resource_name = "Lightning"
-tracks/0/type = "value"
-tracks/0/path = NodePath("TextureProgress:value")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.0, 100.0 ]
 }
 
 [sub_resource type="Animation" id=20]
@@ -225,14 +234,28 @@ tracks/0/keys = {
 "values": [ 0.0, 100.0 ]
 }
 
-[sub_resource type="RectangleShape2D" id=21]
+[sub_resource type="Animation" id=21]
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureProgress:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 100.0 ]
+}
+
+[sub_resource type="RectangleShape2D" id=22]
 extents = Vector2( 414.174, 39.5447 )
 
-[sub_resource type="CapsuleShape2D" id=22]
+[sub_resource type="CapsuleShape2D" id=23]
 radius = 53.3942
 height = 817.872
 
-[sub_resource type="Shader" id=23]
+[sub_resource type="Shader" id=24]
 code = "shader_type canvas_item;
 
 // Gonkee's fog shader for Godot 3 - full tutorial https://youtu.be/QEaTsz_0o44
@@ -282,12 +305,12 @@ void fragment() {
 	COLOR = vec4(color, final * 0.5);
 }"
 
-[sub_resource type="ShaderMaterial" id=24]
-shader = SubResource( 23 )
+[sub_resource type="ShaderMaterial" id=25]
+shader = SubResource( 24 )
 shader_param/color = Vector3( 0.35, 0.48, 0.95 )
 shader_param/OCTAVES = 2
 
-[sub_resource type="Curve" id=25]
+[sub_resource type="Curve" id=26]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.990909, 0.990909 ), 0.0, 0.0, 0, 0 ]
 
 [node name="Game" type="Node2D"]
@@ -296,9 +319,12 @@ script = ExtResource( 2 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="CanvasLayer"]
-position = Vector2( 511.376, 297.56 )
+position = Vector2( 512, 300 )
 current = true
 script = ExtResource( 8 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Camera2D"]
+anims/end_anim = SubResource( 1 )
 
 [node name="Health" parent="CanvasLayer" instance=ExtResource( 6 )]
 margin_bottom = 63.0
@@ -313,10 +339,10 @@ margin_top = -202.868
 margin_right = -330.689
 margin_bottom = -127.868
 rect_pivot_offset = Vector2( 100, 37 )
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/normal = SubResource( 3 )
-custom_fonts/font = SubResource( 5 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+custom_fonts/font = SubResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -329,7 +355,7 @@ margin_top = -10.0
 margin_right = 50.0
 margin_bottom = -10.0
 mouse_filter = 2
-custom_fonts/normal_font = SubResource( 7 )
+custom_fonts/normal_font = SubResource( 8 )
 custom_colors/default_color = Color( 1, 0.666667, 0.368627, 1 )
 bbcode_enabled = true
 bbcode_text = "
@@ -353,7 +379,7 @@ margin_right = 132.229
 margin_bottom = 45.2549
 rect_scale = Vector2( 0.4, 0.4 )
 mouse_filter = 2
-custom_fonts/normal_font = SubResource( 7 )
+custom_fonts/normal_font = SubResource( 8 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 bbcode_enabled = true
 bbcode_text = "
@@ -366,7 +392,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Menu"]
-anims/PlayButton = SubResource( 8 )
+anims/PlayButton = SubResource( 9 )
 
 [node name="Hard_light" type="Node2D" parent="CanvasLayer/Menu"]
 position = Vector2( 189.827, 28.4361 )
@@ -376,7 +402,7 @@ is_menu = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Menu/Hard_light"]
 playback_speed = 3.0
-anims/Lightning = SubResource( 9 )
+anims/Lightning = SubResource( 10 )
 
 [node name="TextureProgress" type="TextureProgress" parent="CanvasLayer/Menu/Hard_light"]
 margin_left = 22.653
@@ -400,7 +426,7 @@ one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Menu/Hard_light/SpawnArea"]
 position = Vector2( -16.4744, -188.834 )
-shape = SubResource( 10 )
+shape = SubResource( 11 )
 disabled = true
 
 [node name="SFX" type="AudioStreamPlayer" parent="CanvasLayer/Menu/Hard_light"]
@@ -414,7 +440,7 @@ margin_right = 188.0
 margin_bottom = 102.0
 rect_pivot_offset = Vector2( 125, 40 )
 mouse_filter = 2
-custom_fonts/normal_font = SubResource( 7 )
+custom_fonts/normal_font = SubResource( 8 )
 custom_colors/default_color = Color( 1, 0.666667, 0.368627, 1 )
 bbcode_enabled = true
 bbcode_text = "
@@ -438,7 +464,7 @@ margin_right = 163.0
 margin_bottom = -12.0
 rect_pivot_offset = Vector2( 125, 40 )
 mouse_filter = 2
-custom_fonts/normal_font = SubResource( 7 )
+custom_fonts/normal_font = SubResource( 8 )
 custom_colors/default_color = Color( 1, 0.666667, 0.368627, 1 )
 bbcode_enabled = true
 bbcode_text = "
@@ -488,7 +514,7 @@ margin_right = 202.025
 margin_bottom = 261.801
 rect_pivot_offset = Vector2( 100, 34 )
 mouse_filter = 2
-custom_fonts/normal_font = SubResource( 7 )
+custom_fonts/normal_font = SubResource( 8 )
 custom_colors/default_color = Color( 1, 0.666667, 0.368627, 1 )
 bbcode_enabled = true
 bbcode_text = "
@@ -515,10 +541,10 @@ margin_top = 39.4748
 margin_right = 96.7364
 margin_bottom = 114.475
 rect_pivot_offset = Vector2( 100, 37 )
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/normal = SubResource( 3 )
-custom_fonts/font = SubResource( 5 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+custom_fonts/font = SubResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -531,7 +557,7 @@ margin_top = -6.46445
 margin_right = 21.7158
 margin_bottom = -6.46445
 mouse_filter = 2
-custom_fonts/normal_font = SubResource( 7 )
+custom_fonts/normal_font = SubResource( 8 )
 custom_colors/default_color = Color( 1, 0.666667, 0.368627, 1 )
 bbcode_enabled = true
 bbcode_text = "
@@ -544,7 +570,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Lose/Restart"]
-anims/PlayButton = SubResource( 11 )
+anims/PlayButton = SubResource( 12 )
 
 [node name="Restart_strike" type="Node2D" parent="CanvasLayer/Lose/Restart"]
 position = Vector2( 189.827, 28.4361 )
@@ -555,7 +581,7 @@ is_restart_button = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Lose/Restart/Restart_strike"]
 playback_speed = 3.0
-anims/Lightning = SubResource( 12 )
+anims/Lightning = SubResource( 13 )
 
 [node name="TextureProgress" type="TextureProgress" parent="CanvasLayer/Lose/Restart/Restart_strike"]
 margin_left = 22.653
@@ -579,7 +605,7 @@ one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Lose/Restart/Restart_strike/SpawnArea"]
 position = Vector2( -16.4744, -188.834 )
-shape = SubResource( 10 )
+shape = SubResource( 11 )
 disabled = true
 
 [node name="SFX" type="AudioStreamPlayer" parent="CanvasLayer/Lose/Restart/Restart_strike"]
@@ -597,10 +623,10 @@ margin_top = 133.512
 margin_right = 96.4597
 margin_bottom = 208.512
 rect_pivot_offset = Vector2( 100, 37 )
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/normal = SubResource( 3 )
-custom_fonts/font = SubResource( 5 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+custom_fonts/font = SubResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -613,7 +639,7 @@ margin_top = -10.0
 margin_right = 50.0
 margin_bottom = -10.0
 mouse_filter = 2
-custom_fonts/normal_font = SubResource( 7 )
+custom_fonts/normal_font = SubResource( 8 )
 custom_colors/default_color = Color( 1, 0.666667, 0.368627, 1 )
 bbcode_enabled = true
 bbcode_text = "
@@ -637,7 +663,7 @@ margin_right = 132.229
 margin_bottom = 45.2549
 rect_scale = Vector2( 0.4, 0.4 )
 mouse_filter = 2
-custom_fonts/normal_font = SubResource( 7 )
+custom_fonts/normal_font = SubResource( 8 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 bbcode_enabled = true
 bbcode_text = "
@@ -650,7 +676,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Lose/Menu_lose"]
-anims/PlayButton = SubResource( 13 )
+anims/PlayButton = SubResource( 14 )
 
 [node name="Menu_lose" type="Node2D" parent="CanvasLayer/Lose/Menu_lose"]
 position = Vector2( 189.827, 28.4361 )
@@ -660,7 +686,7 @@ is_menu = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Lose/Menu_lose/Menu_lose"]
 playback_speed = 3.0
-anims/Lightning = SubResource( 14 )
+anims/Lightning = SubResource( 15 )
 
 [node name="TextureProgress" type="TextureProgress" parent="CanvasLayer/Lose/Menu_lose/Menu_lose"]
 margin_left = 22.653
@@ -684,7 +710,7 @@ one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Lose/Menu_lose/Menu_lose/SpawnArea"]
 position = Vector2( -16.4744, -188.834 )
-shape = SubResource( 10 )
+shape = SubResource( 11 )
 disabled = true
 
 [node name="SFX" type="AudioStreamPlayer" parent="CanvasLayer/Lose/Menu_lose/Menu_lose"]
@@ -724,7 +750,7 @@ margin_right = 151.414
 margin_bottom = 339.823
 rect_pivot_offset = Vector2( 100, 34 )
 mouse_filter = 2
-custom_fonts/normal_font = SubResource( 7 )
+custom_fonts/normal_font = SubResource( 8 )
 custom_colors/default_color = Color( 1, 0.666667, 0.368627, 1 )
 bbcode_enabled = true
 bbcode_text = "
@@ -751,10 +777,10 @@ margin_top = 107.552
 margin_right = 102.076
 margin_bottom = 182.552
 rect_pivot_offset = Vector2( 100, 37 )
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/normal = SubResource( 3 )
-custom_fonts/font = SubResource( 5 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+custom_fonts/font = SubResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -767,7 +793,7 @@ margin_top = -10.0
 margin_right = 50.0
 margin_bottom = -10.0
 mouse_filter = 2
-custom_fonts/normal_font = SubResource( 7 )
+custom_fonts/normal_font = SubResource( 8 )
 custom_colors/default_color = Color( 1, 0.666667, 0.368627, 1 )
 bbcode_enabled = true
 bbcode_text = "
@@ -780,7 +806,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Win/Win"]
-anims/PlayButton = SubResource( 15 )
+anims/PlayButton = SubResource( 16 )
 
 [node name="Win_light" type="Node2D" parent="CanvasLayer/Win/Win"]
 position = Vector2( 189.827, 28.4361 )
@@ -790,7 +816,7 @@ is_menu = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Win/Win/Win_light"]
 playback_speed = 3.0
-anims/Lightning = SubResource( 16 )
+anims/Lightning = SubResource( 17 )
 
 [node name="TextureProgress" type="TextureProgress" parent="CanvasLayer/Win/Win/Win_light"]
 margin_left = 22.653
@@ -814,7 +840,7 @@ one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Win/Win/Win_light/SpawnArea"]
 position = Vector2( -16.4744, -188.834 )
-shape = SubResource( 10 )
+shape = SubResource( 11 )
 disabled = true
 
 [node name="SFX" type="AudioStreamPlayer" parent="CanvasLayer/Win/Win/Win_light"]
@@ -855,7 +881,7 @@ margin_right = 154.781
 margin_bottom = 284.822
 rect_pivot_offset = Vector2( 100, 34 )
 mouse_filter = 2
-custom_fonts/normal_font = SubResource( 7 )
+custom_fonts/normal_font = SubResource( 8 )
 custom_colors/default_color = Color( 1, 0.666667, 0.368627, 1 )
 bbcode_enabled = true
 bbcode_text = "
@@ -883,10 +909,10 @@ margin_top = 107.552
 margin_right = 102.076
 margin_bottom = 182.552
 rect_pivot_offset = Vector2( 100, 37 )
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/normal = SubResource( 3 )
-custom_fonts/font = SubResource( 5 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+custom_fonts/font = SubResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -899,7 +925,7 @@ margin_top = -10.0
 margin_right = 50.0
 margin_bottom = -10.0
 mouse_filter = 2
-custom_fonts/normal_font = SubResource( 7 )
+custom_fonts/normal_font = SubResource( 8 )
 custom_colors/default_color = Color( 1, 0.666667, 0.368627, 1 )
 bbcode_enabled = true
 bbcode_text = "
@@ -912,8 +938,8 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Tutorial/Close_tutorial"]
-anims/Appear = SubResource( 17 )
-anims/PlayButton = SubResource( 18 )
+anims/Appear = SubResource( 18 )
+anims/PlayButton = SubResource( 19 )
 
 [node name="Tutorial_light" type="Node2D" parent="CanvasLayer/Tutorial/Close_tutorial"]
 position = Vector2( 189.827, 28.4361 )
@@ -923,7 +949,7 @@ is_menu = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Tutorial/Close_tutorial/Tutorial_light"]
 playback_speed = 3.0
-anims/Lightning = SubResource( 19 )
+anims/Lightning = SubResource( 20 )
 
 [node name="TextureProgress" type="TextureProgress" parent="CanvasLayer/Tutorial/Close_tutorial/Tutorial_light"]
 margin_left = 22.653
@@ -947,7 +973,7 @@ one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/Tutorial/Close_tutorial/Tutorial_light/SpawnArea"]
 position = Vector2( -16.4744, -188.834 )
-shape = SubResource( 10 )
+shape = SubResource( 11 )
 disabled = true
 
 [node name="SFX" type="AudioStreamPlayer" parent="CanvasLayer/Tutorial/Close_tutorial/Tutorial_light"]
@@ -967,7 +993,7 @@ margin_top = -81.7255
 margin_right = 47.9797
 margin_bottom = -21.7255
 mouse_filter = 2
-custom_fonts/normal_font = SubResource( 7 )
+custom_fonts/normal_font = SubResource( 8 )
 custom_colors/default_color = Color( 1, 0.666667, 0.368627, 1 )
 bbcode_enabled = true
 bbcode_text = "
@@ -986,7 +1012,7 @@ margin_left = -100.0
 margin_right = 100.0
 margin_bottom = 60.0
 mouse_filter = 2
-custom_fonts/normal_font = SubResource( 7 )
+custom_fonts/normal_font = SubResource( 8 )
 custom_colors/default_color = Color( 1, 0.666667, 0.368627, 1 )
 bbcode_enabled = true
 bbcode_text = "
@@ -998,22 +1024,87 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="BossBar" type="TextureProgress" parent="CanvasLayer"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -123.112
+margin_top = 52.7796
+margin_right = 126.888
+margin_bottom = 92.7796
+rect_scale = Vector2( 1, 0.4 )
+mouse_filter = 2
+value = 100.0
+texture_under = ExtResource( 20 )
+texture_progress = ExtResource( 20 )
+tint_under = Color( 1, 1, 1, 0.392157 )
+tint_progress = Color( 1, 0.666667, 0.368627, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BossText" type="RichTextLabel" parent="CanvasLayer/BossBar"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -58.5685
+margin_top = 14.0504
+margin_right = 151.431
+margin_bottom = 74.0504
+rect_scale = Vector2( 0.5, 1.4 )
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 8 )
+custom_colors/default_color = Color( 1, 0.666667, 0.368627, 1 )
+bbcode_enabled = true
+bbcode_text = "
+[wave]HEALTH: 100"
+text = "
+HEALTH: 100"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="RichTextLabel" parent="CanvasLayer/BossBar"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -46.077
+margin_top = -125.183
+margin_right = 163.923
+margin_bottom = -65.1829
+rect_scale = Vector2( 0.5, 1.4 )
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 8 )
+custom_colors/default_color = Color( 1, 0.666667, 0.368627, 1 )
+bbcode_enabled = true
+bbcode_text = "
+[wave]THE KING"
+text = "
+THE KING"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Map" type="Node2D" parent="."]
 position = Vector2( -194.941, 489.472 )
 
 [node name="Sky" type="ColorRect" parent="Map"]
-margin_left = 194.941
-margin_top = -489.472
-margin_right = 1218.94
-margin_bottom = 110.528
+margin_left = 195.0
+margin_top = -489.0
+margin_right = 1392.0
+margin_bottom = 111.0
 color = Color( 0.12549, 0.235294, 0.337255, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Light" type="Sprite" parent="Map/Sky"]
-position = Vector2( 508.115, 276.893 )
-scale = Vector2( 0.7, 0.7 )
+position = Vector2( 575.823, 276.893 )
+scale = Vector2( 0.784635, 0.7 )
 texture = ExtResource( 10 )
 
 [node name="Lightning" type="Node2D" parent="Map"]
@@ -1022,7 +1113,7 @@ script = ExtResource( 13 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Map/Lightning"]
 playback_speed = 3.0
-anims/Lightning = SubResource( 20 )
+anims/Lightning = SubResource( 21 )
 
 [node name="TextureProgress" type="TextureProgress" parent="Map/Lightning"]
 margin_left = 22.653
@@ -1045,7 +1136,7 @@ autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Lightning/SpawnArea"]
 position = Vector2( 243.45, -107.146 )
-shape = SubResource( 21 )
+shape = SubResource( 22 )
 disabled = true
 
 [node name="SFX" type="AudioStreamPlayer" parent="Map/Lightning"]
@@ -1076,7 +1167,7 @@ texture = ExtResource( 9 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Ground/Ground"]
 position = Vector2( 1203.5, 77.4569 )
 rotation = -1.57169
-shape = SubResource( 22 )
+shape = SubResource( 23 )
 
 [node name="Moon" type="TextureRect" parent="Map"]
 anchor_left = 0.5
@@ -1094,8 +1185,8 @@ __meta__ = {
 }
 
 [node name="Vignette" type="Sprite" parent="Map"]
-position = Vector2( 1142.33, 448.214 )
-scale = Vector2( 0.7, 0.7 )
+position = Vector2( 1230.78, 448.214 )
+scale = Vector2( 0.762742, 0.7 )
 texture = ExtResource( 11 )
 offset = Vector2( -609.769, -927.214 )
 
@@ -1114,7 +1205,7 @@ position = Vector2( 538.008, -111.377 )
 position = Vector2( -2.37842, -91.5689 )
 
 [node name="Fog" type="Sprite" parent="."]
-material = SubResource( 24 )
+material = SubResource( 25 )
 position = Vector2( 417.486, 279.383 )
 rotation = 0.530663
 scale = Vector2( 1.26996, 1.42614 )
@@ -1122,7 +1213,7 @@ texture = ExtResource( 10 )
 
 [node name="MouseTrail" parent="." instance=ExtResource( 17 )]
 width = 5.0
-width_curve = SubResource( 25 )
+width_curve = SubResource( 26 )
 default_color = Color( 1, 1, 1, 0.588235 )
 
 [connection signal="pressed" from="CanvasLayer/Menu" to="." method="_on_Menu_pressed"]

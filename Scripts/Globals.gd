@@ -38,6 +38,8 @@ var spawner_enemy_speed #diffuculty
 var train_timer
 var train_point
 
+var boss
+
 var path = "user://data.save"
 
 #things to save:

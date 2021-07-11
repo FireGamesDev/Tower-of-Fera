@@ -11,6 +11,8 @@ const mini_ground_enemy = preload("res://Scenes/MiniGroundEnemy.tscn")
 
 const portal = preload("res://Scenes/SpawningParticles.tscn")
 
+const bossScene = preload("res://Scenes/Boss.tscn")
+
 #difficulty
 var spawn_time : float
 var enemy_speed
@@ -31,12 +33,16 @@ var train_enemies_count = 3
 var spawn_points_count = 4
 
 func _ready():
+	if Globals.game_mode == "Boss":
+		var boss = bossScene.instance()
+		$BossSpawnPoint.call_deferred("add_child", boss)
+		return
 	spawn_time = Globals.spawner_spawn_time
 	enemy_speed = Globals.spawner_enemy_speed
 	tank_health = Globals.spawner_tank_health
 	Globals.spawner = self
 	yield(get_tree().create_timer(1.0), "timeout") #wait to get the game_manager initialize
-	if 	Globals.game_mode == "Train":
+	if Globals.game_mode == "Train":
 		return
 	Globals.wave = 1
 	next_wave()
@@ -115,7 +121,7 @@ func _on_Timer_timeout():
 		$Timer.start(spawn_time)
 		
 func next_wave():
-	if Globals.wave == Globals.waves_count + 1 and Globals.game_mode != "Endless":
+	if Globals.wave == Globals.waves_count + 1 and Globals.game_mode != "Endless" and Globals.game_mode != "Boss":
 		Globals.game_manager.win(false)
 		return
 	if Globals.game_manager:
@@ -123,7 +129,7 @@ func next_wave():
 		$SpawnTimer.start(1)
 	
 func set_wave_text():
-	if Globals.game_mode == "Endless" and Globals.game_manager:
+	if Globals.game_mode == "Endless" and Globals.game_manager and Globals.game_mode != "Boss":
 		Globals.game_manager.wave_text.bbcode_text = "\n[wave]WAVE: " + str(Globals.wave)
 		return
 	if Globals.game_manager:

@@ -90,7 +90,8 @@ func on_drag():
 		
 func shoot():
 	if Globals.health_system.health == 1:
-		arrow.scale = Vector2(10,10)
+		if Globals.game_mode != "Boss":
+			arrow.scale = Vector2(10,10)
 	else: arrow.scale = Vector2(1,1)
 	$Sprite.remove_child(arrow)
 	self.add_child(arrow)
