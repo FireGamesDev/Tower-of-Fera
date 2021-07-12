@@ -1,0 +1,63 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/Joystick/joystick_background.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Joystick/joystick_handle.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Joystick/Joystick.gd" type="Script" id=3]
+
+[node name="Joystick" type="Control"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -275.0
+margin_right = 275.0
+rect_pivot_offset = Vector2( 100, 100 )
+mouse_filter = 1
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+_pressed_color = Color( 0.815686, 0.505882, 0.34902, 1 )
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -128.0
+margin_top = -128.0
+margin_right = 128.0
+margin_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 128, 128 )
+texture = ExtResource( 1 )
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="Node2D" parent="Background"]
+position = Vector2( 130.5, 130.5 )
+
+[node name="Handle" type="TextureRect" parent="Background"]
+self_modulate = Color( 1, 0.666667, 0.368627, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -64.1206
+margin_top = -63.8793
+margin_right = 63.8794
+margin_bottom = 64.1207
+grow_horizontal = 2
+grow_vertical = 2
+rect_rotation = -0.0540112
+rect_pivot_offset = Vector2( 64, 64 )
+texture = ExtResource( 2 )
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Front" type="Node2D" parent="Background/Handle"]
+position = Vector2( 66.1188, 65.8813 )
+rotation = 0.000942673

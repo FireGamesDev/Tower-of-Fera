@@ -11,7 +11,7 @@ const grave1_rigid = preload("res://Scenes/Grave1Rigid.tscn")
 const grave2_rigid = preload("res://Scenes/Grave2Rigid.tscn")
 const grave3_rigid = preload("res://Scenes/Grave3Rigid.tscn")
 
-var mass = 0.10
+var mass = 0.15
 var launched = false
 var velocity = Vector2(0, 0)
 
@@ -20,7 +20,7 @@ var fade = 1
 
 var current_body
 
-func _process(delta):
+func _physics_process(delta):
 	if launched:
 		velocity += gravity_vec * gravity * mass
 		position += velocity * delta

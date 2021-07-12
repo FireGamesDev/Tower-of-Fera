@@ -5,6 +5,8 @@ var once = true
 var game_manager
 var player_cam
 var menu_cam
+var joystick
+var on_drag = false
 
 var is_ended = false
 

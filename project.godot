@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Control",
+"class": "Joystick",
+"language": "GDScript",
+"path": "res://Scenes/Joystick/Joystick.gd"
+} ]
+_global_script_class_icons={
+"Joystick": ""
+}
+
 [application]
 
 config/name="TowerOfFera"
@@ -22,6 +32,10 @@ config/windows_native_icon="res://Logo/Tower.ico"
 Globals="*res://Scripts/Globals.gd"
 SceneChanger="*res://Scenes/SceneChanger.tscn"
 SoundManager="*res://Scenes/SoundManager.tscn"
+
+[debug]
+
+settings/fps/force_fps=60
 
 [display]
 
@@ -43,6 +57,7 @@ pointing/emulate_touch_from_mouse=true
 
 [physics]
 
+common/physics_jitter_fix=10.0
 common/enable_pause_aware_picking=true
 
 [rendering]

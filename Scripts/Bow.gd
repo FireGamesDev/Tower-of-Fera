@@ -13,7 +13,7 @@ var direction
 var force
 var distance
 
-var shoot_force = 0.5
+var shoot_force = 400
 
 func _input(event):
 #	if event.is_action_pressed("shoot"):
@@ -30,7 +30,7 @@ func _input(event):
 		return
 
 	if event is InputEventScreenTouch:
-		if event.is_pressed():
+		if event.is_pressed() and Globals.joystick._is_inside_joystick(event):
 			if Globals.arrows > 0:
 				aiming = true
 				on_drag_start()
@@ -66,9 +66,7 @@ func on_drag_end():
 	
 func on_drag():
 	endpoint = get_local_mouse_position()
-	distance = startpoint.distance_to(endpoint)
-	direction = (startpoint - endpoint).normalized()
-	force = direction * distance * shoot_force
+	force = -Globals.joystick.output * shoot_force
 
 	
 	if !$Line2D.points.empty():
@@ -82,8 +80,13 @@ func on_drag():
 		$Sprite.frame = 1
 	if force.x > 200:
 		$Sprite.frame = 2
-	$Sprite.look_at(startpoint - endpoint)
-	arrow.rotation = $Sprite.rotation
+	
+	var rotation_value = rad2deg(Globals.joystick.front.global_position.angle_to_point(Globals.joystick.back.global_position)) + 180
+	if rotation_value > 50 and rotation_value < 310:
+		return #if the rotation looks weird
+	
+	$Sprite.rotation_degrees = rotation_value
+	arrow.rotation_degrees = $Sprite.rotation_degrees
 	
 	if Globals.trajectory:
 		Globals.trajectory.update_dots($Sprite/Muzzle.position, force)

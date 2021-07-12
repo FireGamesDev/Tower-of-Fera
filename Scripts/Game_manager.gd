@@ -182,4 +182,3 @@ func take_damage():
 		$CanvasLayer/Camera2D/AnimationPlayer.play("end_anim")
 		yield(get_tree().create_timer(5.0), "timeout")
 		win(false)
-
