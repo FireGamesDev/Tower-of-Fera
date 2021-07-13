@@ -2,10 +2,13 @@ extends Node2D
 
 const arrowSprite = preload("res://Scenes/ArrowAmmoSprite.tscn")
 
+var time = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Globals.arrow_ammo_system = self
 	Globals.arrows = 0
+	time = Globals.get_arrow_time
 	_on_Timer_timeout()
 
 func manage_arrows():
@@ -26,6 +29,13 @@ func manage_arrows():
 		xpos -= 10
 
 func _on_Timer_timeout():
-	Globals.arrows += Globals.ammo
-	manage_arrows()
-	$Timer.start(Globals.get_arrow_time)
+	if time == Globals.get_arrow_time:
+		Globals.arrows += Globals.ammo
+		manage_arrows()
+		time = 0
+		$Time.set_text("")
+		$Timer.start(1)
+	else:
+		time += 1
+		$Time.set_text(str(Globals.get_arrow_time - time + 1))
+		$Timer.start(1)

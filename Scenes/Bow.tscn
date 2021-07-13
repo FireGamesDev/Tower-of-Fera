@@ -1,10 +1,60 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Sprites/Bow_sprite_sheet.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Arrow.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/Bow.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Trajectory.tscn" type="PackedScene" id=4]
+[ext_resource path="res://SFX/Reload.wav" type="AudioStream" id=5]
+
+[sub_resource type="Animation" id=2]
+resource_name = "Arrow_appear"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Arrow:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 100.0 ]
+}
 
 [sub_resource type="Animation" id=1]
+resource_name = "Bow"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 3, 0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Arrow_appear"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Arrow:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 100.0 ]
+}
+
+[sub_resource type="Animation" id=4]
 resource_name = "Bow"
 length = 0.2
 tracks/0/type = "value"
@@ -29,7 +79,13 @@ hframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
 playback_speed = 2.0
+anims/Arrow_appear = SubResource( 2 )
 anims/Bow = SubResource( 1 )
+
+[node name="BowAnim" type="AnimationPlayer" parent="Sprite"]
+playback_speed = 2.0
+anims/Arrow_appear = SubResource( 3 )
+anims/Bow = SubResource( 4 )
 
 [node name="Muzzle" type="Position2D" parent="Sprite"]
 position = Vector2( 30.4965, 4.40867 )
@@ -37,6 +93,30 @@ position = Vector2( 30.4965, 4.40867 )
 [node name="Trajectory" parent="Sprite/Muzzle" instance=ExtResource( 4 )]
 position = Vector2( -0.17569, -0.328751 )
 
+[node name="Arrow" type="TextureProgress" parent="Sprite"]
+margin_left = -107.081
+margin_top = -94.3501
+margin_right = 92.9187
+margin_bottom = 105.65
+value = 100.0
+texture_progress = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Line2D" type="Line2D" parent="."]
 visible = false
 default_color = Color( 0.0509804, 0.168627, 0.270588, 1 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
+[node name="Delay" type="Timer" parent="SFXPlayer"]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="SFXPlayer/Delay" to="." method="_on_Delay_timeout"]

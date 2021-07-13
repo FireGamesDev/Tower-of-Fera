@@ -121,3 +121,6 @@ func spawn_rigid_grave(rand, pos):
 	grave.position = pos
 	grave.position.y += 100
 	grave.launch()
+	
+func play_appear_anim():
+	$Anim.play("Arrow_appear")

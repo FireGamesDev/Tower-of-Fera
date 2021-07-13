@@ -9,7 +9,6 @@ anchor_top = 1.0
 anchor_bottom = 1.0
 margin_top = -275.0
 margin_right = 275.0
-rect_pivot_offset = Vector2( 100, 100 )
 mouse_filter = 1
 script = ExtResource( 3 )
 __meta__ = {
@@ -17,7 +16,28 @@ __meta__ = {
 }
 _pressed_color = Color( 0.815686, 0.505882, 0.34902, 1 )
 
+[node name="TextureRect" type="ColorRect" parent="."]
+margin_left = 77.3291
+margin_top = 32.3412
+margin_right = 202.329
+margin_bottom = 35.3412
+rect_rotation = 60.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect2" type="ColorRect" parent="."]
+margin_left = 140.0
+margin_top = 140.0
+margin_right = 265.0
+margin_bottom = 143.0
+rect_rotation = 110.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Background" type="TextureRect" parent="."]
+self_modulate = Color( 1, 1, 1, 0.0196078 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -50,7 +70,7 @@ margin_right = 63.8794
 margin_bottom = 64.1207
 grow_horizontal = 2
 grow_vertical = 2
-rect_rotation = -0.0540112
+rect_scale = Vector2( 0.5, 0.5 )
 rect_pivot_offset = Vector2( 64, 64 )
 texture = ExtResource( 2 )
 stretch_mode = 6

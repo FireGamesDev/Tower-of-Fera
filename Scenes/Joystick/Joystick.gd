@@ -5,6 +5,8 @@ class_name Joystick
 onready var back = $Background/Back
 onready var front = $Background/Handle/Front
 
+var can_move = true
+
 # If the joystick is receiving inputs.
 var is_working := false
 
@@ -129,6 +131,8 @@ func _directional_vector(vector: Vector2, n_directions: int, _symmetry_angle := 
 	return Vector2(cos(angle), sin(angle)) * vector.length()
 
 func _update_joystick(event_position: Vector2):
+	if !can_move:
+		return
 	var ray : float = _background.rect_size.x / 2
 	var dead_size := dead_zone * ray
 	var clamp_size := clamp_zone * ray

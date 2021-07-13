@@ -34,7 +34,7 @@ func _input(event):
 			if Globals.arrows > 0:
 				aiming = true
 				on_drag_start()
-		elif $Sprite.get_child_count() > 2:
+		elif $Sprite.get_child_count() > 4:
 			aiming = false
 			on_drag_end()
 		
@@ -56,11 +56,12 @@ func on_drag_start():
 func on_drag_end():
 	if Globals.trajectory:
 		Globals.trajectory.hide()
-	$Sprite/AnimationPlayer.play("Bow")
+	$Sprite/BowAnim.play("Bow")
 	Globals.sfx_manager.play_shoot_sound(shoot_sfx)
 	
-	$Line2D.remove_point(1)
-	$Line2D.remove_point(0) 
+	if !$Line2D.points.empty():
+		$Line2D.remove_point(1)
+		$Line2D.remove_point(0) 
 	
 	shoot()
 	
@@ -80,10 +81,13 @@ func on_drag():
 		$Sprite.frame = 1
 	if force.x > 200:
 		$Sprite.frame = 2
-	
+		
 	var rotation_value = rad2deg(Globals.joystick.front.global_position.angle_to_point(Globals.joystick.back.global_position)) + 180
 	if rotation_value > 50 and rotation_value < 310:
+		Globals.joystick.can_move = false
+		Globals.joystick.front.global_position = get_global_mouse_position()
 		return #if the rotation looks weird
+	else: Globals.joystick.can_move = true
 	
 	$Sprite.rotation_degrees = rotation_value
 	arrow.rotation_degrees = $Sprite.rotation_degrees
@@ -96,6 +100,20 @@ func shoot():
 		if Globals.game_mode != "Boss":
 			arrow.scale = Vector2(10,10)
 	else: arrow.scale = Vector2(1,1)
+	
 	$Sprite.remove_child(arrow)
 	self.add_child(arrow)
 	arrow.launch(force)
+	
+	if Globals.arrows > 0:
+		$Sprite/AnimationPlayer.play("Arrow_appear")
+		$SFXPlayer/Delay.start(0.5)
+
+func _on_Timer_timeout():
+	if Globals.arrows > 0 and !aiming:
+		$Sprite/Arrow.visible = true
+	else: $Sprite/Arrow.visible = false
+
+
+func _on_Delay_timeout():
+	$SFXPlayer.play()

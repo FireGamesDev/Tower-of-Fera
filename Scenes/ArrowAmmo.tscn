@@ -13,7 +13,6 @@ script = ExtResource( 2 )
 position = Vector2( 39.2438, 128.434 )
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
 one_shot = true
 
 [node name="Label" type="Label" parent="."]
@@ -23,6 +22,16 @@ margin_right = 129.449
 margin_bottom = 267.879
 custom_fonts/font = SubResource( 1 )
 text = "× 1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Time" type="Label" parent="."]
+margin_left = 40.7272
+margin_top = 178.798
+margin_right = 80.7273
+margin_bottom = 195.798
+custom_fonts/font = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

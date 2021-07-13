@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Sprites/Environment.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Game_manager.gd" type="Script" id=2]
@@ -18,7 +18,6 @@
 [ext_resource path="res://Sprites/lightning.png" type="Texture" id=16]
 [ext_resource path="res://Scenes/MouseTrail.tscn" type="PackedScene" id=17]
 [ext_resource path="res://Scenes/Fireflies.tscn" type="PackedScene" id=18]
-[ext_resource path="res://Sprites/Swipe.png" type="Texture" id=19]
 [ext_resource path="res://Sprites/BossBar.png" type="Texture" id=20]
 [ext_resource path="res://Scenes/Joystick/Joystick.tscn" type="PackedScene" id=21]
 
@@ -321,7 +320,6 @@ script = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="CanvasLayer"]
 position = Vector2( 512, 300 )
-current = true
 script = ExtResource( 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Camera2D"]
@@ -872,6 +870,9 @@ margin_top = -200.0
 margin_right = 175.0
 margin_bottom = 200.0
 color = Color( 0.0784314, 0.196078, 0.333333, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Text" type="RichTextLabel" parent="CanvasLayer/Tutorial"]
 anchor_left = 0.5
@@ -886,19 +887,14 @@ custom_fonts/normal_font = SubResource( 8 )
 custom_colors/default_color = Color( 1, 0.666667, 0.368627, 1 )
 bbcode_enabled = true
 bbcode_text = "
-[wave]YOU HAVE TO SWIPE TO SHOOT AN ARROW!"
+[wave]USE THE JOYSTICK TO SHOOT!"
 text = "
-YOU HAVE TO SWIPE TO SHOOT AN ARROW!"
+USE THE JOYSTICK TO SHOOT!"
 fit_content_height = true
 scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Swipe" type="Sprite" parent="CanvasLayer/Tutorial/Text"]
-position = Vector2( 225.757, 176.781 )
-scale = Vector2( 0.6, 0.6 )
-texture = ExtResource( 19 )
 
 [node name="Close_tutorial" type="Button" parent="CanvasLayer/Tutorial"]
 anchor_left = 0.5
@@ -1205,13 +1201,14 @@ rotation = 0.39695
 
 [node name="Rain" parent="." instance=ExtResource( 12 )]
 position = Vector2( 538.008, -111.377 )
+scale = Vector2( 0.25, 2 )
 
 [node name="Spawner" parent="." instance=ExtResource( 14 )]
 position = Vector2( -2.37842, -91.5689 )
 
 [node name="Fog" type="Sprite" parent="."]
 material = SubResource( 25 )
-position = Vector2( 621.717, 212.641 )
+position = Vector2( 528.717, 247.641 )
 rotation = 0.530663
 scale = Vector2( 1.26996, 1.42614 )
 texture = ExtResource( 10 )
