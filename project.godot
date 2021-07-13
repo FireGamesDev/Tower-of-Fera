@@ -33,10 +33,6 @@ Globals="*res://Scripts/Globals.gd"
 SceneChanger="*res://Scenes/SceneChanger.tscn"
 SoundManager="*res://Scenes/SoundManager.tscn"
 
-[debug]
-
-settings/fps/force_fps=60
-
 [display]
 
 mouse_cursor/custom_image="res://Sprites/Cursor.png"

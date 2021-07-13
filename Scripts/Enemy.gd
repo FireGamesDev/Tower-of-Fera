@@ -9,7 +9,7 @@ var health
 var speed
 var velocity = Vector2(0,0)
 
-func _process(_delta):
+func _physics_process(_delta):
 	if Globals.is_ended:
 		return
 	if !dummies:

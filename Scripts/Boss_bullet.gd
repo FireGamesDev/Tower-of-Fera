@@ -9,7 +9,7 @@ var velocity = Vector2(0, 0)
 
 var current_body
 
-func _process(delta):
+func _physics_process(delta):
 	if launched:
 		velocity += gravity_vec * gravity * mass
 		position += velocity * delta

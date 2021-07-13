@@ -1201,7 +1201,6 @@ rotation = 0.39695
 
 [node name="Rain" parent="." instance=ExtResource( 12 )]
 position = Vector2( 538.008, -111.377 )
-scale = Vector2( 0.25, 2 )
 
 [node name="Spawner" parent="." instance=ExtResource( 14 )]
 position = Vector2( -2.37842, -91.5689 )
