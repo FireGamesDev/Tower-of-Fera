@@ -69,11 +69,15 @@ func _touch_ended(event: InputEventScreenTouch) -> bool:
 func _input(event: InputEvent) -> void:
 	if not (event is InputEventScreenTouch or event is InputEventScreenDrag):
 		return
+		
+	if !Globals.can_shoot:
+		return
 	
 	if event is InputEventScreenTouch:
-		if _touch_started(event) and _is_inside_control_rect(event.position, self):
+		if _touch_started(event):
 			if (joystick_mode == JoystickMode.DYNAMIC or joystick_mode == JoystickMode.FOLLOWING):
-				_center_control(_background, event.position)
+				if !_is_inside_Menu_button(event.position, Globals.menu_button_in_game):
+					_center_control(_background, event.position)
 			if _is_inside_control_circle(event.position, _background):
 				_touch_index = event.index
 				_handle.self_modulate = _pressed_color
@@ -101,6 +105,11 @@ func _reset():
 	_reset_handle()
 
 func _is_inside_control_rect(global_position: Vector2, control: Control) -> bool:
+	var x: bool = global_position.x > control.rect_global_position.x and global_position.x < control.rect_global_position.x + (control.rect_size.x * control.rect_scale.x)
+	var y: bool = global_position.y > control.rect_global_position.y and global_position.y < control.rect_global_position.y + (control.rect_size.y * control.rect_scale.y)
+	return x and y
+	
+func _is_inside_Menu_button(global_position: Vector2, control: Control) -> bool:
 	var x: bool = global_position.x > control.rect_global_position.x and global_position.x < control.rect_global_position.x + (control.rect_size.x * control.rect_scale.x)
 	var y: bool = global_position.y > control.rect_global_position.y and global_position.y < control.rect_global_position.y + (control.rect_size.y * control.rect_scale.y)
 	return x and y

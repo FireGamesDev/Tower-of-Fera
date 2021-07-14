@@ -42,6 +42,8 @@ var train_point
 
 var boss
 
+var menu_button_in_game
+
 var path = "user://data.save"
 
 #things to save:
@@ -54,6 +56,7 @@ var boss_save
 var volume
 var muted
 var story
+var dynamic_joystick
 
 func save_game():
 	var f = File.new()
@@ -67,6 +70,7 @@ func save_game():
 	f.store_var(volume)
 	f.store_var(muted)
 	f.store_var(story)
+	f.store_var(dynamic_joystick)
 	f.close()
 
 func load_game():
@@ -82,6 +86,7 @@ func load_game():
 		volume = f.get_var()
 		muted = f.get_var()
 		story = f.get_var()
+		dynamic_joystick = f.get_var()
 		f.close()
 	else: reset_data()
 		
@@ -95,6 +100,7 @@ func reset_data():
 	volume = -7
 	muted = false
 	story = true
+	dynamic_joystick = false
 	save_game()
 		
 func save_score(score):

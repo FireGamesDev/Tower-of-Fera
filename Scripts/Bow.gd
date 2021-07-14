@@ -30,7 +30,7 @@ func _input(event):
 		return
 
 	if event is InputEventScreenTouch:
-		if event.is_pressed() and Globals.joystick._is_inside_joystick(event):
+		if event.is_pressed():
 			if Globals.arrows > 0:
 				aiming = true
 				on_drag_start()

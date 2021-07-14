@@ -7,12 +7,16 @@ const lose_sfx = preload("res://SFX/Lose.wav")
 var remaining_text
 var wave_text
 
+enum JoystickMode {FIXED, DYNAMIC, FOLLOWING}
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Globals.is_ended = false
 	Globals.game_manager = self
 	Globals.player_cam = $CanvasLayer/Camera2D
 	Globals.train_timer = $CanvasLayer/TimerText
+	Globals.menu_button_in_game = $CanvasLayer/Menu
+	
 	wave_text = $CanvasLayer/Waves
 	remaining_text = $CanvasLayer/Remaining
 	$CanvasLayer/Menu.set_focus_mode(Control.FOCUS_NONE)
@@ -21,7 +25,16 @@ func _ready():
 	$CanvasLayer/Lose/Restart.set_focus_mode(Control.FOCUS_NONE)
 	$CanvasLayer/Lose/Menu_lose.set_focus_mode(Control.FOCUS_NONE)
 	$CanvasLayer/Tutorial/Close_tutorial.set_focus_mode(Control.FOCUS_NONE)
+	$CanvasLayer/Tutorial/DynamicJoystick.set_focus_mode(Control.FOCUS_NONE)
 	set_rain()
+	
+	#load
+	if Globals.dynamic_joystick == null:
+		Globals.dynamic_joystick = false
+	$CanvasLayer/Tutorial/DynamicJoystick.pressed = Globals.dynamic_joystick
+	if Globals.dynamic_joystick:
+		Globals.joystick.joystick_mode = JoystickMode.DYNAMIC
+	else: Globals.joystick.joystick_mode = JoystickMode.FIXED
 	
 	if Globals.game_mode == "Train":
 		$CanvasLayer/Tutorial/Close_tutorial/AnimationPlayer.play("Appear")
@@ -182,3 +195,12 @@ func take_damage():
 		$CanvasLayer/Camera2D/AnimationPlayer.play("end_anim")
 		yield(get_tree().create_timer(5.0), "timeout")
 		win(false)
+
+
+func _on_DynamicJoystick_pressed():
+	Globals.dynamic_joystick = $CanvasLayer/Tutorial/DynamicJoystick.pressed
+	if Globals.dynamic_joystick:
+		Globals.joystick.joystick_mode = JoystickMode.DYNAMIC
+	else: Globals.joystick.joystick_mode = JoystickMode.FIXED
+	Globals.save_game()
+	
