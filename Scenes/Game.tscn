@@ -236,22 +236,22 @@ tracks/0/keys = {
 "values": [ 0.0, 100.0 ]
 }
 
-[sub_resource type="StyleBoxFlat" id=27]
+[sub_resource type="StyleBoxFlat" id=21]
 bg_color = Color( 0.941176, 0.568627, 0.133333, 1 )
 
-[sub_resource type="StyleBoxFlat" id=28]
+[sub_resource type="StyleBoxFlat" id=22]
 bg_color = Color( 0.0509804, 0.168627, 0.270588, 1 )
 
-[sub_resource type="StyleBoxFlat" id=29]
+[sub_resource type="StyleBoxFlat" id=23]
 bg_color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="StyleBoxFlat" id=30]
+[sub_resource type="StyleBoxFlat" id=24]
 bg_color = Color( 0.0509804, 0.168627, 0.270588, 1 )
 
-[sub_resource type="StyleBoxFlat" id=31]
+[sub_resource type="StyleBoxFlat" id=25]
 bg_color = Color( 1, 0.666667, 0.368627, 1 )
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=26]
 tracks/0/type = "value"
 tracks/0/path = NodePath("TextureProgress:value")
 tracks/0/interp = 1
@@ -265,14 +265,14 @@ tracks/0/keys = {
 "values": [ 0.0, 100.0 ]
 }
 
-[sub_resource type="RectangleShape2D" id=22]
+[sub_resource type="RectangleShape2D" id=27]
 extents = Vector2( 414.174, 39.5447 )
 
-[sub_resource type="CapsuleShape2D" id=23]
+[sub_resource type="CapsuleShape2D" id=28]
 radius = 53.3942
 height = 817.872
 
-[sub_resource type="Shader" id=24]
+[sub_resource type="Shader" id=29]
 code = "shader_type canvas_item;
 
 // Gonkee's fog shader for Godot 3 - full tutorial https://youtu.be/QEaTsz_0o44
@@ -322,12 +322,12 @@ void fragment() {
 	COLOR = vec4(color, final * 0.5);
 }"
 
-[sub_resource type="ShaderMaterial" id=25]
-shader = SubResource( 24 )
+[sub_resource type="ShaderMaterial" id=30]
+shader = SubResource( 29 )
 shader_param/color = Vector3( 0.35, 0.48, 0.95 )
 shader_param/OCTAVES = 2
 
-[sub_resource type="Curve" id=26]
+[sub_resource type="Curve" id=31]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.990909, 0.990909 ), 0.0, 0.0, 0, 0 ]
 
 [node name="Game" type="Node2D"]
@@ -871,6 +871,7 @@ margin_left = -175.0
 margin_top = -200.0
 margin_right = 175.0
 margin_bottom = 200.0
+rect_scale = Vector2( 1e-05, 1e-05 )
 rect_pivot_offset = Vector2( 175, 200 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1003,11 +1004,11 @@ rect_scale = Vector2( 0.15, 0.15 )
 rect_pivot_offset = Vector2( 100, 100 )
 custom_icons/checked = ExtResource( 22 )
 custom_icons/unchecked = ExtResource( 19 )
-custom_styles/hover = SubResource( 27 )
-custom_styles/pressed = SubResource( 28 )
-custom_styles/disabled = SubResource( 29 )
-custom_styles/hover_pressed = SubResource( 30 )
-custom_styles/normal = SubResource( 31 )
+custom_styles/hover = SubResource( 21 )
+custom_styles/pressed = SubResource( 22 )
+custom_styles/disabled = SubResource( 23 )
+custom_styles/hover_pressed = SubResource( 24 )
+custom_styles/normal = SubResource( 25 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1170,7 +1171,7 @@ script = ExtResource( 13 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Map/Lightning"]
 playback_speed = 3.0
-anims/Lightning = SubResource( 21 )
+anims/Lightning = SubResource( 26 )
 
 [node name="TextureProgress" type="TextureProgress" parent="Map/Lightning"]
 margin_left = 22.653
@@ -1193,7 +1194,7 @@ autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Lightning/SpawnArea"]
 position = Vector2( 243.45, -107.146 )
-shape = SubResource( 22 )
+shape = SubResource( 27 )
 disabled = true
 
 [node name="SFX" type="AudioStreamPlayer" parent="Map/Lightning"]
@@ -1224,7 +1225,7 @@ texture = ExtResource( 9 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Ground/Ground"]
 position = Vector2( 1203.5, 77.4569 )
 rotation = -1.57169
-shape = SubResource( 23 )
+shape = SubResource( 28 )
 
 [node name="Moon" type="TextureRect" parent="Map"]
 anchor_left = 0.5
@@ -1263,7 +1264,7 @@ position = Vector2( 538.008, -111.377 )
 position = Vector2( -2.37842, -91.5689 )
 
 [node name="Fog" type="Sprite" parent="."]
-material = SubResource( 25 )
+material = SubResource( 30 )
 position = Vector2( 528.717, 247.641 )
 rotation = 0.530663
 scale = Vector2( 1.26996, 1.42614 )
@@ -1271,7 +1272,7 @@ texture = ExtResource( 10 )
 
 [node name="MouseTrail" parent="." instance=ExtResource( 17 )]
 width = 5.0
-width_curve = SubResource( 26 )
+width_curve = SubResource( 31 )
 default_color = Color( 1, 1, 1, 0.588235 )
 
 [connection signal="pressed" from="CanvasLayer/Menu" to="." method="_on_Menu_pressed"]
