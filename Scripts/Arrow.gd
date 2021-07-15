@@ -124,3 +124,6 @@ func spawn_rigid_grave(rand, pos):
 	
 func play_appear_anim():
 	$Anim.play("Arrow_appear")
+	
+func set_trail_length(value : int):
+	$trail_target/Trail.trail_length += value

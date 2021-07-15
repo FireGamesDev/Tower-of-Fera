@@ -15,9 +15,10 @@ func _physics_process(delta):
 		position += velocity * delta
 		rotation = velocity.angle()
 		
-func launch(initial_velocity : Vector2):
+func launch(initial_velocity : Vector2, distance : float):
 	launched = true
 	velocity = initial_velocity.rotated(rotation)
+	$Trail.trail_length += (distance - 1000) / 10
 
 func reparent(node, body):
 	node.get_parent().remove_child(node)
@@ -29,6 +30,8 @@ func _on_Boss_bullet_area_entered(area):
 			if current_body == area:
 				return
 		current_body = area
+		
+		remove_trail()
 		
 		Globals.arrows += 1
 		Globals.arrow_ammo_system.manage_arrows()
@@ -59,3 +62,6 @@ func _on_Boss_bullet_area_entered(area):
 		
 func take_damage():
 	Globals.game_manager.take_damage()
+	
+func remove_trail():
+	$Trail.queue_free()

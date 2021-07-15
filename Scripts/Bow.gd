@@ -22,9 +22,6 @@ func _input(event):
 #	if event.is_action_released("shoot"):
 #		aiming = false
 #		on_drag_end()
-
-	if Globals.game_mode != "Train":
-		Globals.can_shoot = true
 		
 	if !Globals.can_shoot:
 		return
@@ -103,6 +100,7 @@ func shoot():
 	
 	$Sprite.remove_child(arrow)
 	self.add_child(arrow)
+	arrow.set_trail_length(force.x / 10)
 	arrow.launch(force)
 	
 	if Globals.arrows > 0:

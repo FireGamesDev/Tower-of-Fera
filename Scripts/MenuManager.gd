@@ -16,11 +16,14 @@ func _ready():
 	$CanvasLayer/Story/ContinueButton.set_focus_mode(Control.FOCUS_NONE)
 	$CanvasLayer/Story/Who_is_Fera.set_focus_mode(Control.FOCUS_NONE)
 	$CanvasLayer/ThanksForPlaying/CloseButton.set_focus_mode(Control.FOCUS_NONE)
+	$CanvasLayer/DynamicJoystick.set_focus_mode(Control.FOCUS_NONE)
 	
 	#load the save
 	load_game()
 	
 	Globals.menu_cam = $CanvasLayer
+	
+	Engine.time_scale = 1
 
 
 func _on_VolumeSlider_mouse_exited():
@@ -70,12 +73,16 @@ func load_game():
 	if Globals.hard_save:
 		$CanvasLayer/Modes/Boss/Cleared.bbcode_text = "\n[wave]UNLOCKED"
 		$CanvasLayer/Modes/Boss/Cleared.rect_position.x = 140
-		$CanvasLayer/Modes/Boss.disabled = false
+		on_hard_cleared()
 	if Globals.boss_save:
 		$CanvasLayer/Modes/Boss/Cleared.bbcode_text = "\n[wave]CLEARED"
 		$CanvasLayer/Modes/Boss/Cleared.rect_position.x = 140
 		$CanvasLayer/ThanksForPlaying.visible = true
 		$CanvasLayer/ThanksForPlaying/CloseButton/Close/AnimationPlayer.play("Appear")
+		
+	if Globals.dynamic_joystick == null:
+		Globals.dynamic_joystick = false
+	$CanvasLayer/DynamicJoystick.pressed = Globals.dynamic_joystick
 
 
 func _on_VolumeSlider_value_changed(value):
@@ -292,3 +299,8 @@ func _on_CloseButton_pressed():
 	$CanvasLayer/Modes/Hard/Hard_light/Timer.start()
 	$CanvasLayer/Modes/Normal/Normal_strike/Timer.start()
 	$CanvasLayer/ThanksForPlaying.visible = false
+
+
+func _on_DynamicJoystick_pressed():
+	Globals.dynamic_joystick = $CanvasLayer/DynamicJoystick.pressed
+	Globals.save_game()

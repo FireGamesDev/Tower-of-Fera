@@ -27,7 +27,7 @@ func shoot():
 	direction = Vector2(-1, -1)
 	force = direction * distance * shoot_force
 	
-	bullet.launch(force)
+	bullet.launch(force, distance)
 	Globals.health_system.spawn_explosion_particle($SpawnPoint.global_position)
 	Globals.sfx_manager.play_shoot_sound(shoot_sfx)
 	$SpawnPoint.call_deferred("add_child", bullet)

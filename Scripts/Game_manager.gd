@@ -11,6 +11,8 @@ enum JoystickMode {FIXED, DYNAMIC, FOLLOWING}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if Globals.game_mode != "Train":
+		Globals.can_shoot = true
 	Globals.is_ended = false
 	Globals.game_manager = self
 	Globals.player_cam = $CanvasLayer/Camera2D
@@ -25,13 +27,8 @@ func _ready():
 	$CanvasLayer/Lose/Restart.set_focus_mode(Control.FOCUS_NONE)
 	$CanvasLayer/Lose/Menu_lose.set_focus_mode(Control.FOCUS_NONE)
 	$CanvasLayer/Tutorial/Close_tutorial.set_focus_mode(Control.FOCUS_NONE)
-	$CanvasLayer/Tutorial/DynamicJoystick.set_focus_mode(Control.FOCUS_NONE)
 	set_rain()
 	
-	#load
-	if Globals.dynamic_joystick == null:
-		Globals.dynamic_joystick = false
-	$CanvasLayer/Tutorial/DynamicJoystick.pressed = Globals.dynamic_joystick
 	if Globals.dynamic_joystick:
 		Globals.joystick.joystick_mode = JoystickMode.DYNAMIC
 	else: Globals.joystick.joystick_mode = JoystickMode.FIXED
@@ -49,6 +46,7 @@ func die():
 		bullet.queue_free()
 	$Map/Lightning.stop = true
 	Globals.is_ended = true
+	Globals.can_shoot = false
 	Globals.sfx_manager.play_sound(lose_sfx)
 	$CanvasLayer/Lose.visible = true
 	if Globals.game_mode == "Endless":
@@ -65,6 +63,7 @@ func die():
 func win(is_train):
 	$Map/Lightning.stop = true
 	Globals.is_ended = true
+	Globals.can_shoot = false
 	if is_train:
 		$CanvasLayer/TrainScoreText.bbcode_text = ""
 		$CanvasLayer/TimerText.bbcode_text = ""
@@ -189,18 +188,10 @@ func take_damage():
 	$CanvasLayer/BossBar.value -= 5
 	$CanvasLayer/BossBar/BossText.bbcode_text = "\n[wave]HEALTH: " + str($CanvasLayer/BossBar.value)
 	
-	if $CanvasLayer/BossBar.value <= 0:
+	if $CanvasLayer/BossBar.value <= 0 and !Globals.boss.is_died:
 		Globals.boss.die()
 		$CanvasLayer/BossBar.visible = false
 		$CanvasLayer/Camera2D/AnimationPlayer.play("end_anim")
 		yield(get_tree().create_timer(5.0), "timeout")
 		win(false)
-
-
-func _on_DynamicJoystick_pressed():
-	Globals.dynamic_joystick = $CanvasLayer/Tutorial/DynamicJoystick.pressed
-	if Globals.dynamic_joystick:
-		Globals.joystick.joystick_mode = JoystickMode.DYNAMIC
-	else: Globals.joystick.joystick_mode = JoystickMode.FIXED
-	Globals.save_game()
 	

@@ -3,6 +3,7 @@ extends Control
 var health
 
 const explosion = preload("res://Scenes//Explosion.tscn")
+const star_disappear = preload("res://Scenes/StarDisappear.tscn")
 const heal_sfx = preload("res://SFX/Heal.wav")
 const heartbeat_sfx = preload("res://SFX/Heartbeat.wav")
 const bad_sfx = preload("res://SFX/Collect.wav")
@@ -115,3 +116,8 @@ func spawn_explosion_particle(pos):
 	particle.set_emitting(true)
 	get_parent().get_parent().add_child(particle)
 	particle.position = pos
+	
+func spawn_star_particle(pos):
+	var particle = star_disappear.instance()
+	particle.position = pos
+	get_parent().get_parent().add_child(particle)
