@@ -1,5 +1,7 @@
 extends Area2D
 
+onready var trail = $Trail
+
 const kill_sfx1 = preload("res://SFX/Die1.wav")
 const kill_sfx2 = preload("res://SFX/Die2.wav")
 
@@ -64,4 +66,5 @@ func take_damage():
 	Globals.game_manager.take_damage()
 	
 func remove_trail():
-	$Trail.queue_free()
+	if is_instance_valid(trail):
+		trail.queue_free()

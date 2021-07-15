@@ -24,7 +24,7 @@ var current_wait_time
 var total_enemies_count
 var current_enemy_count = 0
 
-var train_length = 60
+var train_length = 70
 var current_train_time = 0
 var train_speed = 5
 var train_speed_minus = 0.2

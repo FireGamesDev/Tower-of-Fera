@@ -264,10 +264,10 @@ void vertex() {
 	VERTEX.y += cos(TIME) * (VERTEX.x - 20.0) * 0.01;
 }"
 
-[sub_resource type="ShaderMaterial" id=28]
+[sub_resource type="ShaderMaterial" id=30]
 shader = SubResource( 29 )
 
-[sub_resource type="Shader" id=24]
+[sub_resource type="Shader" id=26]
 code = "shader_type canvas_item;
 
 // Gonkee's fog shader for Godot 3 - full tutorial https://youtu.be/QEaTsz_0o44
@@ -317,12 +317,12 @@ void fragment() {
 	COLOR = vec4(color, final * 0.5);
 }"
 
-[sub_resource type="ShaderMaterial" id=25]
-shader = SubResource( 24 )
+[sub_resource type="ShaderMaterial" id=27]
+shader = SubResource( 26 )
 shader_param/color = Vector3( 0.35, 0.48, 0.95 )
 shader_param/OCTAVES = 2
 
-[sub_resource type="Curve" id=26]
+[sub_resource type="Curve" id=28]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.990909, 0.990909 ), 0.0, 0.0, 0, 0 ]
 
 [node name="Game" type="Node2D"]
@@ -1187,7 +1187,7 @@ rotation = -1.57169
 shape = SubResource( 23 )
 
 [node name="Moon" type="TextureRect" parent="Map"]
-material = SubResource( 28 )
+material = SubResource( 30 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -1224,7 +1224,7 @@ position = Vector2( 538.008, -111.377 )
 position = Vector2( -2.37842, -91.5689 )
 
 [node name="Fog" type="Sprite" parent="."]
-material = SubResource( 25 )
+material = SubResource( 27 )
 position = Vector2( 528.717, 247.641 )
 rotation = 0.530663
 scale = Vector2( 1.26996, 1.42614 )
@@ -1232,7 +1232,7 @@ texture = ExtResource( 10 )
 
 [node name="MouseTrail" parent="." instance=ExtResource( 17 )]
 width = 5.0
-width_curve = SubResource( 26 )
+width_curve = SubResource( 28 )
 default_color = Color( 1, 1, 1, 0.588235 )
 
 [connection signal="pressed" from="CanvasLayer/Menu" to="." method="_on_Menu_pressed"]

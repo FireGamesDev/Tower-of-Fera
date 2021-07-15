@@ -106,6 +106,7 @@ func _on_PlayButton_pressed():
 	Globals.game_mode = "Train"
 	
 	Globals.ammo = 2
+	Globals.get_arrow_time = 5
 	Globals.max_enemy_count = 10
 	Globals.min_enemy_count = 3
 	Globals.max_enemy_plus = 3
