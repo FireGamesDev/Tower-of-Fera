@@ -1226,19 +1226,19 @@ custom_fonts/normal_font = SubResource( 9 )
 custom_colors/default_color = Color( 1, 1, 1, 1 )
 bbcode_enabled = true
 bbcode_text = "
-[shake]Hogy kicsoda Fera??[/shake]
+[shake]Who is Fera??[/shake]
 
-Ja, hat neki csak egy hosszu esteje volt a kocsmaban, aztan nem igazan talalt haza.
+Fera is a knight who had a long day in the tavern.
 
-Valahol pedig megiscsak
- le kellett pihennie"
+He needed some place
+ to take a rest..."
 text = "
-Hogy kicsoda Fera??
+Who is Fera??
 
-Ja, hat neki csak egy hosszu esteje volt a kocsmaban, aztan nem igazan talalt haza.
+Fera is a knight who had a long day in the tavern.
 
-Valahol pedig megiscsak
- le kellett pihennie"
+He needed some place
+ to take a rest..."
 scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
