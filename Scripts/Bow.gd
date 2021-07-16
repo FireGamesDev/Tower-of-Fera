@@ -15,6 +15,8 @@ var distance
 
 var shoot_force = 400
 
+enum JoystickMode {FIXED, DYNAMIC, FOLLOWING}
+
 func _input(event):
 #	if event.is_action_pressed("shoot"):
 #		aiming = true
@@ -27,11 +29,15 @@ func _input(event):
 		return
 
 	if event is InputEventScreenTouch:
-		if event.is_pressed():
+		if event.is_pressed() and (Globals.joystick._is_inside_joystick(event) or Globals.joystick.joystick_mode == JoystickMode.DYNAMIC):
 			if Globals.arrows > 0:
-				aiming = true
-				on_drag_start()
+				if arrow == null:
+					aiming = true
+					on_drag_start()
 		elif $Sprite.get_child_count() > 4:
+			var rotation_value = rad2deg(Globals.joystick.front.global_position.angle_to_point(Globals.joystick.back.global_position)) + 180
+			if rotation_value > 50 and rotation_value < 310:
+				return
 			aiming = false
 			on_drag_end()
 		
@@ -56,23 +62,11 @@ func on_drag_end():
 	$Sprite/BowAnim.play("Bow")
 	Globals.sfx_manager.play_shoot_sound(shoot_sfx)
 	
-	if !$Line2D.points.empty():
-		$Line2D.remove_point(1)
-		$Line2D.remove_point(0) 
-	
 	shoot()
 	
 func on_drag():
 	endpoint = get_local_mouse_position()
 	force = -Globals.joystick.output * shoot_force
-
-	
-	if !$Line2D.points.empty():
-		$Line2D.remove_point(1)
-		$Line2D.remove_point(0) 
-	
-	$Line2D.add_point(startpoint)
-	$Line2D.add_point(endpoint)
 	
 	if force.x > 100:
 		$Sprite.frame = 1
@@ -102,6 +96,8 @@ func shoot():
 	self.add_child(arrow)
 	arrow.set_trail_length(force.x / 10)
 	arrow.launch(force)
+	
+	arrow = null
 	
 	if Globals.arrows > 0:
 		$Sprite/AnimationPlayer.play("Arrow_appear")

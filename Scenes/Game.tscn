@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://Sprites/Environment.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Game_manager.gd" type="Script" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://Scenes/ShootingStarSystem.tscn" type="PackedScene" id=19]
 [ext_resource path="res://Sprites/BossBar.png" type="Texture" id=20]
 [ext_resource path="res://Scenes/Joystick/Joystick.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Sprites/StarVignette.png" type="Texture" id=22]
 
 [sub_resource type="Animation" id=1]
 resource_name = "end_anim"
@@ -256,7 +257,7 @@ extents = Vector2( 414.174, 39.5447 )
 radius = 53.3942
 height = 817.872
 
-[sub_resource type="Shader" id=29]
+[sub_resource type="Shader" id=30]
 code = "shader_type canvas_item;
 
 void vertex() {
@@ -264,10 +265,25 @@ void vertex() {
 	VERTEX.y += cos(TIME) * (VERTEX.x - 20.0) * 0.01;
 }"
 
-[sub_resource type="ShaderMaterial" id=30]
-shader = SubResource( 29 )
+[sub_resource type="ShaderMaterial" id=25]
+shader = SubResource( 30 )
 
-[sub_resource type="Shader" id=26]
+[sub_resource type="Animation" id=26]
+resource_name = "StarVignette"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Shader" id=27]
 code = "shader_type canvas_item;
 
 // Gonkee's fog shader for Godot 3 - full tutorial https://youtu.be/QEaTsz_0o44
@@ -317,12 +333,12 @@ void fragment() {
 	COLOR = vec4(color, final * 0.5);
 }"
 
-[sub_resource type="ShaderMaterial" id=27]
-shader = SubResource( 26 )
+[sub_resource type="ShaderMaterial" id=28]
+shader = SubResource( 27 )
 shader_param/color = Vector3( 0.35, 0.48, 0.95 )
 shader_param/OCTAVES = 2
 
-[sub_resource type="Curve" id=28]
+[sub_resource type="Curve" id=29]
 _data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.990909, 0.990909 ), 0.0, 0.0, 0, 0 ]
 
 [node name="Game" type="Node2D"]
@@ -1104,25 +1120,14 @@ __meta__ = {
 [node name="Map" type="Node2D" parent="."]
 position = Vector2( -194.941, 489.472 )
 
-[node name="Sky" type="ColorRect" parent="Map"]
-margin_left = 195.0
-margin_top = -489.0
-margin_right = 1392.0
-margin_bottom = 111.0
-mouse_filter = 2
-color = Color( 0.12549, 0.235294, 0.337255, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Light" type="Sprite" parent="Map/Sky"]
-position = Vector2( 575.823, 276.893 )
-scale = Vector2( 0.784635, 0.7 )
-texture = ExtResource( 10 )
-
 [node name="ShootingStarsSystem" parent="Map" instance=ExtResource( 19 )]
 position = Vector2( 510.765, -346.87 )
 rotation = 1.53589
+
+[node name="Light" type="Sprite" parent="Map"]
+position = Vector2( 770.823, -212.107 )
+scale = Vector2( 0.784635, 0.7 )
+texture = ExtResource( 10 )
 
 [node name="Lightning" type="Node2D" parent="Map"]
 position = Vector2( 540.537, -107.026 )
@@ -1187,7 +1192,7 @@ rotation = -1.57169
 shape = SubResource( 23 )
 
 [node name="Moon" type="TextureRect" parent="Map"]
-material = SubResource( 30 )
+material = SubResource( 25 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -1209,6 +1214,23 @@ scale = Vector2( 0.762742, 0.7 )
 texture = ExtResource( 11 )
 offset = Vector2( -609.769, -927.214 )
 
+[node name="Control" type="Control" parent="Map"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StarVignette" type="Sprite" parent="Map/Control"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 1314.96, 735.8 )
+z_index = 2
+texture = ExtResource( 22 )
+offset = Vector2( -609.769, -927.214 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Map/Control/StarVignette"]
+anims/StarVignette = SubResource( 26 )
+
 [node name="Bow" parent="." instance=ExtResource( 5 )]
 position = Vector2( 90.0919, 303.34 )
 rotation = -0.39695
@@ -1224,7 +1246,7 @@ position = Vector2( 538.008, -111.377 )
 position = Vector2( -2.37842, -91.5689 )
 
 [node name="Fog" type="Sprite" parent="."]
-material = SubResource( 27 )
+material = SubResource( 28 )
 position = Vector2( 528.717, 247.641 )
 rotation = 0.530663
 scale = Vector2( 1.26996, 1.42614 )
@@ -1232,7 +1254,7 @@ texture = ExtResource( 10 )
 
 [node name="MouseTrail" parent="." instance=ExtResource( 17 )]
 width = 5.0
-width_curve = SubResource( 28 )
+width_curve = SubResource( 29 )
 default_color = Color( 1, 1, 1, 0.588235 )
 
 [connection signal="pressed" from="CanvasLayer/Menu" to="." method="_on_Menu_pressed"]

@@ -16,12 +16,15 @@ func _physics_process(delta):
 		
 func launch(initial_velocity : Vector2, distance : float, width : int):
 	Engine.time_scale = 0.5
+	Globals.star_vignette.play("StarVignette")
 	launched = true
 	velocity = initial_velocity.rotated(rotation)
 	$Trail.trail_length = distance / 100
 	$Trail.width = width
 	$Timer.start(life_time)
+	$Shine.modulate.a = mass * 1/0.6
 
 func _on_Timer_timeout():
+	Globals.star_vignette.play_backwards("StarVignette")
 	Globals.health_system.spawn_star_particle(global_position)
 	queue_free()

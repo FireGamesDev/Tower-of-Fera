@@ -70,7 +70,7 @@ func _input(event: InputEvent) -> void:
 	if not (event is InputEventScreenTouch or event is InputEventScreenDrag):
 		return
 		
-	if !Globals.can_shoot:
+	if !Globals.can_shoot or Globals.is_ended:
 		return
 	
 	if event is InputEventScreenTouch:

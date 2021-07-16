@@ -1,15 +1,80 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/ShootingStar.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Trail_boss.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/noisy-texture.png" type="Texture" id=3]
+[ext_resource path="res://icon.png" type="Texture" id=4]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0.354545, 0.0909091 ), 0.0, 0.0, 0, 0, Vector2( 0.718182, 0.263636 ), 0.0, 0.0, 0, 0, Vector2( 0.818182, 0.272727 ), 0.0, 0.0, 0, 0, Vector2( 0.954545, 0.181818 ), 0.0, 0.0, 0, 0, Vector2( 0.981818, 0.0454545 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Shader" id=4]
+code = "shader_type canvas_item;
+
+uniform vec2 mouse_pos;
+uniform vec2 screen_res;
+uniform sampler2D noise_texture;
+uniform vec2 noise_res;
+
+float noise_f(float t)
+{
+    return texture(noise_texture,vec2(t, 0.0) / noise_res.xy).x;
+}
+float noise_v2(vec2 t, float iTime)
+{
+    return texture(noise_texture,(t + vec2(iTime)) / noise_res.xy).x;
+}
+
+vec3 lensflare(vec2 uv,vec2 pos, float iTime)
+{
+    vec2 main = uv-pos;
+    vec2 uvd = uv*(length(uv));
+    
+    float ang = atan(main.y, main.x);
+    float dist=length(main); dist = pow(dist,.1) * 2.0;
+    float n = noise_v2(vec2((ang-iTime/9.0)*16.0,dist*32.0), iTime);
+    
+    float f0 = 1.0/(length(uv-pos)*1000.0+1.0);
+    
+    f0 = f0+f0*(sin((ang+iTime/18.0 + noise_f(abs(ang)+n/5.0)*2.0)*12.0)*.1+dist*.1+.8);
+    
+    vec3 c = vec3(f0);
+    
+    return c;
+}
+
+vec3 cc(vec3 color, float factor,float factor2) // color modifier
+{
+    float w = color.x+color.y+color.z;
+    return mix(color,vec3(w)*factor,w*factor2);
+}
+
+void fragment()
+{
+    vec2 uv = UV - 0.5;
+    uv.x *= screen_res.x/screen_res.y; //fix aspect ratio
+    vec2 mouse = vec2(mouse_pos.xy/screen_res.xy - 0.5);
+    mouse.x *= screen_res.x/screen_res.y; //fix aspect ratio
+    
+
+    vec3 color = vec3(1.4,1.2,1.0)*lensflare(uv,mouse.xy,TIME);
+    color = cc(color,.5,.1);
+	vec3 sc = texture(SCREEN_TEXTURE,SCREEN_UV).rgb;
+	COLOR = vec4(sc + color,1.0);
+}"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 4 )
+shader_param/mouse_pos = Vector2( 512, 300 )
+shader_param/screen_res = Vector2( 1024, 600 )
+shader_param/noise_res = Vector2( 5, 10 )
+shader_param/noise_texture = ExtResource( 3 )
 
 [node name="Star" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="Trail" type="Line2D" parent="."]
+z_index = -1
 width_curve = SubResource( 1 )
 default_color = Color( 1, 0.666667, 0.368627, 0.439216 )
 script = ExtResource( 2 )
@@ -17,5 +82,19 @@ trail_length = 0
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Shine" type="TextureRect" parent="."]
+modulate = Color( 1, 0.607843, 0, 0.294118 )
+material = SubResource( 3 )
+margin_left = -5119.39
+margin_top = -3001.15
+margin_right = -4095.39
+margin_bottom = -2401.15
+rect_scale = Vector2( 10, 10 )
+texture = ExtResource( 4 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

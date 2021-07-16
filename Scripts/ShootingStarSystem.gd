@@ -16,10 +16,10 @@ func _ready():
 func _on_Timer_timeout():
 	star = starScene.instance()
 	
-	distance = rng.randi_range(1000,3000)
+	distance = rng.randi_range(1000,2000)
 	force = direction * distance * shoot_force
 	
-	star.life_time = rng.randf_range(0.3,0.9)
+	star.life_time = rng.randf_range(0.3,1.2)
 	star.mass = rng.randf_range(0.02, star.life_time / 2)
 	var rand = rng.randi_range(1,11)
 	if rand == 1:

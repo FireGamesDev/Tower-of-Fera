@@ -6,7 +6,7 @@
 [ext_resource path="res://Scenes/Trajectory.tscn" type="PackedScene" id=4]
 [ext_resource path="res://SFX/Reload.wav" type="AudioStream" id=5]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "Arrow_appear"
 length = 2.0
 tracks/0/type = "value"
@@ -22,8 +22,7 @@ tracks/0/keys = {
 "values": [ 0.0, 100.0 ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "Bow"
+[sub_resource type="Animation" id=2]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -79,8 +78,8 @@ hframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
 playback_speed = 2.0
-anims/Arrow_appear = SubResource( 2 )
-anims/Bow = SubResource( 1 )
+anims/Arrow_appear = SubResource( 1 )
+anims/Bow = SubResource( 2 )
 
 [node name="BowAnim" type="AnimationPlayer" parent="Sprite"]
 playback_speed = 2.0
@@ -103,10 +102,6 @@ texture_progress = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Line2D" type="Line2D" parent="."]
-visible = false
-default_color = Color( 0.0509804, 0.168627, 0.270588, 1 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1

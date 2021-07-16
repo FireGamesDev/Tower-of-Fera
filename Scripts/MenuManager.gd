@@ -79,6 +79,7 @@ func load_game():
 		$CanvasLayer/Modes/Boss/Cleared.rect_position.x = 140
 		$CanvasLayer/ThanksForPlaying.visible = true
 		$CanvasLayer/ThanksForPlaying/CloseButton/Close/AnimationPlayer.play("Appear")
+		on_hard_cleared()
 		
 	if Globals.dynamic_joystick == null:
 		Globals.dynamic_joystick = false

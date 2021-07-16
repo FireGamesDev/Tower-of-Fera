@@ -3,7 +3,7 @@
 [ext_resource path="res://Scripts/StarDisappear.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Star.png" type="Texture" id=2]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "StarAppear"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:scale")
@@ -18,8 +18,7 @@ tracks/0/keys = {
 "values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1, 0.6 ) ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "StarDisappear"
+[sub_resource type="Animation" id=2]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:scale")
@@ -38,14 +37,15 @@ tracks/0/keys = {
 scale = Vector2( 0.2, 0.2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 1, 0.6 )
+scale = Vector2( 1e-05, 1e-05 )
+z_index = -1
 texture = ExtResource( 2 )
 
 [node name="StarDisappear" type="AnimationPlayer" parent="."]
 autoplay = "StarAppear"
 playback_speed = 8.0
-anims/StarAppear = SubResource( 2 )
-anims/StarDisappear = SubResource( 1 )
+anims/StarAppear = SubResource( 1 )
+anims/StarDisappear = SubResource( 2 )
 script = ExtResource( 1 )
 
 [connection signal="animation_finished" from="StarDisappear" to="StarDisappear" method="_on_StarDisappear_animation_finished"]

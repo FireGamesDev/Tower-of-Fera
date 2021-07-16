@@ -18,6 +18,7 @@ func _ready():
 	Globals.player_cam = $CanvasLayer/Camera2D
 	Globals.train_timer = $CanvasLayer/TimerText
 	Globals.menu_button_in_game = $CanvasLayer/Menu
+	Globals.star_vignette = $Map/Control/StarVignette/AnimationPlayer
 	
 	wave_text = $CanvasLayer/Waves
 	remaining_text = $CanvasLayer/Remaining

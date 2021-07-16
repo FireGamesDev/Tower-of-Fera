@@ -14,6 +14,8 @@ var sfx_manager
 var trajectory
 var trajectory_dot
 
+var star_vignette
+
 var spawner
 var health_system
 var arrow_ammo_system
