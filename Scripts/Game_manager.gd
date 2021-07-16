@@ -57,7 +57,7 @@ func die():
 		$CanvasLayer/Lose/Text.bbcode_text = "\n[wave]CLEARED WAVES: " + str(Globals.wave -1)
 		return
 	if Globals.wave -1 == 0:
-		$CanvasLayer/Lose/Text.bbcode_text = "\n[wave]THE TOWN FALLED!"
+		$CanvasLayer/Lose/Text.bbcode_text = "\n[wave]THE TOWN HAS FALLEN!"
 	else: $CanvasLayer/Lose/Text.bbcode_text = "\n[wave]THE TOWN FALLED! \nCLEARED WAVES: " + str(Globals.wave -1)
 	if Globals.wave_save < Globals.wave -1:
 		Globals.save_score(Globals.wave -1)
