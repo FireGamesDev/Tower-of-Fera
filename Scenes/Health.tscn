@@ -5,6 +5,54 @@
 [ext_resource path="res://Sprites/empty_heart.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/heart.png" type="Texture" id=5]
 
+[sub_resource type="Animation" id=1]
+resource_name = "Slash"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 40.0, 80.0 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Slash"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 40.0, 80.0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Slash"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 40.0, 80.0 ]
+}
+
 [sub_resource type="Animation" id=4]
 resource_name = "Slash"
 length = 0.3
@@ -21,63 +69,14 @@ tracks/0/keys = {
 "values": [ 40.0, 80.0 ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "Slash"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:value")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 40.0, 80.0 ]
-}
-
-[sub_resource type="Animation" id=6]
-resource_name = "Slash"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:value")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 40.0, 80.0 ]
-}
-
-[sub_resource type="Animation" id=7]
-resource_name = "Slash"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:value")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 40.0, 80.0 ]
-}
-
-[sub_resource type="DynamicFontData" id=1]
+[sub_resource type="DynamicFontData" id=5]
 font_path = "res://Font/PixelGameFont.ttf"
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=6]
 size = 30
-font_data = SubResource( 1 )
+font_data = SubResource( 5 )
 
-[sub_resource type="Animation" id=3]
-resource_name = "Heartbeat"
+[sub_resource type="Animation" id=7]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:scale")
@@ -119,7 +118,7 @@ __meta__ = {
 }
 
 [node name="SlashAnim" type="AnimationPlayer" parent="Sprite/Slash"]
-anims/Slash = SubResource( 4 )
+anims/Slash = SubResource( 1 )
 
 [node name="Sprite1" type="Sprite" parent="."]
 position = Vector2( 96.0263, 50.4316 )
@@ -138,7 +137,7 @@ __meta__ = {
 }
 
 [node name="SlashAnim" type="AnimationPlayer" parent="Sprite1/Slash"]
-anims/Slash = SubResource( 5 )
+anims/Slash = SubResource( 2 )
 
 [node name="Sprite2" type="Sprite" parent="."]
 position = Vector2( 141.026, 50.4316 )
@@ -157,7 +156,7 @@ __meta__ = {
 }
 
 [node name="SlashAnim" type="AnimationPlayer" parent="Sprite2/Slash"]
-anims/Slash = SubResource( 6 )
+anims/Slash = SubResource( 3 )
 
 [node name="Sprite3" type="Sprite" parent="."]
 position = Vector2( 186.026, 50.4316 )
@@ -176,7 +175,7 @@ __meta__ = {
 }
 
 [node name="SlashAnim" type="AnimationPlayer" parent="Sprite3/Slash"]
-anims/Slash = SubResource( 7 )
+anims/Slash = SubResource( 4 )
 
 [node name="HealthPlus" type="Label" parent="."]
 visible = false
@@ -184,7 +183,7 @@ margin_left = 236.184
 margin_top = 36.0182
 margin_right = 251.184
 margin_bottom = 69.0182
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 6 )
 text = "+"
 align = 1
 valign = 1
@@ -201,6 +200,6 @@ texture = ExtResource( 5 )
 
 [node name="Heartbeat" type="AnimationPlayer" parent="."]
 playback_process_mode = 0
-anims/Heartbeat = SubResource( 3 )
+anims/Heartbeat = SubResource( 7 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

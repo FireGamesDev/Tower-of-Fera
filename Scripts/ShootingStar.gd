@@ -22,7 +22,7 @@ func launch(initial_velocity : Vector2, distance : float, width : int):
 	$Trail.trail_length = distance / 100
 	$Trail.width = width
 	$Timer.start(life_time)
-	$Shine.modulate.a = mass * 1/0.6
+	$Shine.modulate.a = mass * 1/0.6 / 2
 
 func _on_Timer_timeout():
 	Globals.star_vignette.play_backwards("StarVignette")

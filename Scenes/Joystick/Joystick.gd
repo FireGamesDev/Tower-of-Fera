@@ -72,12 +72,13 @@ func _input(event: InputEvent) -> void:
 		
 	if !Globals.can_shoot or Globals.is_ended:
 		return
-	
+
 	if event is InputEventScreenTouch:
 		if _touch_started(event):
 			if (joystick_mode == JoystickMode.DYNAMIC or joystick_mode == JoystickMode.FOLLOWING):
 				if !_is_inside_Menu_button(event.position, Globals.menu_button_in_game):
-					_center_control(_background, event.position)
+					if !_is_inside_control_circle(event.position, _background):
+						_center_control(_background, event.position)
 			if _is_inside_control_circle(event.position, _background):
 				_touch_index = event.index
 				_handle.self_modulate = _pressed_color
@@ -101,7 +102,8 @@ func _reset():
 	is_working = false
 	output = Vector2.ZERO
 	_handle.self_modulate = _original_color
-	_background.rect_position = _original_position
+	if joystick_mode != JoystickMode.DYNAMIC:
+		_background.rect_position = _original_position
 	_reset_handle()
 
 func _is_inside_control_rect(global_position: Vector2, control: Control) -> bool:
@@ -171,3 +173,7 @@ func _update_joystick(event_position: Vector2):
 		
 func _is_inside_joystick(event):
 	return _is_inside_control_circle(event.position, $Background)
+	
+func _set_joystick_default_pos():
+	_background.rect_position = _original_position
+	_reset()

@@ -18,7 +18,7 @@ func _ready():
 	Globals.player_cam = $CanvasLayer/Camera2D
 	Globals.train_timer = $CanvasLayer/TimerText
 	Globals.menu_button_in_game = $CanvasLayer/Menu
-	Globals.star_vignette = $Map/Control/StarVignette/AnimationPlayer
+	Globals.star_vignette = $CanvasLayer/Control/StarVignette/AnimationPlayer
 	
 	wave_text = $CanvasLayer/Waves
 	remaining_text = $CanvasLayer/Remaining
@@ -47,6 +47,7 @@ func die():
 		bullet.queue_free()
 	$Map/Lightning.stop = true
 	Globals.is_ended = true
+	Globals.joystick._set_joystick_default_pos()
 	Globals.can_shoot = false
 	Globals.sfx_manager.play_sound(lose_sfx)
 	$CanvasLayer/Lose.visible = true
@@ -64,6 +65,7 @@ func die():
 func win(is_train):
 	$Map/Lightning.stop = true
 	Globals.is_ended = true
+	Globals.joystick._set_joystick_default_pos()
 	Globals.can_shoot = false
 	if is_train:
 		$CanvasLayer/TrainScoreText.bbcode_text = ""

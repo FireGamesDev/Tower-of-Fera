@@ -51,6 +51,21 @@ tracks/1/keys = {
 "values": [ Vector2( 512, 300 ), Vector2( 955.369, 452.285 ) ]
 }
 
+[sub_resource type="Animation" id=26]
+resource_name = "StarVignette"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.392157 ) ]
+}
+
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.815686, 0.505882, 0.34902, 1 )
 
@@ -268,21 +283,6 @@ void vertex() {
 [sub_resource type="ShaderMaterial" id=25]
 shader = SubResource( 30 )
 
-[sub_resource type="Animation" id=26]
-resource_name = "StarVignette"
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.588235 ) ]
-}
-
 [sub_resource type="Shader" id=27]
 code = "shader_type canvas_item;
 
@@ -353,6 +353,27 @@ script = ExtResource( 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Camera2D"]
 anims/end_anim = SubResource( 1 )
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -194.941
+margin_top = 489.472
+margin_right = -194.941
+margin_bottom = 489.472
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StarVignette" type="Sprite" parent="CanvasLayer/Control"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 1314.96, 735.8 )
+z_index = 10
+texture = ExtResource( 22 )
+offset = Vector2( -609.769, -927.214 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control/StarVignette"]
+anims/StarVignette = SubResource( 26 )
 
 [node name="Health" parent="CanvasLayer" instance=ExtResource( 6 )]
 margin_bottom = 63.0
@@ -1213,23 +1234,6 @@ position = Vector2( 1230.78, 448.214 )
 scale = Vector2( 0.762742, 0.7 )
 texture = ExtResource( 11 )
 offset = Vector2( -609.769, -927.214 )
-
-[node name="Control" type="Control" parent="Map"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="StarVignette" type="Sprite" parent="Map/Control"]
-modulate = Color( 1, 1, 1, 0 )
-position = Vector2( 1314.96, 735.8 )
-z_index = 2
-texture = ExtResource( 22 )
-offset = Vector2( -609.769, -927.214 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Map/Control/StarVignette"]
-anims/StarVignette = SubResource( 26 )
 
 [node name="Bow" parent="." instance=ExtResource( 5 )]
 position = Vector2( 90.0919, 303.34 )
