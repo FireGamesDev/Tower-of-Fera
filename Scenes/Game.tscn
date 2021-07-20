@@ -272,7 +272,7 @@ extents = Vector2( 414.174, 39.5447 )
 radius = 53.3942
 height = 817.872
 
-[sub_resource type="Shader" id=30]
+[sub_resource type="Shader" id=25]
 code = "shader_type canvas_item;
 
 void vertex() {
@@ -280,8 +280,8 @@ void vertex() {
 	VERTEX.y += cos(TIME) * (VERTEX.x - 20.0) * 0.01;
 }"
 
-[sub_resource type="ShaderMaterial" id=31]
-shader = SubResource( 30 )
+[sub_resource type="ShaderMaterial" id=26]
+shader = SubResource( 25 )
 
 [sub_resource type="Shader" id=27]
 code = "shader_type canvas_item;
@@ -1213,7 +1213,7 @@ rotation = -1.57169
 shape = SubResource( 24 )
 
 [node name="Moon" type="TextureRect" parent="Map"]
-material = SubResource( 31 )
+material = SubResource( 26 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
