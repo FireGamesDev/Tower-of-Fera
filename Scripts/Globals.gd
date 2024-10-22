@@ -61,8 +61,7 @@ var story
 var dynamic_joystick
 
 func save_game():
-	var f = File.new()
-	f.open(path, File.WRITE)
+	var f = FileAccess.open(path, FileAccess.WRITE)
 	f.store_var(wave_save)
 	f.store_var(easy_save)
 	f.store_var(normal_save)
@@ -76,9 +75,8 @@ func save_game():
 	f.close()
 
 func load_game():
-	var f = File.new()
-	if f.file_exists(path):
-		f.open(path, File.READ)
+	if FileAccess.file_exists(path):
+		var f = FileAccess.open(path, FileAccess.READ)
 		wave_save = f.get_var()
 		easy_save = f.get_var()
 		normal_save = f.get_var()

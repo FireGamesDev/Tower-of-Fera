@@ -1,9 +1,9 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://Sprites/slash_1.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/slash_1.png" type="Texture2D" id=1]
 [ext_resource path="res://Scripts/health_system.gd" type="Script" id=3]
-[ext_resource path="res://Sprites/empty_heart.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/heart.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/empty_heart.png" type="Texture2D" id=4]
+[ext_resource path="res://Sprites/heart.png" type="Texture2D" id=5]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Slash"
@@ -15,8 +15,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 0.3 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 0,
 "values": [ 40.0, 80.0 ]
 }
@@ -31,8 +31,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 0.3 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 0,
 "values": [ 40.0, 80.0 ]
 }
@@ -47,8 +47,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 0.3 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 0,
 "values": [ 40.0, 80.0 ]
 }
@@ -63,37 +63,37 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 0.3 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 0,
 "values": [ 40.0, 80.0 ]
 }
 
-[sub_resource type="DynamicFontData" id=5]
+[sub_resource type="FontFile" id=5]
 font_path = "res://Font/PixelGameFont.ttf"
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="FontFile" id=6]
 size = 30
 font_data = SubResource( 5 )
 
 [sub_resource type="Animation" id=7]
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:scale")
+tracks/0/path = NodePath("Sprite2D:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.5, 1 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0.2, 0.2 ), Vector2( 0.1, 0.1 ), Vector2( 0.2, 0.2 ) ]
 }
 
 [node name="Health" type="Control"]
-margin_right = 300.0
-margin_bottom = 100.0
+offset_right = 300.0
+offset_bottom = 100.0
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -101,35 +101,35 @@ __meta__ = {
 empty_hearth = ExtResource( 4 )
 full_hearth = ExtResource( 5 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2( 51.0263, 50.4316 )
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 5 )
 
-[node name="Slash" type="TextureProgress" parent="Sprite"]
-margin_left = -207.5
-margin_top = -340.0
-margin_right = 292.5
-margin_bottom = 160.0
+[node name="Slash" type="TextureProgressBar" parent="Sprite2D"]
+offset_left = -207.5
+offset_top = -340.0
+offset_right = 292.5
+offset_bottom = 160.0
 texture_progress = ExtResource( 1 )
 fill_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SlashAnim" type="AnimationPlayer" parent="Sprite/Slash"]
+[node name="SlashAnim" type="AnimationPlayer" parent="Sprite2D/Slash"]
 anims/Slash = SubResource( 1 )
 
-[node name="Sprite1" type="Sprite" parent="."]
+[node name="Sprite1" type="Sprite2D" parent="."]
 position = Vector2( 96.0263, 50.4316 )
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 5 )
 
-[node name="Slash" type="TextureProgress" parent="Sprite1"]
-margin_left = -207.5
-margin_top = -340.0
-margin_right = 292.5
-margin_bottom = 160.0
+[node name="Slash" type="TextureProgressBar" parent="Sprite1"]
+offset_left = -207.5
+offset_top = -340.0
+offset_right = 292.5
+offset_bottom = 160.0
 texture_progress = ExtResource( 1 )
 fill_mode = 2
 __meta__ = {
@@ -139,16 +139,16 @@ __meta__ = {
 [node name="SlashAnim" type="AnimationPlayer" parent="Sprite1/Slash"]
 anims/Slash = SubResource( 2 )
 
-[node name="Sprite2" type="Sprite" parent="."]
+[node name="Sprite2" type="Sprite2D" parent="."]
 position = Vector2( 141.026, 50.4316 )
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 5 )
 
-[node name="Slash" type="TextureProgress" parent="Sprite2"]
-margin_left = -207.5
-margin_top = -340.0
-margin_right = 292.5
-margin_bottom = 160.0
+[node name="Slash" type="TextureProgressBar" parent="Sprite2"]
+offset_left = -207.5
+offset_top = -340.0
+offset_right = 292.5
+offset_bottom = 160.0
 texture_progress = ExtResource( 1 )
 fill_mode = 2
 __meta__ = {
@@ -158,16 +158,16 @@ __meta__ = {
 [node name="SlashAnim" type="AnimationPlayer" parent="Sprite2/Slash"]
 anims/Slash = SubResource( 3 )
 
-[node name="Sprite3" type="Sprite" parent="."]
+[node name="Sprite3" type="Sprite2D" parent="."]
 position = Vector2( 186.026, 50.4316 )
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 5 )
 
-[node name="Slash" type="TextureProgress" parent="Sprite3"]
-margin_left = -207.5
-margin_top = -340.0
-margin_right = 292.5
-margin_bottom = 160.0
+[node name="Slash" type="TextureProgressBar" parent="Sprite3"]
+offset_left = -207.5
+offset_top = -340.0
+offset_right = 292.5
+offset_bottom = 160.0
 texture_progress = ExtResource( 1 )
 fill_mode = 2
 __meta__ = {
@@ -179,11 +179,11 @@ anims/Slash = SubResource( 4 )
 
 [node name="HealthPlus" type="Label" parent="."]
 visible = false
-margin_left = 236.184
-margin_top = 36.0182
-margin_right = 251.184
-margin_bottom = 69.0182
-custom_fonts/font = SubResource( 6 )
+offset_left = 236.184
+offset_top = 36.0182
+offset_right = 251.184
+offset_bottom = 69.0182
+theme_override_fonts/font = SubResource( 6 )
 text = "+"
 align = 1
 valign = 1
@@ -191,7 +191,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprite3" type="Sprite" parent="HealthPlus"]
+[node name="Sprite3" type="Sprite2D" parent="HealthPlus"]
 position = Vector2( 48.9302, 14.692 )
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 5 )

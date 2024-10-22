@@ -34,8 +34,8 @@ func _input(event):
 				if arrow == null:
 					aiming = true
 					on_drag_start()
-		elif $Sprite.get_child_count() > 4:
-			var rotation_value = rad2deg(Globals.joystick.front.global_position.angle_to_point(Globals.joystick.back.global_position)) + 180
+		elif $Sprite2D.get_child_count() > 4:
+			var rotation_value = rad_to_deg(Globals.joystick.front.global_position.angle_to_point(Globals.joystick.back.global_position)) + 180
 			if rotation_value > 50 and rotation_value < 310:
 				return
 			aiming = false
@@ -46,9 +46,9 @@ func _input(event):
 		
 func on_drag_start():
 	startpoint = get_local_mouse_position()
-	arrow = arrowAsset.instance()
-	arrow.set_position($Sprite/Muzzle.position)
-	$Sprite.call_deferred("add_child", arrow)
+	arrow = arrowAsset.instantiate()
+	arrow.set_position($Sprite2D/Muzzle.position)
+	$Sprite2D.call_deferred("add_child", arrow)
 
 	Globals.arrows -= 1
 	Globals.arrow_ammo_system.manage_arrows()
@@ -59,7 +59,7 @@ func on_drag_start():
 func on_drag_end():
 	if Globals.trajectory:
 		Globals.trajectory.hide()
-	$Sprite/BowAnim.play("Bow")
+	$Sprite2D/BowAnim.play("Bow")
 	Globals.sfx_manager.play_shoot_sound(shoot_sfx)
 	
 	shoot()
@@ -69,22 +69,22 @@ func on_drag():
 	force = -Globals.joystick.output * shoot_force
 	
 	if force.x > 100:
-		$Sprite.frame = 1
+		$Sprite2D.frame = 1
 	if force.x > 200:
-		$Sprite.frame = 2
+		$Sprite2D.frame = 2
 		
-	var rotation_value = rad2deg(Globals.joystick.front.global_position.angle_to_point(Globals.joystick.back.global_position)) + 180
+	var rotation_value = rad_to_deg(Globals.joystick.front.global_position.angle_to_point(Globals.joystick.back.global_position)) + 180
 	if rotation_value > 50 and rotation_value < 310:
 		Globals.joystick.can_move = false
 		Globals.joystick.front.global_position = get_global_mouse_position()
 		return #if the rotation looks weird
 	else: Globals.joystick.can_move = true
 	
-	$Sprite.rotation_degrees = rotation_value
-	arrow.rotation_degrees = $Sprite.rotation_degrees
+	$Sprite2D.rotation_degrees = rotation_value
+	arrow.rotation_degrees = $Sprite2D.rotation_degrees
 	
 	if Globals.trajectory:
-		Globals.trajectory.update_dots($Sprite/Muzzle.position, force)
+		Globals.trajectory.update_dots($Sprite2D/Muzzle.position, force)
 		
 func shoot():
 	if Globals.health_system.health == 1:
@@ -92,7 +92,7 @@ func shoot():
 			arrow.scale = Vector2(10,10)
 	else: arrow.scale = Vector2(1,1)
 	
-	$Sprite.remove_child(arrow)
+	$Sprite2D.remove_child(arrow)
 	self.add_child(arrow)
 	arrow.set_trail_length(force.x / 10)
 	arrow.launch(force)
@@ -100,13 +100,13 @@ func shoot():
 	arrow = null
 	
 	if Globals.arrows > 0:
-		$Sprite/AnimationPlayer.play("Arrow_appear")
+		$Sprite2D/AnimationPlayer.play("Arrow_appear")
 		$SFXPlayer/Delay.start(0.5)
 
 func _on_Timer_timeout():
 	if Globals.arrows > 0 and !aiming:
-		$Sprite/Arrow.visible = true
-	else: $Sprite/Arrow.visible = false
+		$Sprite2D/Arrow.visible = true
+	else: $Sprite2D/Arrow.visible = false
 
 
 func _on_Delay_timeout():

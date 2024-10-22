@@ -22,7 +22,7 @@ var current_body
 
 func _physics_process(delta):
 	if launched:
-		velocity += gravity_vec * gravity * mass
+		velocity += gravity_direction * gravity * mass
 		position += velocity * delta
 		rotation = velocity.angle()
 		
@@ -71,7 +71,7 @@ func _on_Arrow_body_entered(body):
 		if body.health > 1 and Globals.game_mode != "Train":
 			$trail_target.queue_free()
 			launched = false
-			call_deferred("reparent", self, body)
+			call_deferred("_reparent", self, body)
 			position = Vector2(0,0)
 			$Anim.set_speed_scale(0.5)
 			$Anim.play("Arrow_fade")
@@ -92,18 +92,19 @@ func _on_Arrow_body_entered(body):
 			Globals.spawner.set_remaining_text()
 
 
-func reparent(node, body):
-	node.get_parent().remove_child(node)
-	body.add_child(node)
+func _reparent(node, body):
+	if node.get_parent() != null:
+		node.get_parent().remove_child(node)
+	body.add_child_below_node(null, node)
 	
 func spawn_grave(rand, pos):
 	var grave
 	if rand == 1:
-		grave = grave1.instance()
+		grave = grave1.instantiate()
 	if rand == 2:
-		grave = grave2.instance()
+		grave = grave2.instantiate()
 	if rand == 3:
-		grave = grave3.instance()
+		grave = grave3.instantiate()
 	Globals.spawner.call_deferred("add_child", grave)
 	grave.position = pos
 	grave.position.y += 100
@@ -112,11 +113,11 @@ func spawn_grave(rand, pos):
 func spawn_rigid_grave(rand, pos):
 	var grave
 	if rand == 1:
-		grave = grave1_rigid.instance()
+		grave = grave1_rigid.instantiate()
 	if rand == 2:
-		grave = grave2_rigid.instance()
+		grave = grave2_rigid.instantiate()
 	if rand == 3:
-		grave = grave3_rigid.instance()
+		grave = grave3_rigid.instantiate()
 	Globals.spawner.call_deferred("add_child", grave)
 	grave.position = pos
 	grave.position.y += 100

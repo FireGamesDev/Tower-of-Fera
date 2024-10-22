@@ -14,7 +14,7 @@ func _ready():
 	$Timer.start(rng.randf_range(5,20))
 
 func _on_Timer_timeout():
-	star = starScene.instance()
+	star = starScene.instantiate()
 	
 	distance = rng.randi_range(1000,2000)
 	force = direction * distance * shoot_force

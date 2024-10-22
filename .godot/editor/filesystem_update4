@@ -1,0 +1,11 @@
+res://default_env.tres
+res://Scenes/Menu.tscn
+res://Scenes/Game.tscn
+res://Scripts/Globals.gd
+res://Scripts/Arrow.gd
+res://Scripts/Trajectory.gd
+res://Scripts/Enemy.gd
+res://Scripts/Boss_bullet.gd
+res://Scenes/Joystick/Joystick.gd
+res://Scripts/ArrowAmmo.gd
+res://Scripts/Trail.gd

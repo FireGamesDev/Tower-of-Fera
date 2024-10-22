@@ -1,6 +1,6 @@
 extends Area2D
 
-onready var trail = $Trail
+@onready var trail = $Trail
 
 const kill_sfx1 = preload("res://SFX/Die1.wav")
 const kill_sfx2 = preload("res://SFX/Die2.wav")
@@ -13,7 +13,7 @@ var current_body
 
 func _physics_process(delta):
 	if launched:
-		velocity += gravity_vec * gravity * mass
+		velocity += gravity_direction * gravity * mass
 		position += velocity * delta
 		rotation = velocity.angle()
 		
@@ -22,7 +22,7 @@ func launch(initial_velocity : Vector2, distance : float):
 	velocity = initial_velocity.rotated(rotation)
 	$Trail.trail_length += (distance - 1000) / 10
 
-func reparent(node, body):
+func _reparent(node, body):
 	node.get_parent().remove_child(node)
 	body.add_child(node)
 
@@ -41,7 +41,7 @@ func _on_Boss_bullet_area_entered(area):
 		area.mass += mass
 		
 		launched = false
-		call_deferred("reparent", self, area)
+		call_deferred("_reparent", self, area)
 		position = Vector2(0,0)
 		scale = Vector2(0.4,0.4)
 		

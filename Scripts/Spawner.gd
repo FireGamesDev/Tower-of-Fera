@@ -34,14 +34,14 @@ var spawn_points_count = 4
 
 func _ready():
 	if Globals.game_mode == "Boss":
-		var boss = bossScene.instance()
+		var boss = bossScene.instantiate()
 		$BossSpawnPoint.call_deferred("add_child", boss)
 		return
 	spawn_time = Globals.spawner_spawn_time
 	enemy_speed = Globals.spawner_enemy_speed
 	tank_health = Globals.spawner_tank_health
 	Globals.spawner = self
-	yield(get_tree().create_timer(1.0), "timeout") #wait to get the game_manager initialize
+	await get_tree().create_timer(1.0).timeout #wait to get the game_manager initialize
 	if Globals.game_mode == "Train":
 		return
 	Globals.wave = 1
@@ -77,13 +77,13 @@ func spawn_flying_enemy(is_dummies):
 	var enemy
 	var rand2 = randi()%3+1
 	if rand2 == 2:
-		enemy = fast_flying_enemy.instance()
+		enemy = fast_flying_enemy.instantiate()
 		enemy.speed = enemy_speed + 60
 	if rand2 == 1: 
-		enemy = flying_enemy.instance()
+		enemy = flying_enemy.instantiate()
 		enemy.speed = enemy_speed
 	if rand2 == 3:
-		enemy = ghost_flying_enemy.instance()
+		enemy = ghost_flying_enemy.instantiate()
 		enemy.speed = enemy_speed + 35
 	enemy.dummies = is_dummies
 	return enemy
@@ -92,13 +92,13 @@ func spawn_ground_enemy(is_dummies):
 	var enemy
 	var rand2 = randi()%4+1
 	if rand2 == 1:
-		enemy = ground_enemy1.instance()
+		enemy = ground_enemy1.instantiate()
 		enemy.speed = enemy_speed
 	if rand2 == 2:
-		enemy = ground_enemy2.instance()
+		enemy = ground_enemy2.instantiate()
 		enemy.speed = enemy_speed
 	if rand2 == 3:
-		enemy = mini_ground_enemy.instance()
+		enemy = mini_ground_enemy.instantiate()
 		enemy.speed = enemy_speed + 40
 	if rand2 == 4:
 		return spawn_tank_enemy(is_dummies)
@@ -106,7 +106,7 @@ func spawn_ground_enemy(is_dummies):
 	return enemy
 	
 func spawn_tank_enemy(is_dummies):
-	var enemy = ground_enemy3.instance()
+	var enemy = ground_enemy3.instantiate()
 	enemy.health = tank_health
 	if Globals.game_mode == "Easy":
 		enemy.speed = enemy_speed - 10
@@ -130,19 +130,19 @@ func next_wave():
 	
 func set_wave_text():
 	if Globals.game_mode == "Endless" and Globals.game_manager and Globals.game_mode != "Boss":
-		Globals.game_manager.wave_text.bbcode_text = "\n[wave]WAVE: " + str(Globals.wave)
+		Globals.game_manager.wave_text.text = "\n[wave]WAVE: " + str(Globals.wave)
 		return
 	if Globals.game_manager:
-		Globals.game_manager.wave_text.bbcode_text = "\n[wave]WAVE: " + str(Globals.wave) + "/" + str(Globals.waves_count)
+		Globals.game_manager.wave_text.text = "\n[wave]WAVE: " + str(Globals.wave) + "/" + str(Globals.waves_count)
 
 func set_remaining_text():
 	if Globals.remaining_enemies == 0:
 		if Globals.game_manager:
-			Globals.game_manager.remaining_text.bbcode_text = ""
+			Globals.game_manager.remaining_text.text = ""
 		next_wave()
 		return
 	if Globals.game_manager:
-		Globals.game_manager.remaining_text.bbcode_text = "\n[wave]REMAINING: " + str(Globals.remaining_enemies)
+		Globals.game_manager.remaining_text.text = "\n[wave]REMAINING: " + str(Globals.remaining_enemies)
 		
 func train():
 	current_train_time = 0
@@ -153,7 +153,7 @@ func train():
 func _on_TrainTimer_timeout():
 	current_train_time += 1
 	if Globals.train_timer:
-		Globals.train_timer.bbcode_text = "\n[wave]" + str(train_length - current_train_time)
+		Globals.train_timer.text = "\n[wave]" + str(train_length - current_train_time)
 	if current_train_time >= train_length:
 		Globals.game_manager.win(true)
 	else: $TrainTimer.start()
@@ -184,7 +184,7 @@ func get_ground_spawn(enemy):
 	if Globals.is_ended:
 		return
 	enemy.dummies = true
-	var portal_particle = portal.instance()
+	var portal_particle = portal.instantiate()
 	portal_particle.spawn_this = enemy
 	var rand = randi()%2 + 1
 	var random
@@ -201,7 +201,7 @@ func get_air_spawn(enemy):
 	if Globals.is_ended:
 		return
 	enemy.dummies = true
-	var portal_particle = portal.instance()
+	var portal_particle = portal.instantiate()
 	portal_particle.spawn_this = enemy
 	var rand = randi()%2 + 1
 	var random
@@ -223,7 +223,7 @@ func _on_SpawnTimer_timeout():
 		text = "LAST"
 		
 	if current_wait_time != 0:
-		Globals.game_manager.wave_text.bbcode_text = "\n[wave]" + text + " WAVE IN " + str(current_wait_time)
+		Globals.game_manager.wave_text.text = "\n[wave]" + text + " WAVE IN " + str(current_wait_time)
 		current_wait_time -= 1
 		$SpawnTimer.start(1)
 	else: 

@@ -23,7 +23,7 @@ func manage_arrows():
 	else: $Label.set_text("")
 	
 	for arrow in Globals.arrows:
-		var arrow_instance = arrowSprite.instance()
+		var arrow_instance = arrowSprite.instantiate()
 		$Parent.call_deferred("add_child", arrow_instance)
 		arrow_instance.position.x -= xpos
 		xpos -= 10

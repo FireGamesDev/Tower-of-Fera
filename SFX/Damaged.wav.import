@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/Damaged.wav-cbba2dff3fc3266254e1ceee2d95325c.sample"
+type="AudioStreamWAV"
+uid="uid://dmao7gdjbi1ax"
+path="res://.godot/imported/Damaged.wav-cbba2dff3fc3266254e1ceee2d95325c.sample"
 
 [deps]
 
 source_file="res://SFX/Damaged.wav"
-dest_files=[ "res://.import/Damaged.wav-cbba2dff3fc3266254e1ceee2d95325c.sample" ]
+dest_files=["res://.godot/imported/Damaged.wav-cbba2dff3fc3266254e1ceee2d95325c.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=false
 edit/normalize=false
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

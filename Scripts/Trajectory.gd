@@ -20,10 +20,10 @@ func _ready():
 	hide()
 	prepare_dots()
 	
-func show():
+func _show():
 	$Dots.visible = true
 	
-func hide():
+func _hide():
 	$Dots.visible = false
 	
 func prepare_dots():
@@ -36,9 +36,9 @@ func prepare_dots():
 	var scale_factor : float = size / dot_number
 	
 	for i in dot_number:
-		var dot = dotScene.instance()
+		var dot = dotScene.instantiate()
 		if i == 7 or i == 10:
-			dot.get_child(0).modulate = Color.orange
+			dot.get_child(0).modulate = Color.ORANGE
 		dot.scale = Vector2.ONE * size
 		if size > min_scale:
 			size -= scale_factor

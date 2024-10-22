@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Sprites/Grave2.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Grave2.png" type="Texture2D" id=1]
 [ext_resource path="res://Scripts/GraveRigid.gd" type="Script" id=3]
 [ext_resource path="res://Animations/grave_fading.tres" type="Animation" id=4]
 
@@ -8,14 +8,14 @@
 resource_name = "Grave_fade"
 length = 10.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("TextureProgress:tint_progress")
+tracks/0/path = NodePath("TextureProgressBar:tint_progress")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 10 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 10 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
@@ -23,14 +23,14 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=1]
 resource_name = "grave_appear"
 tracks/0/type = "value"
-tracks/0/path = NodePath("TextureProgress:value")
+tracks/0/path = NodePath("TextureProgressBar:value")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 1 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 0,
 "values": [ 0.0, 100.0 ]
 }
@@ -45,9 +45,9 @@ anims/Grave_fade = SubResource( 2 )
 anims/grave_appear = SubResource( 1 )
 anims/grave_fading = ExtResource( 4 )
 
-[node name="TextureProgress" type="TextureProgress" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
 value = 100.0
 texture_progress = ExtResource( 1 )
 fill_mode = 3

@@ -1,6 +1,6 @@
 extends Node2D
 
-var gravity_vec = Vector2(0,1)
+var gravity_direction = Vector2(0,1)
 var gravity = 9.8
 var mass = 0.02
 var launched = false
@@ -10,7 +10,7 @@ var life_time
 
 func _physics_process(delta):
 	if launched:
-		velocity += gravity_vec * gravity * mass
+		velocity += gravity_direction * gravity * mass
 		position += velocity * delta
 		rotation = velocity.angle()
 		

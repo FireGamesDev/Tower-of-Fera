@@ -17,6 +17,6 @@ func play_heal_sound(path):
 	$HealPlayer.play()
 	
 func play_kill_sound(path):
-	$KillPlayer.pitch_scale = rand_range(1,2)
+	$KillPlayer.pitch_scale = randf_range(1,2)
 	$KillPlayer.stream = path
 	$KillPlayer.play()

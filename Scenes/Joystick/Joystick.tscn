@@ -1,14 +1,14 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Scenes/Joystick/joystick_background.png" type="Texture" id=1]
-[ext_resource path="res://Scenes/Joystick/joystick_handle.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Joystick/joystick_background.png" type="Texture2D" id=1]
+[ext_resource path="res://Scenes/Joystick/joystick_handle.png" type="Texture2D" id=2]
 [ext_resource path="res://Scenes/Joystick/Joystick.gd" type="Script" id=3]
 
 [node name="Joystick" type="Control"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_top = -275.0
-margin_right = 275.0
+offset_top = -275.0
+offset_right = 275.0
 mouse_filter = 1
 script = ExtResource( 3 )
 __meta__ = {
@@ -22,13 +22,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -128.0
-margin_top = -128.0
-margin_right = 128.0
-margin_bottom = 128.0
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
 grow_horizontal = 2
 grow_vertical = 2
-rect_pivot_offset = Vector2( 128, 128 )
+pivot_offset = Vector2( 128, 128 )
 texture = ExtResource( 1 )
 stretch_mode = 6
 __meta__ = {
@@ -40,11 +40,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -60.7293
-margin_top = -107.078
-margin_right = 64.2706
-margin_bottom = -104.078
-rect_rotation = 60.0
+offset_left = -60.7293
+offset_top = -107.078
+offset_right = 64.2706
+offset_bottom = -104.078
+rotation = 60.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -54,11 +54,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 1.75598
-margin_top = 1.01978
-margin_right = 126.756
-margin_bottom = 4.01978
-rect_rotation = 110.0
+offset_left = 1.75598
+offset_top = 1.01978
+offset_right = 126.756
+offset_bottom = 4.01978
+rotation = 110.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -72,14 +72,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -64.1206
-margin_top = -63.8793
-margin_right = 63.8794
-margin_bottom = 64.1207
+offset_left = -64.1206
+offset_top = -63.8793
+offset_right = 63.8794
+offset_bottom = 64.1207
 grow_horizontal = 2
 grow_vertical = 2
-rect_scale = Vector2( 0.5, 0.5 )
-rect_pivot_offset = Vector2( 64, 64 )
+scale = Vector2( 0.5, 0.5 )
+pivot_offset = Vector2( 64, 64 )
 texture = ExtResource( 2 )
 stretch_mode = 6
 __meta__ = {

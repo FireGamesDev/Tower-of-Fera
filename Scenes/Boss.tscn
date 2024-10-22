@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/Boss.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Boss_crowned.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/BossIdle_crowned.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Boss_crowned.png" type="Texture2D" id=2]
+[ext_resource path="res://Sprites/BossIdle_crowned.png" type="Texture2D" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Bow"
@@ -14,8 +14,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.3, 0.6 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
 "update": 1,
 "values": [ 2, 1, 0 ]
 }
@@ -30,8 +30,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.2, 0.4, 0.6 ),
+"transitions": PackedFloat32Array( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 1 ]
 }
@@ -46,8 +46,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 4.9 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array( 0, 4.9 ),
+"transitions": PackedFloat32Array( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
@@ -62,8 +62,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.2, 0.4, 0.6 ),
+"transitions": PackedFloat32Array( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 1 ]
 }
@@ -83,15 +83,15 @@ _data = [ Vector2( 0, 0.518182 ), 0.0, 0.0, 0, 0, Vector2( 0.0706522, 9.45455 ),
 scale = Vector2( 0.4, 0.4 )
 script = ExtResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
 texture = ExtResource( 2 )
 hframes = 3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 anims/Bow = SubResource( 1 )
 
-[node name="Idle" type="Sprite" parent="."]
+[node name="Idle" type="Sprite2D" parent="."]
 texture = ExtResource( 3 )
 hframes = 3
 
@@ -102,13 +102,13 @@ anims/Fade = SubResource( 3 )
 anims/Idle = SubResource( 4 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( 21.3275, 173.495, 131.329, 108.089, 165.519, -7.85904, 125.383, -131.239, 6.46248, -175.834, -100.566, -123.807, -154.08, -22.7241, -160.026, 78.3585, -115.431, 154.17, -61.917, 177.955 )
+polygon = PackedVector2Array( 21.3275, 173.495, 131.329, 108.089, 165.519, -7.85904, 125.383, -131.239, 6.46248, -175.834, -100.566, -123.807, -154.08, -22.7241, -160.026, 78.3585, -115.431, 154.17, -61.917, 177.955 )
 
 [node name="ShootTimer" type="Timer" parent="."]
 one_shot = true
 autostart = true
 
-[node name="SpawnPoint" type="Position2D" parent="."]
+[node name="SpawnPoint" type="Marker2D" parent="."]
 position = Vector2( -91.25, 52.5 )
 
 [node name="Explosion" type="CPUParticles2D" parent="."]
@@ -127,6 +127,6 @@ angular_velocity_curve = SubResource( 5 )
 scale_amount_curve = SubResource( 6 )
 color = Color( 1, 0.666667, 0.368627, 1 )
 
-[connection signal="animation_finished" from="Sprite/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="animation_finished" from="Sprite2D/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="animation_finished" from="Idle/IdleAnim" to="." method="_on_IdleAnim_animation_finished"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]

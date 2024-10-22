@@ -1,10 +1,10 @@
 extends Line2D
 
 var point
-export var trail_length = 10
+@export var trail_length = 10
 
 func _enter_tree():
-	set_as_toplevel(true)
+	set_as_top_level(true)
 
 func _physics_process(_delta):
 	point = get_parent().global_position

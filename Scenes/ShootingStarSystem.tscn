@@ -8,36 +8,36 @@ script = ExtResource( 1 )
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
-[node name="SpawnPoint" type="Position2D" parent="."]
+[node name="SpawnPoint" type="Marker2D" parent="."]
 
-[node name="SpawnPoint1" type="Position2D" parent="."]
+[node name="SpawnPoint1" type="Marker2D" parent="."]
 position = Vector2( -148.425, 34.6581 )
 
-[node name="SpawnPoint2" type="Position2D" parent="."]
+[node name="SpawnPoint2" type="Marker2D" parent="."]
 position = Vector2( 148.612, 2.89627 )
 
-[node name="SpawnPoint3" type="Position2D" parent="."]
+[node name="SpawnPoint3" type="Marker2D" parent="."]
 position = Vector2( 145.943, 177.76 )
 
-[node name="SpawnPoint4" type="Position2D" parent="."]
+[node name="SpawnPoint4" type="Marker2D" parent="."]
 position = Vector2( -96.9983, 201.787 )
 
-[node name="SpawnPoint5" type="Position2D" parent="."]
+[node name="SpawnPoint5" type="Marker2D" parent="."]
 position = Vector2( 133.929, 296.561 )
 
-[node name="SpawnPoint6" type="Position2D" parent="."]
+[node name="SpawnPoint6" type="Marker2D" parent="."]
 position = Vector2( -14.2382, 375.317 )
 
-[node name="SpawnPoint7" type="Position2D" parent="."]
+[node name="SpawnPoint7" type="Marker2D" parent="."]
 position = Vector2( 44.4948, 90.9957 )
 
-[node name="SpawnPoint8" type="Position2D" parent="."]
+[node name="SpawnPoint8" type="Marker2D" parent="."]
 position = Vector2( 24.4722, 236.493 )
 
-[node name="SpawnPoint9" type="Position2D" parent="."]
+[node name="SpawnPoint9" type="Marker2D" parent="."]
 position = Vector2( -101.003, -98.5515 )
 
-[node name="SpawnPoint10" type="Position2D" parent="."]
+[node name="SpawnPoint10" type="Marker2D" parent="."]
 position = Vector2( 56.5083, -102.556 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

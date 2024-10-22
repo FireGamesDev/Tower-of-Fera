@@ -9,11 +9,11 @@ var fade = 1
 
 var current_body
 var gravity = 9.8
-var gravity_vec = Vector2(0, 1)
+var gravity_direction = Vector2(0, 1)
 
 func _process(delta):
 	if launched:
-		velocity += gravity_vec * gravity * mass
+		velocity += gravity_direction * gravity * mass
 		position += velocity * delta
 		
 func launch():
@@ -21,7 +21,7 @@ func launch():
 
 func _on_Area2D_area_entered(area):
 	if area.is_in_group("Ground"):
-		yield(get_tree().create_timer(0.1), "timeout")
+		await get_tree().create_timer(0.1).timeout
 		launched = false
 		$AnimationPlayer.play("grave_appear")
 

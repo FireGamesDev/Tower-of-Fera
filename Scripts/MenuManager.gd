@@ -41,7 +41,7 @@ func mute():
 	else: 
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), Globals.volume)
 		$CanvasLayer/Volume/VolumeSlider.value = Globals.volume
-	$CanvasLayer/Volume/Mute.pressed = Globals.muted
+	$CanvasLayer/Volume/Mute.button_pressed = Globals.muted
 	Globals.save_game()
 
 func load_game():
@@ -49,7 +49,7 @@ func load_game():
 	
 	#volume
 	$CanvasLayer/Volume/VolumeSlider.value = Globals.volume
-	$CanvasLayer/Volume/Mute.pressed = Globals.muted
+	$CanvasLayer/Volume/Mute.button_pressed = Globals.muted
 	
 	if Globals.muted:
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), -80)
@@ -57,7 +57,7 @@ func load_game():
 	else: AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), Globals.volume)
 	
 	#score
-	$CanvasLayer/Modes/Endless/Score.bbcode_text = "\n[wave]BEST: " + str(Globals.endless_wave_save)
+	$CanvasLayer/Modes/Endless/Score.text = "\n[wave]BEST: " + str(Globals.endless_wave_save)
 	
 	#the story show once
 	$CanvasLayer/Story.visible = Globals.story
@@ -71,19 +71,19 @@ func load_game():
 	$CanvasLayer/Modes/Hard/Cleared.visible = Globals.hard_save
 	
 	if Globals.hard_save:
-		$CanvasLayer/Modes/Boss/Cleared.bbcode_text = "\n[wave]UNLOCKED"
-		$CanvasLayer/Modes/Boss/Cleared.rect_position.x = 140
+		$CanvasLayer/Modes/Boss/Cleared.text = "\n[wave]UNLOCKED"
+		$CanvasLayer/Modes/Boss/Cleared.position.x = 140
 		on_hard_cleared()
 	if Globals.boss_save:
-		$CanvasLayer/Modes/Boss/Cleared.bbcode_text = "\n[wave]CLEARED"
-		$CanvasLayer/Modes/Boss/Cleared.rect_position.x = 140
+		$CanvasLayer/Modes/Boss/Cleared.text = "\n[wave]CLEARED"
+		$CanvasLayer/Modes/Boss/Cleared.position.x = 140
 		$CanvasLayer/ThanksForPlaying.visible = true
 		$CanvasLayer/ThanksForPlaying/CloseButton/Close/AnimationPlayer.play("Appear")
 		on_hard_cleared()
 		
 	if Globals.dynamic_joystick == null:
 		Globals.dynamic_joystick = false
-	$CanvasLayer/DynamicJoystick.pressed = Globals.dynamic_joystick
+	$CanvasLayer/DynamicJoystick.button_pressed = Globals.dynamic_joystick
 
 
 func _on_VolumeSlider_value_changed(value):
@@ -91,7 +91,7 @@ func _on_VolumeSlider_value_changed(value):
 		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), value)
 		Globals.volume = value
 		Globals.muted = false
-		$CanvasLayer/Volume/Mute.pressed = false
+		$CanvasLayer/Volume/Mute.button_pressed = false
 	else: once = false
 
 
@@ -102,7 +102,7 @@ func _on_PlayButton_pressed():
 	$CanvasLayer/Control2/Lightning._on_Timer_timeout()
 	$CanvasLayer/Control2/Lightning.stop = true
 	Globals.sfx_manager.play_sound(click_sound)
-	SceneChanger.change_scene("res://Scenes/Game.tscn", 0.5)
+	SceneChanger.change_scene_to_file("res://Scenes/Game.tscn", 0.5)
 	
 	Globals.game_mode = "Train"
 	
@@ -122,7 +122,7 @@ func _on_Boss_pressed():
 	$CanvasLayer/Modes/Boss/Boss._on_Timer_timeout()
 	$CanvasLayer/Modes/Boss/Boss.stop = true
 	Globals.sfx_manager.play_sound(click_sound)
-	SceneChanger.change_scene("res://Scenes/Game.tscn", 0.5)
+	SceneChanger.change_scene_to_file("res://Scenes/Game.tscn", 0.5)
 	
 	Globals.game_mode = "Boss"
 	
@@ -134,7 +134,7 @@ func _on_Hard_pressed():
 	$CanvasLayer/Modes/Hard/Hard_light._on_Timer_timeout()
 	$CanvasLayer/Modes/Hard/Hard_light.stop = true
 	Globals.sfx_manager.play_sound(click_sound)
-	SceneChanger.change_scene("res://Scenes/Game.tscn", 0.5)
+	SceneChanger.change_scene_to_file("res://Scenes/Game.tscn", 0.5)
 	
 	Globals.game_mode = "Hard"
 	
@@ -156,7 +156,7 @@ func _on_Endless_pressed():
 	$CanvasLayer/Modes/Endless/Endless_strike._on_Timer_timeout()
 	$CanvasLayer/Modes/Endless/Endless_strike.stop = true
 	Globals.sfx_manager.play_sound(click_sound)
-	SceneChanger.change_scene("res://Scenes/Game.tscn", 0.5)
+	SceneChanger.change_scene_to_file("res://Scenes/Game.tscn", 0.5)
 	
 	Globals.game_mode = "Endless"
 	
@@ -177,7 +177,7 @@ func _on_Normal_pressed():
 	$CanvasLayer/Modes/Normal/Normal_strike._on_Timer_timeout()
 	$CanvasLayer/Modes/Normal/Normal_strike.stop = true
 	Globals.sfx_manager.play_sound(click_sound)
-	SceneChanger.change_scene("res://Scenes/Game.tscn", 0.5)
+	SceneChanger.change_scene_to_file("res://Scenes/Game.tscn", 0.5)
 	Globals.game_mode = "Normal"
 	
 	Globals.ammo = 1
@@ -198,7 +198,7 @@ func _on_Easy_pressed():
 	$CanvasLayer/Modes/Easy/Easy_strike._on_Timer_timeout()
 	$CanvasLayer/Modes/Easy/Easy_strike.stop = true
 	Globals.sfx_manager.play_sound(click_sound)
-	SceneChanger.change_scene("res://Scenes/Game.tscn", 0.5)
+	SceneChanger.change_scene_to_file("res://Scenes/Game.tscn", 0.5)
 	
 	Globals.game_mode = "Easy"
 	
@@ -252,9 +252,9 @@ func _on_ContinueButton_pressed():
 	$CanvasLayer/Story/ContinueButton/Continue._on_Timer_timeout()
 	$CanvasLayer/Story/ContinueButton/Continue.stop = true
 	Globals.sfx_manager.play_sound(click_sound)
-	yield(get_tree().create_timer(1), "timeout")
+	await get_tree().create_timer(1).timeout
 	$CanvasLayer/Story/ContinueButton/Continue/AnimationPlayer.play_backwards("Appear")
-	yield(get_tree().create_timer($CanvasLayer/Story/ContinueButton/Continue/AnimationPlayer.current_animation_length), "timeout")
+	await get_tree().create_timer($CanvasLayer/Story/ContinueButton/Continue/AnimationPlayer.current_animation_length).timeout
 	start_all_timers()
 	$CanvasLayer/Story.visible = false
 
@@ -290,9 +290,9 @@ func _on_CloseButton_pressed():
 	$CanvasLayer/ThanksForPlaying/CloseButton/Close._on_Timer_timeout()
 	$CanvasLayer/ThanksForPlaying/CloseButton/Close.stop = true
 	Globals.sfx_manager.play_sound(click_sound)
-	yield(get_tree().create_timer(1), "timeout")
+	await get_tree().create_timer(1).timeout
 	$CanvasLayer/ThanksForPlaying/CloseButton/Close/AnimationPlayer.play_backwards("Appear")
-	yield(get_tree().create_timer($CanvasLayer/ThanksForPlaying/CloseButton/Close/AnimationPlayer.current_animation_length), "timeout")
+	await get_tree().create_timer($CanvasLayer/ThanksForPlaying/CloseButton/Close/AnimationPlayer.current_animation_length).timeout
 	#start all timers
 	$CanvasLayer/Control2/Lightning/Timer.start()
 	$CanvasLayer/Modes/Boss/Boss/Timer.start()

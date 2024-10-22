@@ -54,11 +54,11 @@ func die():
 	if Globals.game_mode == "Endless":
 		if Globals.endless_wave_save < Globals.wave -1:
 			Globals.save_endless_score(Globals.wave -1)
-		$CanvasLayer/Lose/Text.bbcode_text = "\n[wave]CLEARED WAVES: " + str(Globals.wave -1)
+		$CanvasLayer/Lose/Text.text = "\n[wave]CLEARED WAVES: " + str(Globals.wave -1)
 		return
 	if Globals.wave -1 == 0:
-		$CanvasLayer/Lose/Text.bbcode_text = "\n[wave]THE TOWN HAS FALLEN!"
-	else: $CanvasLayer/Lose/Text.bbcode_text = "\n[wave]THE TOWN FALLED! \nCLEARED WAVES: " + str(Globals.wave -1)
+		$CanvasLayer/Lose/Text.text = "\n[wave]THE TOWN HAS FALLEN!"
+	else: $CanvasLayer/Lose/Text.text = "\n[wave]THE TOWN FALLED! \nCLEARED WAVES: " + str(Globals.wave -1)
 	if Globals.wave_save < Globals.wave -1:
 		Globals.save_score(Globals.wave -1)
 	
@@ -68,11 +68,11 @@ func win(is_train):
 	Globals.joystick._set_joystick_default_pos()
 	Globals.can_shoot = false
 	if is_train:
-		$CanvasLayer/TrainScoreText.bbcode_text = ""
-		$CanvasLayer/TimerText.bbcode_text = ""
+		$CanvasLayer/TrainScoreText.text = ""
+		$CanvasLayer/TimerText.text = ""
 		Globals.sfx_manager.play_sound(win_sfx)
 		$CanvasLayer/Win.visible = true
-		$CanvasLayer/Win/Text.bbcode_text = "\n[wave]YOU KILLED " + str(Globals.train_point) + " [/wave] [shake]GIMPS!"
+		$CanvasLayer/Win/Text.text = "\n[wave]YOU KILLED " + str(Globals.train_point) + " [/wave] [shake]GIMPS!"
 		return
 	Globals.save_progress()
 	if Globals.wave_save < Globals.waves_count:
@@ -80,9 +80,9 @@ func win(is_train):
 	Globals.sfx_manager.play_sound(win_sfx)
 	$CanvasLayer/Win.visible = true
 	var cleared_mode = Globals.game_mode
-	$CanvasLayer/Win/Text.bbcode_text = "\n[wave]YOU CLEARED " + str(cleared_mode.to_upper()) + "\n\nCONGRATS!"
+	$CanvasLayer/Win/Text.text = "\n[wave]YOU CLEARED " + str(cleared_mode.to_upper()) + "\n\nCONGRATS!"
 	if cleared_mode == "Boss":
-		$CanvasLayer/Win/Text.bbcode_text = "\n[wave]YOU DEFEATED THE KING!\n\nCONGRATS!"
+		$CanvasLayer/Win/Text.text = "\n[wave]YOU DEFEATED THE KING!\n\nCONGRATS!"
 
 
 func _on_Tower_body_entered(body):
@@ -119,7 +119,7 @@ func _on_Menu_pressed():
 	$CanvasLayer/Menu/Hard_light.stop = true
 	$Map/Lightning.stop = true
 	Globals.sfx_manager.play_sound(click_sound)
-	SceneChanger.change_scene("res://Scenes/Menu.tscn", 0.5)
+	SceneChanger.change_scene_to_file("res://Scenes/Menu.tscn", 0.5)
 
 
 func _on_Win_light_strike():
@@ -133,7 +133,7 @@ func _on_Win_pressed():
 	$CanvasLayer/Win/Win/Win_light.stop = true
 	$Map/Lightning.stop = true
 	Globals.sfx_manager.play_sound(click_sound)
-	SceneChanger.change_scene("res://Scenes/Menu.tscn", 0.5)
+	SceneChanger.change_scene_to_file("res://Scenes/Menu.tscn", 0.5)
 
 
 func _on_Menu_lose_pressed():
@@ -142,7 +142,7 @@ func _on_Menu_lose_pressed():
 	$CanvasLayer/Lose/Menu_lose/Menu_lose.stop = true
 	$Map/Lightning.stop = true
 	Globals.sfx_manager.play_sound(click_sound)
-	SceneChanger.change_scene("res://Scenes/Menu.tscn", 0.5)
+	SceneChanger.change_scene_to_file("res://Scenes/Menu.tscn", 0.5)
 
 
 func _on_Menu_lose_strike():
@@ -176,7 +176,7 @@ func _on_Close_tutorial_pressed():
 	$CanvasLayer/Tutorial/Close_tutorial/Tutorial_light.stop = true
 	Globals.sfx_manager.play_sound(click_sound)
 	$CanvasLayer/Tutorial/Close_tutorial/AnimationPlayer.play_backwards("Appear")
-	yield(get_tree().create_timer($CanvasLayer/Tutorial/Close_tutorial/AnimationPlayer.current_animation_length), "timeout")
+	await get_tree().create_timer($CanvasLayer/Tutorial/Close_tutorial/AnimationPlayer.current_animation_length).timeout
 	$CanvasLayer/Tutorial.visible = false
 	
 	#start train
@@ -185,16 +185,16 @@ func _on_Close_tutorial_pressed():
 		Globals.spawner.train()
 	
 func set_train_score_text():
-	$CanvasLayer/TrainScoreText.bbcode_text = "\n[wave]SCORE: " + str(Globals.train_point)
+	$CanvasLayer/TrainScoreText.text = "\n[wave]SCORE: " + str(Globals.train_point)
 	
 func take_damage():
 	$CanvasLayer/BossBar.value -= 5
-	$CanvasLayer/BossBar/BossText.bbcode_text = "\n[wave]HEALTH: " + str($CanvasLayer/BossBar.value)
+	$CanvasLayer/BossBar/BossText.text = "\n[wave]HEALTH: " + str($CanvasLayer/BossBar.value)
 	
 	if $CanvasLayer/BossBar.value <= 0 and !Globals.boss.is_died:
 		Globals.boss.die()
 		$CanvasLayer/BossBar.visible = false
 		$CanvasLayer/Camera2D/AnimationPlayer.play("end_anim")
-		yield(get_tree().create_timer(5.0), "timeout")
+		await get_tree().create_timer(5.0).timeout
 		win(false)
 	

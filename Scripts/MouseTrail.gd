@@ -1,7 +1,7 @@
 extends Line2D
 
 var point
-export var trail_length = 10
+@export var trail_length = 10
 
 var can_move = false
 	

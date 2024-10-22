@@ -18,12 +18,12 @@ func _ready():
 func shoot():
 	$Idle/IdleAnim.stop(true)
 	$Idle.visible = false
-	$Sprite.visible = true
-	$Sprite/AnimationPlayer.play("Bow")
+	$Sprite2D.visible = true
+	$Sprite2D/AnimationPlayer.play("Bow")
 	
-	var bullet = boss_bullet.instance()
+	var bullet = boss_bullet.instantiate()
 	
-	distance = rand_range(1000,1200)
+	distance = randf_range(1000,1200)
 	direction = Vector2(-1, -1)
 	force = direction * distance * shoot_force
 	
@@ -36,12 +36,12 @@ func _on_ShootTimer_timeout():
 	if is_died or Globals.is_ended:
 		return
 	shoot()
-	var time = rand_range(2.5,2)
+	var time = randf_range(2.5,2)
 	$ShootTimer.start(time)
 
 
 func _on_AnimationPlayer_animation_finished(_anim_name):
-	$Sprite.visible = false
+	$Sprite2D.visible = false
 	$Idle.visible = true
 	$Idle/IdleAnim.play("Idle")
 	
